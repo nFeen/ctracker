@@ -20,7 +20,7 @@ class LoginActivity : ComponentActivity() {
         val userId = SharedPreferencesManager.getString("UserID", "-1").toInt()
 
         if (userId != -1) {
-            val i = Intent(this@LoginActivity, HomeActivity::class.java)
+            val i = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(i)
         }
 
@@ -30,7 +30,7 @@ class LoginActivity : ComponentActivity() {
                     val loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
                     loginViewModel.loginSuccess.observe(this, Observer { success ->
                         if (success) {
-                            val i = Intent(this@LoginActivity, HomeActivity::class.java)
+                            val i = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(i)
                         }
                     })

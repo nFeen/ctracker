@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CTracker"
         tools:targetApi="31">
+
         <activity
             android:name="com.example.ctracker.activity.LoginActivity"
             android:exported="true"
@@ -24,10 +25,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:label="@string/app_name"
-            android:theme="@style/Theme.CTracker"
-            android:name="com.example.ctracker.activity.HomeActivity">
+            android:name="com.example.ctracker.activity.MainActivity"
+            android:theme="@style/Theme.CTracker">
         </activity>
     </application>
 
