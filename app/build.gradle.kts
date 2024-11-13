@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.ctracker"
-    compileSdk = 34
+    namespace = "com.example.myapplication"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.ctracker"
+        applicationId = "com.example.myapplication"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
