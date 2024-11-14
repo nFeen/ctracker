@@ -18,7 +18,7 @@ fun SettingsView(viewModel: MainViewModel) {
     ) {
         // Надпись "Настройки" в левом верхнем углу
         Text(
-            text = "Настройки",
+            text = "Settings",
             fontSize = 24.sp,
             color = MaterialTheme.colorScheme.primary
         )

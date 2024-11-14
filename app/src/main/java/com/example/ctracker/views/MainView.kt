@@ -1,5 +1,7 @@
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
@@ -10,9 +12,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
 import androidx.navigation.compose.*
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import com.example.ctracker.views.ProfileView
-import com.example.ctracker.ui.theme.CTrackerTheme // Добавьте импорт вашей темы
+import com.example.ctracker.viewmodel.ProfileViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -21,14 +25,18 @@ fun MainView(navController: NavHostController, viewModel: MainViewModel) {
         bottomBar = {
             NavigationBar(navController = navController)
         }
-    ) {
-        NavHost(
-            navController = navController,
-            startDestination = "home",
-        ) {
-            composable("profile") { ProfileView(viewModel) }
-            composable("home") { HomeView(viewModel) }
-            composable("settings") { SettingsView(viewModel) }
+    ){innerPadding ->
+        Column(
+            modifier = Modifier.padding(innerPadding)
+        ){
+            NavHost(
+                navController = navController,
+                startDestination = "profile",
+            ) {
+                composable("profile") { ProfileView(ProfileViewModel()) }
+                composable("home") { HomeView(viewModel) }
+                composable("settings") { SettingsView(viewModel) }
+            }
         }
     }
 }
@@ -76,4 +84,10 @@ sealed class BottomNavItem(val route: String, val icon: ImageVector, val title: 
     object Profile : BottomNavItem("profile", Icons.Default.Person, "Profile")
     object Home : BottomNavItem("home", Icons.Default.Home, "Home")
     object Settings : BottomNavItem("settings", Icons.Default.Settings, "Settings")
+}
+@Preview(showBackground = true)
+@Composable
+fun PreviewMainView() {
+    val viewModel = MainViewModel()
+    MainView( navController = rememberNavController(), viewModel=viewModel)
 }
