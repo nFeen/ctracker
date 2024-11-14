@@ -4,6 +4,6 @@ import com.example.ctracker.entity.User
 
 interface UserRepository {
     fun getUserById(id: Int): User?
-    fun addUser(user: User)
+    fun addUser(login: String, password: String) : Boolean
     fun authenticateUser(login: String, password: String): User?
 }

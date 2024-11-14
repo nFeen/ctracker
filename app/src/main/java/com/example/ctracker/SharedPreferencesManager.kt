@@ -17,4 +17,11 @@ object SharedPreferencesManager {
     fun getString(key: String, defaultValue: String): String {
         return sharedPreferences.getString(key, defaultValue) ?: defaultValue
     }
+    fun saveBoolean(key: String, value: Boolean) {
+        sharedPreferences.edit().putBoolean(key, value).apply()
+    }
+
+    fun getBoolean(key: String, default: Boolean): Boolean {
+        return sharedPreferences.getBoolean(key, default)
+    }
 }

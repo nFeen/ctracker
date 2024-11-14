@@ -36,9 +36,9 @@ fun MainView(navController: NavHostController, viewModel: MainViewModel) {
 @Composable
 fun NavigationBar(navController: NavController) {
     val items = listOf(
+        BottomNavItem.Profile,
         BottomNavItem.Home,
-        BottomNavItem.Settings,
-        BottomNavItem.Profile
+        BottomNavItem.Settings
     )
 
     NavigationBar(

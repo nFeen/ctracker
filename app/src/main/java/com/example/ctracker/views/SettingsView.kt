@@ -4,8 +4,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun SettingsView(viewModel: MainViewModel) {
@@ -14,41 +16,32 @@ fun SettingsView(viewModel: MainViewModel) {
             .fillMaxSize()
             .padding(16.dp)
     ) {
+        // Надпись "Настройки" в левом верхнем углу
         Text(
-            text = "Settings Screen",
+            text = "Настройки",
             fontSize = 24.sp,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            color = MaterialTheme.colorScheme.primary
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
-        var notificationsEnabled by remember { mutableStateOf(true) }
-        var darkModeEnabled by remember { mutableStateOf(false) }
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+        // Кнопка Logout с цветами темы
+        OutlinedButton(
+            onClick = { viewModel.onLogoutClick() },
+            colors = ButtonDefaults.outlinedButtonColors(
+                contentColor = MaterialTheme.colorScheme.primary,
+                containerColor = MaterialTheme.colorScheme.surface
+            ),
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
-            Text(text = "Enable Notifications", fontSize = 18.sp)
-            Spacer(modifier = Modifier.weight(1f))
-            Switch(checked = notificationsEnabled, onCheckedChange = { notificationsEnabled = it })
-        }
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(text = "Dark Mode", fontSize = 18.sp)
-            Spacer(modifier = Modifier.weight(1f))
-            Switch(checked = darkModeEnabled, onCheckedChange = { darkModeEnabled = it })
-        }
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        OutlinedButton(onClick = { viewModel.onLogoutClick() }) {
-            Text(text = "Logout", color = Color.Red)
+            Text(text = "Logout")
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewSettingsView() {
+    val viewModel = MainViewModel()
+    SettingsView( viewModel=viewModel)
 }

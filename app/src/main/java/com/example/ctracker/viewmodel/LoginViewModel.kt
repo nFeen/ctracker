@@ -6,7 +6,6 @@ import com.example.ctracker.entity.User
 import com.example.ctracker.repository.mock.MockUserRepository
 
 class LoginViewModel : ViewModel() {
-    private val userRepository: MockUserRepository = MockUserRepository()
 
     var login = mutableStateOf("")
     var password = mutableStateOf("")
@@ -22,8 +21,7 @@ class LoginViewModel : ViewModel() {
     }
 
     fun onLoginClick() {
-        println("buttonclicked")
-        val user : User? = userRepository.authenticateUser(login.value, password.value)
+        val user : User? = MockUserRepository.authenticateUser(login.value, password.value)
         if (user != null) {
             loginSuccess.value = true
             errorMessage.value = ""
@@ -33,13 +31,5 @@ class LoginViewModel : ViewModel() {
             errorMessage.value = "Invalid login or password"
 
         }
-    }
-
-    fun onForgotPasswordClick() {
-        // Логика для "забыл пароль"
-    }
-
-    fun onRegisterClick() {
-        // Логика для регистрации
     }
 }
