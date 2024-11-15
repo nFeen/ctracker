@@ -15,6 +15,7 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import com.example.ctracker.viewmodel.HomeViewModel
 import com.example.ctracker.views.ProfileView
 import com.example.ctracker.viewmodel.ProfileViewModel
 
@@ -31,10 +32,10 @@ fun MainView(navController: NavHostController, viewModel: MainViewModel) {
         ){
             NavHost(
                 navController = navController,
-                startDestination = "profile",
+                startDestination = "home",
             ) {
-                composable("profile") { ProfileView(ProfileViewModel()) }
-                composable("home") { HomeView(viewModel) }
+                composable("profile",) { ProfileView(ProfileViewModel()) }
+                composable("home") { HomeView(HomeViewModel())}
                 composable("settings") { SettingsView(viewModel) }
             }
         }

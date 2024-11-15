@@ -11,7 +11,7 @@ class ProfileViewModel : ViewModel() {
     val carbs = mutableIntStateOf(100)
     val protein = mutableIntStateOf(100)
     val maxCalorie = mutableIntStateOf(2500)
-    val calorie = mutableIntStateOf(12000)
+    val calorie = mutableIntStateOf(1000)
     val chartData = mutableListOf(
         1870 to "20.11",
         20000 to "20.11",

@@ -27,6 +27,7 @@ class LoginActivity : ComponentActivity() {
         if (userId != -1) {
             val i = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(i)
+            finish()
         }
 
         else {
@@ -47,6 +48,7 @@ class LoginActivity : ComponentActivity() {
                         if (success) {
                             val i = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(i)
+                            finish()
                         }
                     })
                 }
