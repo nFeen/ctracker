@@ -1,8 +1,10 @@
 package com.example.ctracker.viewmodel
 
+import SharedPreferencesManager
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.example.ctracker.CTrackerApp
 import com.example.ctracker.entity.User
 import com.example.ctracker.repository.mock.MockMealRepository
 import com.example.ctracker.repository.mock.MockUserRepository
@@ -46,6 +48,7 @@ class ProfileViewModel(
 
     init {
         calculateMacrosFromMeals()
+        SharedPreferencesManager.init(CTrackerApp.applicationContext())
     }
 
     // Подсчет данных макросов (жиров, белков, углеводов) по сегодняшним приемам пищи

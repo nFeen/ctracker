@@ -45,7 +45,7 @@ class HomeViewModel(
 
         mealList.apply {
             clear()
-            add(MealModel("Завтрак", breakfastProducts, mutableStateOf(true)) { toggleVisibility(0) })
+            add(MealModel("Завтрак", breakfastProducts, mutableStateOf(false)) { toggleVisibility(0) })
             add(MealModel("Обед", lunchProducts, mutableStateOf(false)) { toggleVisibility(1) })
             add(MealModel("Ужин", dinnerProducts, mutableStateOf(false)) { toggleVisibility(2) })
             add(MealModel("Другое", additionalProducts, mutableStateOf(false)) { toggleVisibility(3) })
@@ -69,4 +69,8 @@ data class MealModel(
     val productList: List<Meal>, // Список продуктов
     var isProductListVisible: MutableState<Boolean>, // Булевое значение для видимости списка продуктов
     val toggleProductList: () -> Unit // Функция для переключения видимости
-)
+) {
+    val totalCalories: Int
+        get() = productList.sumOf { it.calories.toInt() } // Суммируем калории всех продуктов
+}
+

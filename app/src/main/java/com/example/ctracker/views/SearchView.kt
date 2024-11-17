@@ -13,15 +13,37 @@ import com.example.ctracker.viewmodel.SearchViewModel
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchView(viewModel: SearchViewModel, navController: NavController) {
-    val query = viewModel.query.value
-    val results = viewModel.results.value
-    val hasSearched = viewModel.hasSearched.value
+    SearchContent(
+        query = viewModel.query.value,
+        results = viewModel.results.value,
+        hasSearched = viewModel.hasSearched.value,
+        index = viewModel.index,
+        onQueryChange = { query ->
+            viewModel.query.value = query
+            if (query.isBlank()) {
+                viewModel.resetSearchState()
+            }
+        },
+        onSearch = viewModel::search
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SearchContent(
+    query: String,
+    results: List<Food>,
+    hasSearched: Boolean,
+    index: Int,
+    onQueryChange: (String) -> Unit,
+    onSearch: () -> Unit
+) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -33,7 +55,7 @@ fun SearchView(viewModel: SearchViewModel, navController: NavController) {
                     Text("CTracker")
                 }
             )
-        },
+        }
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -46,22 +68,15 @@ fun SearchView(viewModel: SearchViewModel, navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
             TextField(
                 value = query,
-                onValueChange = {
-                    viewModel.query.value = it
-                    if (it.isBlank()) {
-                        viewModel.resetSearchState() // Сбрасываем состояние поиска
-                    }
-                },
+                onValueChange = onQueryChange,
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("Введите название продукта ${viewModel.index}") },
+                placeholder = { Text("Введите название продукта $index") },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions.Default.copy(
                     imeAction = ImeAction.Search
                 ),
                 keyboardActions = KeyboardActions(
-                    onSearch = {
-                        viewModel.search()
-                    }
+                    onSearch = { onSearch() }
                 )
             )
 
@@ -132,4 +147,28 @@ fun ProductItem(product: Food) {
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SearchContentPreview() {
+    SearchContent(
+        query = "",
+        results = listOf(
+            Food(1, "Яблоко", 52, 0.2f, 14f, 0.3f),
+            Food(2, "Банан", 89, 0.3f, 23f, 1.1f),
+            Food(3, "Куриное филе", 165, 3.6f, 0f, 31f),
+            Food(4, "Овсянка", 68, 1.4f, 12f, 2.4f),
+            Food(5, "Яйцо вареное", 155, 11f, 1.1f, 13f),
+            Food(6, "Молоко", 42, 1f, 5f, 3.4f),
+            Food(7, "Рис", 130, 0.3f, 28f, 2.7f),
+            Food(8, "Гречка", 110, 1.6f, 20f, 4.2f),
+            Food(9, "Помидор", 18, 0.2f, 3.9f, 0.9f),
+            Food(10, "Огурец", 15, 0.1f, 3.6f, 0.7f)
+        ),
+        hasSearched = true,
+        index = 1,
+        onQueryChange = {},
+        onSearch = {}
+    )
 }

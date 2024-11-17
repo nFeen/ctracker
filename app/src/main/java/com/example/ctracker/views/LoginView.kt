@@ -1,6 +1,6 @@
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -10,15 +10,34 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.ctracker.views.ProfileView
 
 @Composable
 fun LoginView(
     viewModel: LoginViewModel,
     navController: NavHostController
+) {
+    LoginContent(
+        login = viewModel.login.value,
+        onLoginChanged = viewModel::onLoginChanged,
+        password = viewModel.password.value,
+        onPasswordChanged = viewModel::onPasswordChanged,
+        errorMessage = viewModel.errorMessage.value,
+        onLoginClick = viewModel::onLoginClick,
+        onRegisterClick = { navController.navigate("registration") }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun LoginContent(
+    login: String,
+    onLoginChanged: (String) -> Unit,
+    password: String,
+    onPasswordChanged: (String) -> Unit,
+    errorMessage: String,
+    onLoginClick: () -> Unit,
+    onRegisterClick: () -> Unit
 ) {
     Scaffold { paddingValues ->
         Column(
@@ -59,8 +78,8 @@ fun LoginView(
                 Spacer(modifier = Modifier.height(40.dp))
 
                 OutlinedTextField(
-                    value = viewModel.login.value,
-                    onValueChange = { viewModel.onLoginChanged(it) },
+                    value = login,
+                    onValueChange = onLoginChanged,
                     label = { Text(text = "Логин") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
@@ -69,8 +88,8 @@ fun LoginView(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = viewModel.password.value,
-                    onValueChange = { viewModel.onPasswordChanged(it) },
+                    value = password,
+                    onValueChange = onPasswordChanged,
                     label = { Text(text = "Пароль") },
                     singleLine = true,
                     visualTransformation = PasswordVisualTransformation(),
@@ -79,21 +98,20 @@ fun LoginView(
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                if (viewModel.errorMessage.value.isNotEmpty()) {
+                if (errorMessage.isNotEmpty()) {
                     Text(
-                        text = viewModel.errorMessage.value,
+                        text = errorMessage,
                         color = Color.Red,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
                 }
 
                 Button(
-                    onClick = { viewModel.onLoginClick() },
+                    onClick = onLoginClick,
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(text = "Войти")
                 }
-
             }
 
             Column(
@@ -103,7 +121,7 @@ fun LoginView(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(text = "Не зарегистрированы?", color = Color.Gray)
-                TextButton(onClick = { navController.navigate("registration")}) {
+                TextButton(onClick = onRegisterClick) {
                     Text(text = "Зарегистрироваться")
                 }
             }
@@ -114,6 +132,13 @@ fun LoginView(
 @Preview(showBackground = true)
 @Composable
 fun PreviewLoginView() {
-    val loginViewModel = LoginViewModel()
-    LoginView(viewModel = loginViewModel, navController = rememberNavController())
+    LoginContent(
+        login = "",
+        onLoginChanged = {},
+        password = "",
+        onPasswordChanged = {},
+        errorMessage = "",
+        onLoginClick = {},
+        onRegisterClick = {}
+    )
 }

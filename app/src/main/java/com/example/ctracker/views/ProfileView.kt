@@ -19,13 +19,34 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ctracker.viewmodel.ProfileViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ProfileView(viewModel: ProfileViewModel = viewModel()) {
+fun ProfileView(viewModel: ProfileViewModel) {
+    ProfileContent(
+        userName = viewModel.userName.value,
+        userWeight = viewModel.userWeight.value,
+        calorie = viewModel.calorie.intValue,
+        maxCalorie = viewModel.maxCalorie.intValue,
+        protein = viewModel.protein.intValue,
+        fats = viewModel.fats.intValue,
+        carbs = viewModel.carbs.intValue,
+        chartData = viewModel.chartData
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ProfileContent(
+    userName: String,
+    userWeight: String,
+    calorie: Int,
+    maxCalorie: Int,
+    protein: Int,
+    fats: Int,
+    carbs: Int,
+    chartData: List<Pair<Int, String>>
+) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -37,32 +58,28 @@ fun ProfileView(viewModel: ProfileViewModel = viewModel()) {
                     Text("Профиль")
                 }
             )
-        },
-    )
-    {innerPadding ->
+        }
+    ) { innerPadding ->
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
                 .padding(innerPadding)
                 .padding(horizontal = 16.dp)
         ) {
-
-
             Spacer(modifier = Modifier.height(24.dp))
 
             // Блок с иконкой и информацией о пользователе
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp)  // Фиксированная высота Row
+                    .height(200.dp)
                     .padding(vertical = 16.dp)
             ) {
-                // Левая часть с иконкой пользователя, занимает половину ширины Row
                 Box(
                     modifier = Modifier
                         .fillMaxHeight()
-                        .weight(1f) // Иконка занимает половину ширины Row
-                        .background(MaterialTheme.colorScheme.primaryContainer), // Цвет из темы
+                        .weight(1f)
+                        .background(MaterialTheme.colorScheme.primaryContainer),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -74,17 +91,15 @@ fun ProfileView(viewModel: ProfileViewModel = viewModel()) {
 
                 Spacer(modifier = Modifier.width(16.dp))
 
-                // Правая часть с двумя блоками: Имя сверху и Вес снизу
                 Column(
                     modifier = Modifier
                         .fillMaxHeight()
-                        .weight(1f) // Правая часть занимает оставшуюся половину
+                        .weight(1f)
                 ) {
-                    // Блок для имени пользователя, занимает половину высоты
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .weight(1f) // Равномерное распределение по высоте
+                            .weight(1f)
                             .background(
                                 MaterialTheme.colorScheme.surface,
                                 shape = RoundedCornerShape(8.dp)
@@ -92,20 +107,19 @@ fun ProfileView(viewModel: ProfileViewModel = viewModel()) {
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = viewModel.userName.value,
-                            fontSize = 24.sp, // Увеличенный размер текста
+                            text = userName,
+                            fontSize = 24.sp,
                             color = MaterialTheme.colorScheme.onSurface,
                             modifier = Modifier.padding(horizontal = 8.dp)
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(8.dp)) // Отступ между блоками
+                    Spacer(modifier = Modifier.height(8.dp))
 
-                    // Блок для веса поль   зователя, занимает половину высоты
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .weight(1f) // Равномерное распределение по высоте
+                            .weight(1f)
                             .background(
                                 MaterialTheme.colorScheme.surface,
                                 shape = RoundedCornerShape(8.dp)
@@ -113,15 +127,17 @@ fun ProfileView(viewModel: ProfileViewModel = viewModel()) {
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = viewModel.userWeight.value,
-                            fontSize = 24.sp, // Увеличенный размер текста
+                            text = userWeight,
+                            fontSize = 24.sp,
                             color = MaterialTheme.colorScheme.onSurface,
                             modifier = Modifier.padding(horizontal = 8.dp)
                         )
                     }
                 }
             }
+
             Spacer(modifier = Modifier.height(24.dp))
+
             Text(
                 text = "Калории",
                 fontSize = 24.sp,
@@ -131,17 +147,15 @@ fun ProfileView(viewModel: ProfileViewModel = viewModel()) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(250.dp),// Увеличиваем высоту для размещения всех элементов
+                    .height(250.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Колонка с круговым индикатором калорий и текстом с целью
                 Column(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    // Блок с круговым индикатором калорий
                     Box(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
@@ -149,19 +163,21 @@ fun ProfileView(viewModel: ProfileViewModel = viewModel()) {
                             .aspectRatio(1f)
                     ) {
                         Canvas(modifier = Modifier.fillMaxSize()) {
+                            // Рисуем серую окружность
                             val strokeWidth = 12.dp.toPx()
-
-                            // Определяем цвет для заполненной части круга
+                            drawArc(
+                                color = Color.Gray,
+                                startAngle = 0f,
+                                sweepAngle = 360f,
+                                useCenter = false,
+                                style = Stroke(width = strokeWidth)
+                            )
+                        }
+                        Canvas(modifier = Modifier.fillMaxSize()) {
+                            val strokeWidth = 12.dp.toPx()
                             val color =
-                                if (viewModel.calorie.intValue > viewModel.maxCalorie.intValue) {
-                                    Color(0xFFFFA500) // Оранжевый, если калорий больше, чем максимум
-                                } else {
-                                    Color.Green // Зеленый, если калории в пределах нормы
-                                }
-
-                            // Заполненная часть круга
-                            val sweepAngle =
-                                360 * (viewModel.calorie.intValue.toFloat() / viewModel.maxCalorie.intValue)
+                                if (calorie > maxCalorie) Color(0xFFFFA500) else Color.Green
+                            val sweepAngle = 360 * (calorie.toFloat() / maxCalorie)
                             drawArc(
                                 color = color,
                                 startAngle = -90f,
@@ -170,27 +186,15 @@ fun ProfileView(viewModel: ProfileViewModel = viewModel()) {
                                 style = Stroke(width = strokeWidth)
                             )
                         }
-                        // Текст в центре круга
                         Text(
-                            text = "${viewModel.calorie.intValue}\nКалорий",
-                            fontSize = TextUnit(40f, TextUnitType.Unspecified),
+                            text = "$calorie/$maxCalorie\nКалорий",
+                            fontSize = TextUnit(50f, TextUnitType.Unspecified),
                             color = MaterialTheme.colorScheme.onSurface,
                             textAlign = TextAlign.Center
                         )
                     }
-
-
-                    // Текст с целью калорий под кругом
-                    Text(
-                        text = "Цель: ${viewModel.maxCalorie.intValue}",
-                        fontSize = TextUnit(40f, TextUnitType.Unspecified),
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
                 }
 
-                Spacer(modifier = Modifier.width(16.dp))
-
-                // Информация о нутриентах, занимает половину ширины Row и выровнена по высоте с Canvas
                 Column(
                     modifier = Modifier
                         .weight(1f)
@@ -198,107 +202,68 @@ fun ProfileView(viewModel: ProfileViewModel = viewModel()) {
                     verticalArrangement = Arrangement.SpaceEvenly,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "Белки: ${viewModel.protein.intValue}",
-                            fontSize = TextUnit(20f, TextUnitType.Unspecified),
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
-                        )
-                    }
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "Жиры: ${viewModel.fats.intValue}",
-                            fontSize = TextUnit(20f, TextUnitType.Unspecified),
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
-                        )
-                    }
-
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "Углеводы: ${viewModel.carbs.intValue}",
-                            fontSize = TextUnit(20f, TextUnitType.Unspecified),
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
-                        )
-                    }
+                    Text(
+                        text = "Белки: $protein",
+                        fontSize = TextUnit(20f, TextUnitType.Unspecified),
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                    Text(
+                        text = "Жиры: $fats",
+                        fontSize = TextUnit(20f, TextUnitType.Unspecified),
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                    Text(
+                        text = "Углеводы: $carbs",
+                        fontSize = TextUnit(20f, TextUnitType.Unspecified),
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
                 }
             }
+
             Spacer(modifier = Modifier.height(24.dp))
+
             Text(
                 text = "Статистика",
                 fontSize = 24.sp,
                 color = MaterialTheme.colorScheme.primary
             )
 
-
             val maxBarHeight = 200
-            val maxCalories = viewModel.maxCalorie
-
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(maxBarHeight.dp),// Высота Row задает maxBarHeight
+                    .height(maxBarHeight.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Bottom
             ) {
-                viewModel.chartData.forEach { (calories, date) ->
+                chartData.forEach { (calories, date) ->
                     Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        // Отображение количества калорий сверху
                         Text(
                             text = calories.toString(),
                             fontSize = 10.sp,
                             color = MaterialTheme.colorScheme.onSurface
                         )
-
                         Spacer(modifier = Modifier.height(4.dp))
-
-                        // Контейнер для столбика калорий с фиксированной высотой
                         Box(
                             modifier = Modifier
                                 .width(24.dp)
-                                .height((maxBarHeight * 0.6f).dp) // Ограничиваем высоту столбика до 60% от maxBarHeight
+                                .height((maxBarHeight * 0.6f).dp)
                                 .background(Color.LightGray),
                             contentAlignment = Alignment.BottomCenter
                         ) {
-                            // Определяем цвет столбика на основе значения калорий
-                            val barColor = if (calories > maxCalories.intValue) {
-                                Color(0xFFFFA500) // Оранжевый, если калорий больше, чем максимум
-                            } else {
-                                Color.Green // Зеленый, если калории в пределах нормы
-                            }
-
-                            // Высота столбика пропорционально калориям, ограниченная maxCalories
-                            val fillFraction =
-                                (calories / maxCalories.intValue.toFloat()).coerceAtMost(1f)
-
+                            val barColor =
+                                if (calories > maxCalorie) Color(0xFFFFA500) else Color.Green
+                            val fillFraction = (calories / maxCalorie.toFloat()).coerceAtMost(1f)
                             Box(
                                 modifier = Modifier
                                     .width(24.dp)
-                                    .fillMaxHeight(fraction = fillFraction) // Высота относительно maxCalories, максимум 100%
+                                    .fillMaxHeight(fraction = fillFraction)
                                     .background(barColor)
                             )
                         }
-
                         Spacer(modifier = Modifier.height(4.dp))
-
-                        // Отображение даты внизу
                         Text(
                             text = date,
                             fontSize = 10.sp,
@@ -313,6 +278,15 @@ fun ProfileView(viewModel: ProfileViewModel = viewModel()) {
 
 @Preview(showBackground = true)
 @Composable
-fun ProfileViewPreview() {
-    ProfileView(ProfileViewModel())
+fun ProfileContentPreview() {
+    ProfileContent(
+        userName = "Имя пользователя",
+        userWeight = "70 кг",
+        calorie = 100,
+        maxCalorie = 2000,
+        protein = 120,
+        fats = 50,
+        carbs = 200,
+        chartData = listOf(2500 to "19.11", 1800 to "20.11", 1700 to "21.11",1700 to "22.11",1700 to "23.11",1700 to "24.11", 1700 to "25.11")
+    )
 }

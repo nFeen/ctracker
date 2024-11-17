@@ -14,6 +14,31 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun RegisterView(viewModel: RegistrationViewModel, navController: NavController) {
+    RegisterContent(
+        login = viewModel.login.value,
+        password = viewModel.password.value,
+        errorMessage = viewModel.errorMessage.value,
+        onLoginChanged = viewModel::onLoginChanged,
+        onPasswordChanged = viewModel::onPasswordChanged,
+        onRegisterClick = { onSuccess, onFailure ->
+            viewModel.onRegisterClick(onSuccess, onFailure)
+        },
+        onBackClick = { navController.popBackStack() },
+        navigateToLogin = { navController.navigate("login") }
+    )
+}
+
+@Composable
+fun RegisterContent(
+    login: String,
+    password: String,
+    errorMessage: String,
+    onLoginChanged: (String) -> Unit,
+    onPasswordChanged: (String) -> Unit,
+    onRegisterClick: (onSuccess: () -> Unit, onFailure: (String) -> Unit) -> Unit,
+    onBackClick: () -> Unit,
+    navigateToLogin: () -> Unit
+) {
     Scaffold { paddingValues ->
         Column(
             modifier = Modifier
@@ -26,15 +51,13 @@ fun RegisterView(viewModel: RegistrationViewModel, navController: NavController)
                     .padding(horizontal = 16.dp, vertical = 16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                // Заголовок CTracker
                 Text(
                     text = "Ctracker",
                     fontSize = 32.sp,
                     color = MaterialTheme.colorScheme.primary,
                     textAlign = TextAlign.Start
                 )
-                // Кнопка "Назад"
-                TextButton(onClick = { navController.popBackStack() }) {
+                TextButton(onClick = onBackClick) {
                     Text(text = "Назад", color = MaterialTheme.colorScheme.primary)
                 }
             }
@@ -58,13 +81,10 @@ fun RegisterView(viewModel: RegistrationViewModel, navController: NavController)
 
                 Spacer(modifier = Modifier.height(40.dp))
 
-                var login by remember { mutableStateOf("") }
-                var password by remember { mutableStateOf("") }
-
                 // Поле ввода логина
                 OutlinedTextField(
-                    value = viewModel.login.value,
-                    onValueChange = {viewModel.onLoginChanged(it)},
+                    value = login,
+                    onValueChange = onLoginChanged,
                     label = { Text(text = "Логин") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
@@ -74,8 +94,8 @@ fun RegisterView(viewModel: RegistrationViewModel, navController: NavController)
 
                 // Поле ввода пароля
                 OutlinedTextField(
-                    value = viewModel.password.value,
-                    onValueChange = {viewModel.onPasswordChanged(it)},
+                    value = password,
+                    onValueChange = onPasswordChanged,
                     label = { Text(text = "Пароль") },
                     singleLine = true,
                     visualTransformation = PasswordVisualTransformation(),
@@ -86,23 +106,26 @@ fun RegisterView(viewModel: RegistrationViewModel, navController: NavController)
 
                 // Кнопка "Регистрация"
                 Button(
-                    onClick = {viewModel.onRegisterClick(
-                        onSuccess = { navController.navigate("login") },
-                        onFailure = { error -> viewModel.errorMessage.value = error }
-                    )
+                    onClick = {
+                        onRegisterClick(
+                            navigateToLogin
+                        ) { error -> println("Ошибка: $error") }
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(text = "Регистрация")
                 }
+
             }
-            if (viewModel.errorMessage.value.isNotEmpty()) {
+
+            if (errorMessage.isNotEmpty()) {
                 Text(
-                    text = viewModel.errorMessage.value,
+                    text = errorMessage,
                     color = Color.Red,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
             }
+
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -117,10 +140,18 @@ fun RegisterView(viewModel: RegistrationViewModel, navController: NavController)
         }
     }
 }
+
 @Preview(showBackground = true)
 @Composable
-fun PreviewRegistrationView() {
-    val navController = rememberNavController()
-    val viewModel = RegistrationViewModel()
-    RegisterView(navController = navController, viewModel=viewModel)
+fun PreviewRegisterContent() {
+    RegisterContent(
+        login = "",
+        password = "",
+        errorMessage = "",
+        onLoginChanged = {},
+        onPasswordChanged = {},
+        onRegisterClick = { _, _ -> },
+        onBackClick = {},
+        navigateToLogin = {}
+    )
 }

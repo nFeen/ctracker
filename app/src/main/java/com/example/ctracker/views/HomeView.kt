@@ -1,3 +1,4 @@
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,6 +10,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,19 +23,33 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.ctracker.entity.Meal
 import com.example.ctracker.viewmodel.HomeViewModel
+import com.example.ctracker.viewmodel.MealModel
+import java.util.Calendar
+import java.util.Date
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeView(viewModel: HomeViewModel, navController: NavController) {
-    val calorie = viewModel.calorie
-    val maxCalories = viewModel.maxCalories
+    HomeContent(
+        calorie = viewModel.calorie.value,
+        maxCalories = viewModel.maxCalories.value,
+        progress = viewModel.calorie.value / viewModel.maxCalories.value.toFloat(),
+        progressColor = if (viewModel.calorie.value > viewModel.maxCalories.value) Color(0xFFFF9800) else Color(0xFF4CAF50),
+        mealList = viewModel.mealList,
+        onNavigateToSearch = { index -> navController.navigate("search/$index") }
+    )
+}
 
-    val progress = calorie.value / maxCalories.value.toFloat()
-
-    val progressColor =
-        if (calorie.value > maxCalories.value) Color(0xFFFF9800)
-        else Color(0xFF4CAF50)
-
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HomeContent(
+    calorie: Int,
+    maxCalories: Int,
+    progress: Float,
+    progressColor: Color,
+    mealList: List<MealModel>,
+    onNavigateToSearch: (Int) -> Unit
+) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -45,7 +61,7 @@ fun HomeView(viewModel: HomeViewModel, navController: NavController) {
                     Text("CTracker")
                 }
             )
-        },
+        }
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -57,12 +73,12 @@ fun HomeView(viewModel: HomeViewModel, navController: NavController) {
         ) {
             Spacer(modifier = Modifier.height(16.dp))
 
-            Text(text = "Калории: ${calorie.value} / ${maxCalories.value}")
+            Text(text = "Калории: $calorie / $maxCalories")
 
             Spacer(modifier = Modifier.height(8.dp))
 
             LinearProgressIndicator(
-                progress = { progress.coerceIn(0f, 1f) },
+                progress = progress.coerceIn(0f, 1f),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(8.dp),
@@ -72,31 +88,22 @@ fun HomeView(viewModel: HomeViewModel, navController: NavController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            viewModel.mealList.forEachIndexed { index, mealModel ->
+            mealList.forEachIndexed { index, mealModel ->
                 MealOfDay(
-                    isVisibleItems = mealModel.isProductListVisible.value,
-                    toggleProductList = mealModel.toggleProductList,
-                    productList = mealModel.productList,
-                    name = mealModel.name,
-                    onAddProductClick = {
-                        navController.navigate("search/$index")
-                    }
+                    mealModel = mealModel,
+                    onAddProductClick = { onNavigateToSearch(index) }
                 )
                 Spacer(modifier = Modifier.height(16.dp))
             }
         }
     }
 }
-
 @Composable
 fun MealOfDay(
-    isVisibleItems: Boolean,
-    toggleProductList: () -> Unit,
-    productList: List<Meal>,
-    name: String,
+    mealModel: MealModel,
     onAddProductClick: () -> Unit
 ) {
-    val icon: ImageVector = if (isVisibleItems) {
+    val icon: ImageVector = if (mealModel.isProductListVisible.value) {
         Icons.Filled.KeyboardArrowUp
     } else {
         Icons.Filled.KeyboardArrowDown
@@ -109,7 +116,7 @@ fun MealOfDay(
                 color = MaterialTheme.colorScheme.secondaryContainer,
                 shape = RoundedCornerShape(8.dp)
             )
-            .clickable(onClick = toggleProductList)
+            .clickable(onClick = mealModel.toggleProductList)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -126,7 +133,7 @@ fun MealOfDay(
             )
             Spacer(modifier = Modifier.size(8.dp))
             Text(
-                text = name,
+                text = "${mealModel.name} (${mealModel.totalCalories} ккал)", // Отображение имени и калорий
                 fontSize = 20.sp,
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
                 textAlign = TextAlign.Start,
@@ -140,20 +147,21 @@ fun MealOfDay(
 
     Spacer(modifier = Modifier.height(16.dp))
 
-    if (isVisibleItems) {
+    if (mealModel.isProductListVisible.value) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .heightIn(max = 200.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            productList.forEach { product ->
+            mealModel.productList.forEach { product ->
                 ProductItem(product = product)
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }
     }
 }
+
 
 @Composable
 fun ProductItem(product: Meal) {
@@ -169,21 +177,22 @@ fun ProductItem(product: Meal) {
             verticalArrangement = Arrangement.Center
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth(), // Растягиваем Row на всю ширину
-                horizontalArrangement = Arrangement.SpaceBetween // Распределяем элементы по краям
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = product.name,
                     fontSize = 16.sp,
-                    color = MaterialTheme.colorScheme.onSurface, // Текстовый цвет
-                    modifier = Modifier.weight(1f) // Левый текст занимает свою часть пространства
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.weight(1f)
                 )
+
                 Text(
                     text = "${product.calories.toInt()} ккал",
                     fontSize = 14.sp,
-                    color = MaterialTheme.colorScheme.onSurface, // Текстовый цвет
-                    modifier = Modifier.weight(1f) // Правый текст занимает свою часть пространства
-                        .wrapContentWidth(Alignment.End) // Выравниваем текст по правому краю
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.weight(1f)
+                        .wrapContentWidth(Alignment.End)
                 )
             }
 
@@ -191,16 +200,53 @@ fun ProductItem(product: Meal) {
             Text(
                 text = "Вес: ${product.quantity.toInt()} г | Б: ${product.protein} г | Ж: ${product.fats} г | У: ${product.carbs} г",
                 fontSize = 12.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant // Более мягкий цвет текста
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }
 }
 
+@SuppressLint("UnrememberedMutableState")
 @Preview(showBackground = true)
 @Composable
-fun PreviewHomeView() {
-    val viewModel = HomeViewModel()
-    val navController = rememberNavController()
-    HomeView(viewModel = viewModel, navController = navController)
+fun PreviewHomeContent() {
+    val calendar = Calendar.getInstance()
+    calendar.add(Calendar.DAY_OF_YEAR, 0)
+    val date: Date = calendar.time
+
+    val breakfastProducts = listOf(
+        Meal(1, 0, "Яичница", 70F, 6.0F, 5.0F, 1.0F, 10.0F, date),
+        Meal(2, 0, "Тост", 120F, 4.0F, 2.0F, 20.0F, 10.0F, date)
+    )
+
+    val lunchProducts = listOf(
+        Meal(3, 1, "Суп", 200F, 10.0F, 8.0F, 30.0F, 15.0F, date),
+        Meal(4, 1, "Салат", 150F, 5.0F, 7.0F, 12.0F, 10.0F, date)
+    )
+
+    val dinnerProducts = listOf(
+        Meal(5, 2, "Паста", 400F, 12.0F, 10.0F, 50.0F, 20.0F, date),
+        Meal(6, 2, "Курица", 250F, 30.0F, 5.0F, 2.0F, 15.0F, date)
+    )
+
+    val additionalProducts = listOf(
+        Meal(7, 3, "Шоколад", 120F, 2.0F, 8.0F, 10.0F, 5.0F, date),
+        Meal(8, 3, "Орехи", 150F, 4.0F, 10.0F, 5.0F, 7.0F, date)
+    )
+
+    val mealList = listOf(
+        MealModel("Завтрак", breakfastProducts, mutableStateOf(true)) { },
+        MealModel("Обед", lunchProducts, mutableStateOf(false)) { },
+        MealModel("Ужин", dinnerProducts, mutableStateOf(false)) { },
+        MealModel("Другое", additionalProducts, mutableStateOf(false)) { }
+    )
+
+    HomeContent(
+        calorie = 1200,
+        maxCalories = 2000,
+        progress = 0.6f,
+        progressColor = Color.Green,
+        mealList = mealList,
+        onNavigateToSearch = {}
+    )
 }
