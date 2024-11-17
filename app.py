@@ -163,8 +163,7 @@ def add_meal():
 def get_meals():
     user_id = request.args.get('user_id')
     date = request.args.get('date')
-    part_of_the_day = request.args.get('part_of_the_day')
-    meals = Meal.query.filter(Meal.user_id == user_id, Meal.date == date, Meal.part_of_the_day == part_of_the_day).all()
+    meals = Meal.query.filter(Meal.user_id == user_id, Meal.date == date).all()
     if meals:
         result = [
             {
