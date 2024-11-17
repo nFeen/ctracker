@@ -11,6 +11,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.ui.text.input.ImeAction
 
 @Composable
 fun LoginView(
@@ -39,6 +42,7 @@ fun LoginContent(
     onLoginClick: () -> Unit,
     onRegisterClick: () -> Unit
 ) {
+
     Scaffold { paddingValues ->
         Column(
             modifier = Modifier
@@ -76,7 +80,18 @@ fun LoginContent(
                 )
 
                 Spacer(modifier = Modifier.height(40.dp))
-
+                if (errorMessage.isNotEmpty()) {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = errorMessage,
+                        color = Color.Red,
+                        modifier = Modifier.padding(bottom = 8.dp),
+                        textAlign = TextAlign.Center
+                    )
+                }
+                else{
+                    Spacer(modifier = Modifier.height(40.dp))
+                }
                 OutlinedTextField(
                     value = login,
                     onValueChange = onLoginChanged,
@@ -93,18 +108,19 @@ fun LoginContent(
                     label = { Text(text = "Пароль") },
                     singleLine = true,
                     visualTransformation = PasswordVisualTransformation(),
-                    modifier = Modifier.fillMaxWidth()
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        imeAction = ImeAction.Done
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onDone = {
+                            onLoginClick()
+                        }
+                    ),
+                    modifier = Modifier.fillMaxWidth(),
+                    isError = errorMessage.isNotEmpty()
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
-
-                if (errorMessage.isNotEmpty()) {
-                    Text(
-                        text = errorMessage,
-                        color = Color.Red,
-                        modifier = Modifier.padding(bottom = 8.dp)
-                    )
-                }
 
                 Button(
                     onClick = onLoginClick,
@@ -130,6 +146,7 @@ fun LoginContent(
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
 fun PreviewLoginView() {
@@ -138,7 +155,7 @@ fun PreviewLoginView() {
         onLoginChanged = {},
         password = "",
         onPasswordChanged = {},
-        errorMessage = "",
+        errorMessage = "123",
         onLoginClick = {},
         onRegisterClick = {}
     )

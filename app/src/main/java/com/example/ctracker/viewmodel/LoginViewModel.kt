@@ -12,6 +12,9 @@ class LoginViewModel : ViewModel() {
     var loginSuccess = MutableLiveData(false)
     var errorMessage = mutableStateOf("")
 
+    private val loginRegex = Regex("^(?=.*[A-Za-z0-9]$)[A-Za-z][A-Za-z\\d.-]{0,19}$")
+    private val passwordRegex = Regex("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
+
     fun onLoginChanged(newLogin: String) {
         login.value = newLogin
     }
@@ -21,15 +24,20 @@ class LoginViewModel : ViewModel() {
     }
 
     fun onLoginClick() {
-        val user : User? = MockUserRepository.authenticateUser(login.value, password.value)
+        if (!loginRegex.matches(login.value) or !passwordRegex.matches(password.value)) {
+            loginSuccess.value = false
+            errorMessage.value = "Логин или пароль неверные"
+            return
+        }
+        // Аутентификация пользователя
+        val user: User? = MockUserRepository.authenticateUser(login.value, password.value)
         if (user != null) {
             loginSuccess.value = true
             errorMessage.value = ""
             SharedPreferencesManager.saveString("UserID", user.id.toString())
         } else {
             loginSuccess.value = false
-            errorMessage.value = "Invalid login or password"
-
+            errorMessage.value = "Логин или пароль неверные (ДЛЯ ТЕСТА, АУТЕНТИФИКАКЦИЯ НЕ ПРОШЛА)"
         }
     }
 }

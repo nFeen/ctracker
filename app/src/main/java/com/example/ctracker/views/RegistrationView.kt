@@ -11,20 +11,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.ui.text.input.ImeAction
 
 @Composable
 fun RegisterView(viewModel: RegistrationViewModel, navController: NavController) {
-    RegisterContent(
-        login = viewModel.login.value,
+    RegisterContent(login = viewModel.login.value,
         password = viewModel.password.value,
         errorMessage = viewModel.errorMessage.value,
         onLoginChanged = viewModel::onLoginChanged,
         onPasswordChanged = viewModel::onPasswordChanged,
-        onRegisterClick = { onSuccess, onFailure ->
-            viewModel.onRegisterClick(onSuccess, onFailure)
+        onRegisterClick = { onSuccess ->
+            viewModel.onRegisterClick(onSuccess)
         },
         onBackClick = { navController.popBackStack() },
-        navigateToLogin = { navController.navigate("login") }
+        navigateToLogin = { navController.navigate("login") },
+        isLoginError = viewModel.isLoginError.value,
+        isPasswordError = viewModel.isPasswordError.value
     )
 }
 
@@ -35,9 +39,11 @@ fun RegisterContent(
     errorMessage: String,
     onLoginChanged: (String) -> Unit,
     onPasswordChanged: (String) -> Unit,
-    onRegisterClick: (onSuccess: () -> Unit, onFailure: (String) -> Unit) -> Unit,
+    onRegisterClick: (onSuccess: () -> Unit) -> Unit,
     onBackClick: () -> Unit,
-    navigateToLogin: () -> Unit
+    navigateToLogin: () -> Unit,
+    isLoginError: Boolean,
+    isPasswordError: Boolean
 ) {
     Scaffold { paddingValues ->
         Column(
@@ -79,27 +85,47 @@ fun RegisterContent(
                     textAlign = TextAlign.Center
                 )
 
-                Spacer(modifier = Modifier.height(40.dp))
 
                 // Поле ввода логина
+                if (errorMessage.isNotEmpty()) {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = errorMessage,
+                        color = Color.Red,
+                        modifier = Modifier.padding(bottom = 8.dp),
+                        textAlign = TextAlign.Center
+                    )
+                }
+                else{
+                    Spacer(modifier = Modifier.height(40.dp))
+                }
                 OutlinedTextField(
                     value = login,
                     onValueChange = onLoginChanged,
                     label = { Text(text = "Логин") },
                     singleLine = true,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    isError = isLoginError
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Поле ввода пароля
-                OutlinedTextField(
-                    value = password,
+                OutlinedTextField(value = password,
                     onValueChange = onPasswordChanged,
                     label = { Text(text = "Пароль") },
                     singleLine = true,
                     visualTransformation = PasswordVisualTransformation(),
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        imeAction = ImeAction.Done
+                    ),
+                    keyboardActions = KeyboardActions(onDone = {
+                        onRegisterClick(
+                            navigateToLogin
+                        )
+                    }),
+                    isError = isPasswordError
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
@@ -109,21 +135,13 @@ fun RegisterContent(
                     onClick = {
                         onRegisterClick(
                             navigateToLogin
-                        ) { error -> println("Ошибка: $error") }
-                    },
-                    modifier = Modifier.fillMaxWidth()
+                        )
+                    }, modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(text = "Регистрация")
                 }
-                Spacer(modifier = Modifier.height(200.dp))
-            }
 
-            if (errorMessage.isNotEmpty()) {
-                Text(
-                    text = errorMessage,
-                    color = Color.Red,
-                    modifier = Modifier.padding(bottom = 8.dp)
-                )
+                Spacer(modifier = Modifier.height(200.dp))
             }
 
             Column(
@@ -144,14 +162,14 @@ fun RegisterContent(
 @Preview(showBackground = true)
 @Composable
 fun PreviewRegisterContent() {
-    RegisterContent(
-        login = "",
+    RegisterContent(login = "",
         password = "",
-        errorMessage = "",
+        errorMessage = "213",
         onLoginChanged = {},
         onPasswordChanged = {},
-        onRegisterClick = { _, _ -> },
+        onRegisterClick = { _ -> },
         onBackClick = {},
-        navigateToLogin = {}
-    )
+        navigateToLogin = {} ,
+        isLoginError = true,
+        isPasswordError = true)
 }

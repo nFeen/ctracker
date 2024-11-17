@@ -276,7 +276,7 @@ fun ProfileContent(
                         Box(
                             modifier = Modifier
                                 .width(24.dp)
-                                .height((maxBarHeight * 0.8f).dp)
+                                .height((maxBarHeight * 0.7f).dp)
                                 .background(Color.LightGray),
                             contentAlignment = Alignment.BottomCenter
                         ) {

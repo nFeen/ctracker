@@ -4,7 +4,7 @@ import com.example.ctracker.entity.User
 
 object MockUserRepository {
     private val users = mutableListOf(
-        User(id = 1, login = "1", mealsId = listOf(1, 2, 3), password = "1", currentCalorie = 1000, weight = 75)
+        User(id = 1, login = "testuser1", mealsId = listOf(1, 2, 3), password = "testuser1", currentCalorie = 1000, weight = 75)
     )
 
     fun authenticateUser(login: String, password: String): User? {

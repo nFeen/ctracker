@@ -48,7 +48,6 @@ class ProfileViewModel(
 
     init {
         calculateMacrosFromMeals()
-        SharedPreferencesManager.init(CTrackerApp.applicationContext())
     }
 
     // Подсчет данных макросов (жиров, белков, углеводов) по сегодняшним приемам пищи
