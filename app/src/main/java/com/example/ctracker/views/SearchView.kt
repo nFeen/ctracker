@@ -16,65 +16,73 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchView(viewModel: SearchViewModel, navController: NavController) {
     val query = viewModel.query.value
     val results = viewModel.results.value
     val hasSearched = viewModel.hasSearched.value
-
-    LaunchedEffect(Unit) {
-        // Перехватываем переход на "Home" в BottomNavigationBar
-        navController.currentBackStackEntryFlow.collect { backStackEntry ->
-            if (backStackEntry.destination.route == "home") {
-                navController.popBackStack() // Закрываем текущий экран
-            }
-        }
-    }
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        TextField(
-            value = query,
-            onValueChange = {
-                viewModel.query.value = it
-                if (it.isBlank()) {
-                    viewModel.resetSearchState() // Сбрасываем состояние поиска
-                }
-            },
-            modifier = Modifier.fillMaxWidth(),
-            placeholder = { Text("Введите название продукта ${viewModel.index}") },
-            singleLine = true,
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Search
-            ),
-            keyboardActions = KeyboardActions(
-                onSearch = {
-                    viewModel.search()
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                ),
+                title = {
+                    Text("CTracker")
                 }
             )
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        if (hasSearched) {
-            if (results.isEmpty()) {
-                Text(
-                    text = "Продуктов нет",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+        },
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(horizontal = 16.dp),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(modifier = Modifier.height(16.dp))
+            TextField(
+                value = query,
+                onValueChange = {
+                    viewModel.query.value = it
+                    if (it.isBlank()) {
+                        viewModel.resetSearchState() // Сбрасываем состояние поиска
+                    }
+                },
+                modifier = Modifier.fillMaxWidth(),
+                placeholder = { Text("Введите название продукта ${viewModel.index}") },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    imeAction = ImeAction.Search
+                ),
+                keyboardActions = KeyboardActions(
+                    onSearch = {
+                        viewModel.search()
+                    }
                 )
-            } else {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Top
-                ) {
-                    results.take(10).forEach { product ->
-                        ProductItem(product)
-                        Spacer(modifier = Modifier.height(8.dp))
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            if (hasSearched) {
+                if (results.isEmpty()) {
+                    Text(
+                        text = "Продуктов нет",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                } else {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Top
+                    ) {
+                        results.take(10).forEach { product ->
+                            ProductItem(product)
+                            Spacer(modifier = Modifier.height(8.dp))
+                        }
                     }
                 }
             }

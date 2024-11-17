@@ -72,10 +72,10 @@ fun NavigationBar(navController: NavController) {
                 label = { Text(text = item.title, color = MaterialTheme.colorScheme.onBackground) },
                 selected = currentRoute == item.route,
                 onClick = {
-                        if (item.route == "home" && currentRoute != item.route && currentRoute == "search/{index}") {
-                            navController.popBackStack()
+                    if (item.route != currentRoute) {
+                        if (currentRoute == "search/{index}") {
+                            navController.popBackStack("home", inclusive = false)
                         }
-                    else if (currentRoute != item.route) {
                         navController.navigate(item.route) {
                             popUpTo(navController.graph.startDestinationId) {
                                 saveState = true
