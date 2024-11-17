@@ -7,7 +7,6 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
 import androidx.navigation.compose.*
@@ -18,6 +17,8 @@ import androidx.navigation.NavHostController
 import com.example.ctracker.viewmodel.HomeViewModel
 import com.example.ctracker.views.ProfileView
 import com.example.ctracker.viewmodel.ProfileViewModel
+import com.example.ctracker.viewmodel.SearchViewModel
+import com.example.ctracker.views.SearchView
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -26,17 +27,22 @@ fun MainView(navController: NavHostController, viewModel: MainViewModel) {
         bottomBar = {
             NavigationBar(navController = navController)
         }
-    ){innerPadding ->
+    ) { innerPadding ->
         Column(
             modifier = Modifier.padding(innerPadding)
-        ){
+        ) {
             NavHost(
                 navController = navController,
                 startDestination = "home",
             ) {
-                composable("profile",) { ProfileView(ProfileViewModel()) }
-                composable("home") { HomeView(HomeViewModel())}
+                composable("profile") { ProfileView(ProfileViewModel()) }
+                composable("home") { HomeView(HomeViewModel(), navController) }
                 composable("settings") { SettingsView(viewModel) }
+                composable("search/{index}") { backStackEntry ->
+                    val index = backStackEntry.arguments?.getString("index")?.toIntOrNull() ?: 0
+                    val searchViewModel = SearchViewModel(index)
+                    SearchView(searchViewModel, navController)
+                }
             }
         }
     }
@@ -66,7 +72,10 @@ fun NavigationBar(navController: NavController) {
                 label = { Text(text = item.title, color = MaterialTheme.colorScheme.onBackground) },
                 selected = currentRoute == item.route,
                 onClick = {
-                    if (currentRoute != item.route) {
+                        if (item.route == "home" && currentRoute != item.route && currentRoute == "search/{index}") {
+                            navController.popBackStack()
+                        }
+                    else if (currentRoute != item.route) {
                         navController.navigate(item.route) {
                             popUpTo(navController.graph.startDestinationId) {
                                 saveState = true

@@ -1,8 +1,6 @@
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -19,22 +17,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.ctracker.entity.Meal
 import com.example.ctracker.viewmodel.HomeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeView(viewModel: HomeViewModel) {
+fun HomeView(viewModel: HomeViewModel, navController: NavController) {
     val calorie = viewModel.calorie
     val maxCalories = viewModel.maxCalories
 
-    // Вычисляем прогресс
     val progress = calorie.value / maxCalories.value.toFloat()
 
-    // Определяем цвет прогресс-бара
     val progressColor =
         if (calorie.value > maxCalories.value) Color(0xFFFF9800)
-        else Color(0xFF4CAF50) // Оранжевый / Зеленый
+        else Color(0xFF4CAF50)
 
     Scaffold(
         topBar = {
@@ -57,14 +55,12 @@ fun HomeView(viewModel: HomeViewModel) {
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Текст текущего состояния
             Text(text = "Калории: ${calorie.value} / ${maxCalories.value}")
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Прогресс-бар
             LinearProgressIndicator(
-                progress = { progress.coerceIn(0f, 1f) },
+                progress = progress.coerceIn(0f, 1f),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(8.dp),
@@ -74,13 +70,15 @@ fun HomeView(viewModel: HomeViewModel) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Передаем каждый MealModel для отображения
-            viewModel.mealList.forEach { mealModel ->
+            viewModel.mealList.forEachIndexed { index, mealModel ->
                 MealOfDay(
                     isVisibleItems = mealModel.isProductListVisible.value,
                     toggleProductList = mealModel.toggleProductList,
                     productList = mealModel.productList,
-                    name = mealModel.name
+                    name = mealModel.name,
+                    onAddProductClick = {
+                        navController.navigate("search/$index")
+                    }
                 )
                 Spacer(modifier = Modifier.height(16.dp))
             }
@@ -94,8 +92,8 @@ fun MealOfDay(
     toggleProductList: () -> Unit,
     productList: List<Meal>,
     name: String,
+    onAddProductClick: () -> Unit
 ) {
-    // Иконка для раскрытия/сворачивания
     val icon: ImageVector = if (isVisibleItems) {
         Icons.Filled.KeyboardArrowUp
     } else {
@@ -106,10 +104,10 @@ fun MealOfDay(
         modifier = Modifier
             .fillMaxWidth()
             .background(
-                color = MaterialTheme.colorScheme.secondaryContainer, // Цвет фона из темы
+                color = MaterialTheme.colorScheme.secondaryContainer,
                 shape = RoundedCornerShape(8.dp)
             )
-            .clickable(onClick = toggleProductList) // Весь Row (кроме кнопки) - кнопка
+            .clickable(onClick = toggleProductList)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -118,7 +116,6 @@ fun MealOfDay(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.weight(1f)
         ) {
-            // Иконка для разворачивания
             Icon(
                 imageVector = icon,
                 contentDescription = null,
@@ -126,7 +123,6 @@ fun MealOfDay(
                 modifier = Modifier.size(24.dp)
             )
             Spacer(modifier = Modifier.size(8.dp))
-            // Название приёма пищи
             Text(
                 text = name,
                 fontSize = 20.sp,
@@ -135,21 +131,19 @@ fun MealOfDay(
                 modifier = Modifier.weight(1f)
             )
         }
-        // Кнопка для добавления нового продукта
-        Button(onClick = {print("click")}) {
+        Button(onClick = onAddProductClick) {
             Text(text = "+")
         }
     }
 
     Spacer(modifier = Modifier.height(16.dp))
 
-    // Список продуктов
     if (isVisibleItems) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(max = 200.dp) // Ограничиваем максимальную высоту
-                .verticalScroll(rememberScrollState()) // Добавляем прокрутку
+                .heightIn(max = 200.dp)
+                .verticalScroll(rememberScrollState())
         ) {
             productList.forEach { product ->
                 ProductItem(product = product)
@@ -193,7 +187,7 @@ fun ProductItem(product: Meal) {
 
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "Вес: ${product.quantity.toInt()} г | Б: ${product.protein} г | Ж: ${product.fat} г | У: ${product.carb} г",
+                text = "Вес: ${product.quantity.toInt()} г | Б: ${product.protein} г | Ж: ${product.fats} г | У: ${product.carbs} г",
                 fontSize = 12.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant // Более мягкий цвет текста
             )
@@ -205,5 +199,6 @@ fun ProductItem(product: Meal) {
 @Composable
 fun PreviewHomeView() {
     val viewModel = HomeViewModel()
-    HomeView(viewModel = viewModel)
+    val navController = rememberNavController()
+    HomeView(viewModel = viewModel, navController = navController)
 }

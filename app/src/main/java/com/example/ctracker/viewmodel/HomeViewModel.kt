@@ -4,41 +4,53 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.ctracker.entity.Meal
+import com.example.ctracker.entity.User
+import com.example.ctracker.repository.mock.MockMealRepository
+import com.example.ctracker.repository.mock.MockUserRepository
 
-class HomeViewModel : ViewModel() {
-    // Список продуктов для разных приемов пищи
-    private val breakfastProducts = listOf(
-        Meal(1, 1, "zalupa", 70F, 6.0F, 5.0F, 1.0F, 10.0F),
-        Meal(2, 2, "zalupa", 4.0F, 2.0F, 21.0F, 20F, 10.0F)
-    )
+class HomeViewModel(
+    private val mealRepository: MockMealRepository = MockMealRepository,
+    private val userRepository: MockUserRepository = MockUserRepository
+) : ViewModel() {
 
-    private val lunchProducts = listOf(
-        Meal(3, 3, "zalupa", 20.0F, 12.0F, 35.0F, 50F, 10.0F),
-        Meal(4, 4, "zalupa", 3.0F, 6.0F, 8.0F, 15F, 10.0F)
-    )
+    // ID пользователя из SharedPreferences
+    private val userId: Int = SharedPreferencesManager.getString("UserID", "-1").toInt()
 
-    private val dinnerProducts = listOf(
-        Meal(5, 5, "zalupa", 35.0F, 25.0F, 0.0F, 2F, 10.0F),
-        Meal(6, 6, "zalupa", 4.0F, 0.5F, 45.0F, 40F, 10.0F)
-    )
-    private val additionalProducts = listOf(
-        Meal(5, 5, "zalupa", 35.0F, 25.0F, 0.0F, 2F, 10.0F),
-        Meal(6, 6, "zalupa", 4.0F, 0.5F, 45.0F, 40F, 10.0F)
-    )
+    // Пользовательские данные
+    private val user: User? = userRepository.getUserById(userId)
 
     // Максимальные калории
-    var maxCalories = mutableStateOf(2000)
+    val maxCalories: MutableState<Int> = mutableStateOf(user?.maxCalorie ?: 2000)
 
     // Текущие калории
-    var calorie = mutableStateOf(3000)
+    val calorie: MutableState<Int> = mutableStateOf(user?.currentCalorie ?: 0)
 
     // Список моделей для каждого приема пищи
-    val mealList = listOf(
-        MealModel("Завтрак", breakfastProducts, mutableStateOf(true)) { toggleVisibility(0) },
-        MealModel("Обед", lunchProducts, mutableStateOf(false)) { toggleVisibility(1) },
-        MealModel("Ужин", dinnerProducts, mutableStateOf(false)) { toggleVisibility(2) },
-        MealModel("Другое", dinnerProducts, mutableStateOf(false)) { toggleVisibility(3) }
-    )
+    val mealList = mutableListOf<MealModel>()
+
+    init {
+        // Загружаем данные из репозитория
+        loadMeals()
+    }
+
+    // Метод для загрузки данных из репозитория
+    private fun loadMeals() {
+        val userMeals = mealRepository.getMealsForUser(userId)
+
+        // Разделяем продукты по категориям
+        val breakfastProducts = userMeals.filter { it.mealType == 0 }
+        val lunchProducts = userMeals.filter { it.mealType == 1 }
+        val dinnerProducts = userMeals.filter { it.mealType == 2 }
+        val additionalProducts = userMeals.filter { it.mealType == 3 }
+
+        mealList.apply {
+            clear()
+            add(MealModel("Завтрак", breakfastProducts, mutableStateOf(true)) { toggleVisibility(0) })
+            add(MealModel("Обед", lunchProducts, mutableStateOf(false)) { toggleVisibility(1) })
+            add(MealModel("Ужин", dinnerProducts, mutableStateOf(false)) { toggleVisibility(2) })
+            add(MealModel("Другое", additionalProducts, mutableStateOf(false)) { toggleVisibility(3) })
+        }
+    }
 
     // Переключение видимости для определенного приема пищи
     private fun toggleVisibility(index: Int) {
@@ -48,11 +60,12 @@ class HomeViewModel : ViewModel() {
     // Обновление текущего значения калорий
     fun updateCalories(newCalories: Int) {
         calorie.value = newCalories
+        user?.currentCalorie = newCalories // Сохраняем значение в репозитории пользователя
     }
 }
 
 data class MealModel(
-    val name: String, // Название приёма пищи
+    val name: String, // Название приема пищи
     val productList: List<Meal>, // Список продуктов
     var isProductListVisible: MutableState<Boolean>, // Булевое значение для видимости списка продуктов
     val toggleProductList: () -> Unit // Функция для переключения видимости
