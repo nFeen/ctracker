@@ -112,6 +112,7 @@ fun LoginContent(
                 ) {
                     Text(text = "Войти")
                 }
+                Spacer(modifier = Modifier.height(200.dp))
             }
 
             Column(

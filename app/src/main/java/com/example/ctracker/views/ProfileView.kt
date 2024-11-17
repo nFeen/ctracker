@@ -100,17 +100,15 @@ fun ProfileContent(
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(1f)
-                            .background(
-                                MaterialTheme.colorScheme.surface,
-                                shape = RoundedCornerShape(8.dp)
-                            ),
+                            .background(MaterialTheme.colorScheme.secondaryContainer),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
                             text = userName,
                             fontSize = 24.sp,
                             color = MaterialTheme.colorScheme.onSurface,
-                            modifier = Modifier.padding(horizontal = 8.dp)
+                            modifier = Modifier.padding(horizontal = 8.dp),
+                            textAlign = TextAlign.Center
                         )
                     }
 
@@ -120,10 +118,7 @@ fun ProfileContent(
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(1f)
-                            .background(
-                                MaterialTheme.colorScheme.surface,
-                                shape = RoundedCornerShape(8.dp)
-                            ),
+                            .background(MaterialTheme.colorScheme.secondaryContainer),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
@@ -198,25 +193,56 @@ fun ProfileContent(
                 Column(
                     modifier = Modifier
                         .weight(1f)
-                        .fillMaxHeight(),
+                        .fillMaxHeight()
+                        .padding(start = 16.dp),
                     verticalArrangement = Arrangement.SpaceEvenly,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(
-                        text = "Белки: $protein",
-                        fontSize = TextUnit(20f, TextUnitType.Unspecified),
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
-                    Text(
-                        text = "Жиры: $fats",
-                        fontSize = TextUnit(20f, TextUnitType.Unspecified),
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
-                    Text(
-                        text = "Углеводы: $carbs",
-                        fontSize = TextUnit(20f, TextUnitType.Unspecified),
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(MaterialTheme.colorScheme.secondaryContainer)
+                            .padding(16.dp)
+                            .weight(1f)
+                    ) {
+                        Text(
+                            modifier = Modifier.align(Alignment.Center),
+                            text = "Белки: $protein",
+                            fontSize = TextUnit(20f, TextUnitType.Unspecified),
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(24.dp))
+
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(MaterialTheme.colorScheme.secondaryContainer)
+                            .padding(16.dp)
+                            .weight(1f),
+                    ) {
+                        Text(
+                            modifier = Modifier.align(Alignment.Center),
+                            text = "Жиры: $fats",
+                            fontSize = TextUnit(20f, TextUnitType.Unspecified),
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(24.dp))
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(MaterialTheme.colorScheme.secondaryContainer)
+                            .padding(16.dp)
+                            .weight(1f)
+                    ) {
+                        Text(
+                            modifier = Modifier.align(Alignment.Center),
+                            text = "Углеводы: $carbs",
+                            fontSize = TextUnit(20f, TextUnitType.Unspecified),
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    }
                 }
             }
 
@@ -235,6 +261,7 @@ fun ProfileContent(
                     .height(maxBarHeight.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Bottom
+
             ) {
                 chartData.forEach { (calories, date) ->
                     Column(
@@ -249,7 +276,7 @@ fun ProfileContent(
                         Box(
                             modifier = Modifier
                                 .width(24.dp)
-                                .height((maxBarHeight * 0.6f).dp)
+                                .height((maxBarHeight * 0.8f).dp)
                                 .background(Color.LightGray),
                             contentAlignment = Alignment.BottomCenter
                         ) {
@@ -287,6 +314,14 @@ fun ProfileContentPreview() {
         protein = 120,
         fats = 50,
         carbs = 200,
-        chartData = listOf(2500 to "19.11", 1800 to "20.11", 1700 to "21.11",1700 to "22.11",1700 to "23.11",1700 to "24.11", 1700 to "25.11")
+        chartData = listOf(
+            2500 to "19.11",
+            1800 to "20.11",
+            1700 to "21.11",
+            1700 to "22.11",
+            1700 to "23.11",
+            1700 to "24.11",
+            1700 to "25.11"
+        )
     )
 }

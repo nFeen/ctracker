@@ -56,21 +56,5 @@ class HomeViewModel(
     private fun toggleVisibility(index: Int) {
         mealList[index].isProductListVisible.value = !mealList[index].isProductListVisible.value
     }
-
-    // Обновление текущего значения калорий
-    fun updateCalories(newCalories: Int) {
-        calorie.value = newCalories
-        user?.currentCalorie = newCalories // Сохраняем значение в репозитории пользователя
-    }
-}
-
-data class MealModel(
-    val name: String, // Название приема пищи
-    val productList: List<Meal>, // Список продуктов
-    var isProductListVisible: MutableState<Boolean>, // Булевое значение для видимости списка продуктов
-    val toggleProductList: () -> Unit // Функция для переключения видимости
-) {
-    val totalCalories: Int
-        get() = productList.sumOf { it.calories.toInt() } // Суммируем калории всех продуктов
 }
 

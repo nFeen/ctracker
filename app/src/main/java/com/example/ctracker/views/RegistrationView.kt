@@ -115,7 +115,7 @@ fun RegisterContent(
                 ) {
                     Text(text = "Регистрация")
                 }
-
+                Spacer(modifier = Modifier.height(200.dp))
             }
 
             if (errorMessage.isNotEmpty()) {
