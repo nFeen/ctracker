@@ -32,6 +32,8 @@ class ProfileViewModel(
     // Логин пользователя
     val userName = mutableStateOf(user?.login ?: "Unknown User")
 
+    val userHeight = mutableStateOf(user?.height ?: 180)
+
     // Вес пользователя
     val userWeight = mutableStateOf("${user?.weight ?: 75} kg")
 

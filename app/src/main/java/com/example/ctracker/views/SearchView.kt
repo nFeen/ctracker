@@ -1,5 +1,6 @@
 package com.example.ctracker.views
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -13,9 +14,11 @@ import com.example.ctracker.viewmodel.SearchViewModel
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.ctracker.ui.theme.CTrackerTheme
 
 @Composable
 fun SearchView(viewModel: SearchViewModel, navController: NavController) {
@@ -24,12 +27,7 @@ fun SearchView(viewModel: SearchViewModel, navController: NavController) {
         results = viewModel.results.value,
         hasSearched = viewModel.hasSearched.value,
         index = viewModel.index,
-        onQueryChange = { query ->
-            viewModel.query.value = query
-            if (query.isBlank()) {
-                viewModel.resetSearchState()
-            }
-        },
+        onQueryChange = viewModel::onQuerySearch,
         onSearch = viewModel::search
     )
 }
@@ -48,7 +46,7 @@ fun SearchContent(
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 ),
                 title = {
@@ -66,18 +64,21 @@ fun SearchContent(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(16.dp))
-            TextField(
+            OutlinedTextField(
                 value = query,
                 onValueChange = onQueryChange,
-                modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("Введите название продукта $index") },
+                placeholder = { Text ("Введите название продукта")},
                 singleLine = true,
                 keyboardOptions = KeyboardOptions.Default.copy(
-                    imeAction = ImeAction.Search
+                    imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
-                    onSearch = { onSearch() }
-                )
+                    onDone = {
+                        onSearch()
+                    }
+                ),
+                modifier = Modifier.fillMaxWidth(),
+                isError = hasSearched && results.isEmpty()
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -112,7 +113,8 @@ fun ProductItem(product: Food) {
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp),
-        shape = RoundedCornerShape(8.dp)
+        shape = RoundedCornerShape(8.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -149,26 +151,29 @@ fun ProductItem(product: Food) {
     }
 }
 
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true)
 @Composable
 fun SearchContentPreview() {
-    SearchContent(
-        query = "",
-        results = listOf(
-            Food(1, "Яблоко", 52, 0.2f, 14f, 0.3f),
-            Food(2, "Банан", 89, 0.3f, 23f, 1.1f),
-            Food(3, "Куриное филе", 165, 3.6f, 0f, 31f),
-            Food(4, "Овсянка", 68, 1.4f, 12f, 2.4f),
-            Food(5, "Яйцо вареное", 155, 11f, 1.1f, 13f),
-            Food(6, "Молоко", 42, 1f, 5f, 3.4f),
-            Food(7, "Рис", 130, 0.3f, 28f, 2.7f),
-            Food(8, "Гречка", 110, 1.6f, 20f, 4.2f),
-            Food(9, "Помидор", 18, 0.2f, 3.9f, 0.9f),
-            Food(10, "Огурец", 15, 0.1f, 3.6f, 0.7f)
-        ),
-        hasSearched = true,
-        index = 1,
-        onQueryChange = {},
-        onSearch = {}
-    )
+    CTrackerTheme {
+        SearchContent(
+            query = "",
+            results = listOf(
+                Food(1, "Яблоко", 52, 0.2f, 14f, 0.3f),
+                Food(2, "Банан", 89, 0.3f, 23f, 1.1f),
+                Food(3, "Куриное филе", 165, 3.6f, 0f, 31f),
+                Food(4, "Овсянка", 68, 1.4f, 12f, 2.4f),
+                Food(5, "Яйцо вареное", 155, 11f, 1.1f, 13f),
+                Food(6, "Молоко", 42, 1f, 5f, 3.4f),
+                Food(7, "Рис", 130, 0.3f, 28f, 2.7f),
+                Food(8, "Гречка", 110, 1.6f, 20f, 4.2f),
+                Food(9, "Помидор", 18, 0.2f, 3.9f, 0.9f),
+                Food(10, "Огурец", 15, 0.1f, 3.6f, 0.7f)
+            ),
+            hasSearched = true,
+            index = 1,
+            onQueryChange = {},
+            onSearch = {}
+        )
+    }
 }

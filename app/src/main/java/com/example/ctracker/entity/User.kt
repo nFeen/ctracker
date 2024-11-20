@@ -8,5 +8,6 @@ data class User(
     val password: String,
     val maxCalorie: Int = 2000,
     var currentCalorie: Int = 0,
-    val weight : Int = 75
+    val weight : Int = 75,
+    val height : Int = 180
 )

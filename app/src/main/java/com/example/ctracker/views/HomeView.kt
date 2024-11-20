@@ -1,4 +1,5 @@
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -22,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.ctracker.entity.Meal
+import com.example.ctracker.ui.theme.CTrackerTheme
 import com.example.ctracker.viewmodel.HomeViewModel
 import com.example.ctracker.viewmodel.MealModel
 import java.util.Calendar
@@ -34,7 +36,6 @@ fun HomeView(viewModel: HomeViewModel, navController: NavController) {
         calorie = viewModel.calorie.value,
         maxCalories = viewModel.maxCalories.value,
         progress = viewModel.calorie.value / viewModel.maxCalories.value.toFloat(),
-        progressColor = if (viewModel.calorie.value > viewModel.maxCalories.value) Color(0xFFFF9800) else Color(0xFF4CAF50),
         mealList = viewModel.mealList,
         onNavigateToSearch = { index -> navController.navigate("search/$index") }
     )
@@ -46,7 +47,6 @@ fun HomeContent(
     calorie: Int,
     maxCalories: Int,
     progress: Float,
-    progressColor: Color,
     mealList: List<MealModel>,
     onNavigateToSearch: (Int) -> Unit
 ) {
@@ -54,8 +54,8 @@ fun HomeContent(
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    titleContentColor = MaterialTheme.colorScheme.onSurface,
                 ),
                 title = {
                     Text("CTracker")
@@ -76,7 +76,7 @@ fun HomeContent(
             Text(text = "Калории: $calorie / $maxCalories")
 
             Spacer(modifier = Modifier.height(8.dp))
-
+            val progressColor = if (calorie > maxCalories) Color(0xFFFFD1A4) else Color(0xFF4CAF50)
             LinearProgressIndicator(
                 progress = progress.coerceIn(0f, 1f),
                 modifier = Modifier
@@ -98,6 +98,7 @@ fun HomeContent(
         }
     }
 }
+
 @Composable
 fun MealOfDay(
     mealModel: MealModel,
@@ -113,7 +114,7 @@ fun MealOfDay(
         modifier = Modifier
             .fillMaxWidth()
             .background(
-                color = MaterialTheme.colorScheme.secondaryContainer,
+                color = MaterialTheme.colorScheme.primaryContainer,
                 shape = RoundedCornerShape(8.dp)
             )
             .clickable(onClick = mealModel.toggleProductList)
@@ -128,19 +129,22 @@ fun MealOfDay(
             Icon(
                 imageVector = icon,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                tint = MaterialTheme.colorScheme.onPrimaryContainer,
                 modifier = Modifier.size(24.dp)
             )
             Spacer(modifier = Modifier.size(8.dp))
             Text(
                 text = "${mealModel.name} (${mealModel.totalCalories} ккал)", // Отображение имени и калорий
                 fontSize = 20.sp,
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
                 textAlign = TextAlign.Start,
                 modifier = Modifier.weight(1f)
             )
         }
-        Button(onClick = onAddProductClick) {
+        Button(
+            onClick = onAddProductClick,
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)
+        ) {
             Text(text = "+")
         }
     }
@@ -170,7 +174,8 @@ fun ProductItem(product: Meal) {
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp),
-        shape = RoundedCornerShape(8.dp)
+        shape = RoundedCornerShape(8.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -191,7 +196,8 @@ fun ProductItem(product: Meal) {
                     text = "${product.calories.toInt()} ккал",
                     fontSize = 14.sp,
                     color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier
+                        .weight(1f)
                         .wrapContentWidth(Alignment.End)
                 )
             }
@@ -207,6 +213,7 @@ fun ProductItem(product: Meal) {
 }
 
 @SuppressLint("UnrememberedMutableState")
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true)
 @Composable
 fun PreviewHomeContent() {
@@ -240,13 +247,13 @@ fun PreviewHomeContent() {
         MealModel("Ужин", dinnerProducts, mutableStateOf(false)) { },
         MealModel("Другое", additionalProducts, mutableStateOf(false)) { }
     )
-
-    HomeContent(
-        calorie = 1200,
-        maxCalories = 2000,
-        progress = 0.6f,
-        progressColor = Color.Green,
-        mealList = mealList,
-        onNavigateToSearch = {}
-    )
+    CTrackerTheme {
+        HomeContent(
+            calorie = 2200,
+            maxCalories = 2000,
+            progress = 0.6f,
+            mealList = mealList,
+            onNavigateToSearch = {}
+        )
+    }
 }

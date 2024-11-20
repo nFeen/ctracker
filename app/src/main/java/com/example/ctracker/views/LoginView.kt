@@ -1,3 +1,4 @@
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -14,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.ui.text.input.ImeAction
+import com.example.ctracker.ui.theme.CTrackerTheme
 
 @Composable
 fun LoginView(
@@ -57,7 +59,7 @@ fun LoginContent(
                 Text(
                     text = "Ctracker",
                     fontSize = 32.sp,
-                    color = MaterialTheme.colorScheme.primary,
+                    color = MaterialTheme.colorScheme.onSurface,
                     textAlign = TextAlign.Start
                 )
             }
@@ -146,11 +148,11 @@ fun LoginContent(
     }
 }
 
-
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true)
 @Composable
 fun PreviewLoginView() {
-    LoginContent(
+    CTrackerTheme { LoginContent(
         login = "",
         onLoginChanged = {},
         password = "",
@@ -158,5 +160,6 @@ fun PreviewLoginView() {
         errorMessage = "123",
         onLoginClick = {},
         onRegisterClick = {}
-    )
+    )}
+
 }

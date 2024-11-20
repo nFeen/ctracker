@@ -29,6 +29,7 @@ class MainActivity : ComponentActivity() {
                     if (logout) {
                         mainViewModel.resetLogoutState()  // Сбрасываем состояние выхода
                         startActivity(Intent(this, LoginActivity::class.java))
+                        finish()
                     }
                 })
                 // Основной экран с BottomNavigationBar и навигацией

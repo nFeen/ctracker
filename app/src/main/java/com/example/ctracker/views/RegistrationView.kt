@@ -1,3 +1,4 @@
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -14,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.ui.text.input.ImeAction
+import com.example.ctracker.ui.theme.CTrackerTheme
 
 @Composable
 fun RegisterView(viewModel: RegistrationViewModel, navController: NavController) {
@@ -60,11 +62,11 @@ fun RegisterContent(
                 Text(
                     text = "Ctracker",
                     fontSize = 32.sp,
-                    color = MaterialTheme.colorScheme.primary,
+                    color = MaterialTheme.colorScheme.onSurface,
                     textAlign = TextAlign.Start
                 )
                 TextButton(onClick = onBackClick) {
-                    Text(text = "Назад", color = MaterialTheme.colorScheme.primary)
+                    Text(text = "Назад", color = MaterialTheme.colorScheme.onSurface)
                 }
             }
 
@@ -86,7 +88,6 @@ fun RegisterContent(
                 )
 
 
-                // Поле ввода логина
                 if (errorMessage.isNotEmpty()) {
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
@@ -159,17 +160,21 @@ fun RegisterContent(
     }
 }
 
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true)
 @Composable
 fun PreviewRegisterContent() {
-    RegisterContent(login = "",
-        password = "",
-        errorMessage = "213",
-        onLoginChanged = {},
-        onPasswordChanged = {},
-        onRegisterClick = { _ -> },
-        onBackClick = {},
-        navigateToLogin = {} ,
-        isLoginError = true,
-        isPasswordError = true)
+    CTrackerTheme {
+        RegisterContent(login = "",
+            password = "",
+            errorMessage = "213",
+            onLoginChanged = {},
+            onPasswordChanged = {},
+            onRegisterClick = { _ -> },
+            onBackClick = {},
+            navigateToLogin = {} ,
+            isLoginError = true,
+            isPasswordError = true)
+    }
+
 }

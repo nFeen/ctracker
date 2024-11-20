@@ -1,6 +1,7 @@
 package com.example.ctracker.views
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -19,6 +20,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.ctracker.ui.theme.CTrackerTheme
 import com.example.ctracker.viewmodel.ProfileViewModel
 
 @Composable
@@ -31,7 +33,8 @@ fun ProfileView(viewModel: ProfileViewModel) {
         protein = viewModel.protein.intValue,
         fats = viewModel.fats.intValue,
         carbs = viewModel.carbs.intValue,
-        chartData = viewModel.chartData
+        chartData = viewModel.chartData,
+        height = viewModel.userHeight.value
     )
 }
 
@@ -45,14 +48,15 @@ fun ProfileContent(
     protein: Int,
     fats: Int,
     carbs: Int,
-    chartData: List<Pair<Int, String>>
+    chartData: List<Pair<Int, String>>,
+    height : Int
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    titleContentColor = MaterialTheme.colorScheme.onSurface,
                 ),
                 title = {
                     Text("Профиль")
@@ -100,7 +104,7 @@ fun ProfileContent(
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(1f)
-                            .background(MaterialTheme.colorScheme.secondaryContainer),
+                            .background(MaterialTheme.colorScheme.primaryContainer),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
@@ -117,14 +121,29 @@ fun ProfileContent(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .weight(1f)
+                            .weight(0.5f)
                             .background(MaterialTheme.colorScheme.secondaryContainer),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
                             text = userWeight,
-                            fontSize = 24.sp,
-                            color = MaterialTheme.colorScheme.onSurface,
+                            fontSize = 18.sp,
+                            color = MaterialTheme.colorScheme.onSecondaryContainer,
+                            modifier = Modifier.padding(horizontal = 8.dp)
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(0.5f)
+                            .background(MaterialTheme.colorScheme.secondaryContainer),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "$height см",
+                            fontSize = 18.sp,
+                            color = MaterialTheme.colorScheme.onSecondaryContainer,
                             modifier = Modifier.padding(horizontal = 8.dp)
                         )
                     }
@@ -136,7 +155,7 @@ fun ProfileContent(
             Text(
                 text = "Калории",
                 fontSize = 24.sp,
-                color = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             Row(
@@ -168,10 +187,10 @@ fun ProfileContent(
                                 style = Stroke(width = strokeWidth)
                             )
                         }
+                        val circleColor = if (calorie > maxCalorie) MaterialTheme.colorScheme.inversePrimary else MaterialTheme.colorScheme.primary
                         Canvas(modifier = Modifier.fillMaxSize()) {
                             val strokeWidth = 12.dp.toPx()
-                            val color =
-                                if (calorie > maxCalorie) Color(0xFFFFA500) else Color.Green
+                            val color = circleColor
                             val sweepAngle = 360 * (calorie.toFloat() / maxCalorie)
                             drawArc(
                                 color = color,
@@ -182,7 +201,7 @@ fun ProfileContent(
                             )
                         }
                         Text(
-                            text = "$calorie/$maxCalorie\nКалорий",
+                            text = "$calorie/$maxCalorie",
                             fontSize = TextUnit(50f, TextUnitType.Unspecified),
                             color = MaterialTheme.colorScheme.onSurface,
                             textAlign = TextAlign.Center
@@ -201,7 +220,7 @@ fun ProfileContent(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(MaterialTheme.colorScheme.secondaryContainer)
+                            .background(MaterialTheme.colorScheme.primaryContainer)
                             .padding(16.dp)
                             .weight(1f)
                     ) {
@@ -209,15 +228,15 @@ fun ProfileContent(
                             modifier = Modifier.align(Alignment.Center),
                             text = "Белки: $protein",
                             fontSize = TextUnit(20f, TextUnitType.Unspecified),
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(36.dp))
 
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(MaterialTheme.colorScheme.secondaryContainer)
+                            .background(MaterialTheme.colorScheme.primaryContainer)
                             .padding(16.dp)
                             .weight(1f),
                     ) {
@@ -225,14 +244,14 @@ fun ProfileContent(
                             modifier = Modifier.align(Alignment.Center),
                             text = "Жиры: $fats",
                             fontSize = TextUnit(20f, TextUnitType.Unspecified),
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(36.dp))
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(MaterialTheme.colorScheme.secondaryContainer)
+                            .background(MaterialTheme.colorScheme.primaryContainer)
                             .padding(16.dp)
                             .weight(1f)
                     ) {
@@ -240,7 +259,7 @@ fun ProfileContent(
                             modifier = Modifier.align(Alignment.Center),
                             text = "Углеводы: $carbs",
                             fontSize = TextUnit(20f, TextUnitType.Unspecified),
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 }
@@ -251,7 +270,7 @@ fun ProfileContent(
             Text(
                 text = "Статистика",
                 fontSize = 24.sp,
-                color = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             val maxBarHeight = 200
@@ -280,14 +299,13 @@ fun ProfileContent(
                                 .background(Color.LightGray),
                             contentAlignment = Alignment.BottomCenter
                         ) {
-                            val barColor =
-                                if (calories > maxCalorie) Color(0xFFFFA500) else Color.Green
+                            val color = if (calories > maxCalorie) MaterialTheme.colorScheme.inversePrimary else MaterialTheme.colorScheme.primary
                             val fillFraction = (calories / maxCalorie.toFloat()).coerceAtMost(1f)
                             Box(
                                 modifier = Modifier
                                     .width(24.dp)
                                     .fillMaxHeight(fraction = fillFraction)
-                                    .background(barColor)
+                                    .background(color)
                             )
                         }
                         Spacer(modifier = Modifier.height(4.dp))
@@ -303,25 +321,29 @@ fun ProfileContent(
     }
 }
 
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true)
 @Composable
 fun ProfileContentPreview() {
-    ProfileContent(
-        userName = "Имя пользователя",
-        userWeight = "70 кг",
-        calorie = 100,
-        maxCalorie = 2000,
-        protein = 120,
-        fats = 50,
-        carbs = 200,
-        chartData = listOf(
-            2500 to "19.11",
-            1800 to "20.11",
-            1700 to "21.11",
-            1700 to "22.11",
-            1700 to "23.11",
-            1700 to "24.11",
-            1700 to "25.11"
+    CTrackerTheme {
+        ProfileContent(
+            userName = "Имя",
+            userWeight = "70 кг",
+            calorie = 30000,
+            maxCalorie = 2000,
+            protein = 120,
+            fats = 50,
+            carbs = 200,
+            chartData = listOf(
+                2500 to "19.11",
+                1800 to "20.11",
+                1700 to "21.11",
+                1700 to "22.11",
+                1700 to "23.11",
+                1700 to "24.11",
+                1700 to "25.11"
+            ),
+            height = 180
         )
-    )
+    }
 }

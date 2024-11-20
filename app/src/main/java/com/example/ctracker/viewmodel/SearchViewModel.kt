@@ -20,4 +20,11 @@ class SearchViewModel(val index: Int) : ViewModel() {
         hasSearched.value = false
         results.value = emptyList()
     }
+
+    fun onQuerySearch(newQuery: String) {
+        query.value = newQuery
+        if (newQuery.isBlank()) {
+            resetSearchState()
+        }
+    }
 }

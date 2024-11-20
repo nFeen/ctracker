@@ -12,6 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.*
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import com.example.ctracker.viewmodel.HomeViewModel
@@ -71,6 +72,7 @@ fun NavigationBar(navController: NavController) {
                 },
                 label = { Text(text = item.title, color = MaterialTheme.colorScheme.onBackground) },
                 selected = currentRoute == item.route,
+                colors = NavigationBarItemDefaults.colors(indicatorColor = MaterialTheme.colorScheme.onPrimary),
                 onClick = {
                     if (item.route != currentRoute) {
                         if (currentRoute == "search/{index}") {
