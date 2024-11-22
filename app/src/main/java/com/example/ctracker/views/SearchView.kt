@@ -14,6 +14,7 @@ import com.example.ctracker.viewmodel.SearchViewModel
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
@@ -26,11 +27,15 @@ fun SearchView(viewModel: SearchViewModel, navController: NavController) {
         query = viewModel.query.value,
         results = viewModel.results.value,
         hasSearched = viewModel.hasSearched.value,
-        index = viewModel.index,
         onQueryChange = viewModel::onQuerySearch,
-        onSearch = viewModel::search
+        onSearch = viewModel::search,
+        onItemClick = { index ->
+            val mealType : Int = viewModel.mealType // mealType берется из ViewModel
+            navController.navigate("additem/${mealType}/$index")
+        }
     )
 }
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,9 +43,9 @@ fun SearchContent(
     query: String,
     results: List<Food>,
     hasSearched: Boolean,
-    index: Int,
     onQueryChange: (String) -> Unit,
-    onSearch: () -> Unit
+    onSearch: () -> Unit,
+    onItemClick: (Int) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -50,18 +55,18 @@ fun SearchContent(
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 ),
                 title = {
-                    Text("CTracker")
+                    Text("CTracker",
+                        fontFamily = FontFamily.Serif,
+                        color = MaterialTheme.colorScheme.onPrimary)
                 }
             )
         }
     ) { innerPadding ->
         Column(
-            modifier = Modifier
+            Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(horizontal = 16.dp), Arrangement.Top, Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedTextField(
@@ -96,7 +101,7 @@ fun SearchContent(
                         verticalArrangement = Arrangement.Top
                     ) {
                         results.take(10).forEach { product ->
-                            ProductItem(product)
+                            ProductItem(product) { onItemClick(product.id) }
                             Spacer(modifier = Modifier.height(8.dp))
                         }
                     }
@@ -107,9 +112,11 @@ fun SearchContent(
 }
 
 @Composable
-fun ProductItem(product: Food) {
+fun ProductItem
+            (product: Food,
+             onAddProductClick: () -> Unit) {
     Button(
-        onClick = { /* TODO: обработка нажатия на продукт */ },
+        onClick = { onAddProductClick() },
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp),
@@ -171,9 +178,9 @@ fun SearchContentPreview() {
                 Food(10, "Огурец", 15, 0.1f, 3.6f, 0.7f)
             ),
             hasSearched = true,
-            index = 1,
             onQueryChange = {},
-            onSearch = {}
+            onSearch = {},
+            onItemClick = {}
         )
     }
 }

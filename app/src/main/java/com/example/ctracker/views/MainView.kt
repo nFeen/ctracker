@@ -15,10 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import com.example.ctracker.viewmodel.AddItemViewModel
 import com.example.ctracker.viewmodel.HomeViewModel
 import com.example.ctracker.views.ProfileView
 import com.example.ctracker.viewmodel.ProfileViewModel
 import com.example.ctracker.viewmodel.SearchViewModel
+import com.example.ctracker.views.AddItemView
 import com.example.ctracker.views.SearchView
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -43,6 +45,12 @@ fun MainView(navController: NavHostController, viewModel: MainViewModel) {
                     val index = backStackEntry.arguments?.getString("index")?.toIntOrNull() ?: 0
                     val searchViewModel = SearchViewModel(index)
                     SearchView(searchViewModel, navController)
+                }
+                composable("additem/{mealType}/{index}") { backStackEntry ->
+                    val mealType = backStackEntry.arguments?.getString("mealType")?.toIntOrNull() ?: 0
+                    val index = backStackEntry.arguments?.getString("index")?.toIntOrNull() ?: 0
+                    val addViewModel = AddItemViewModel(index = index, mealType = mealType)
+                    AddItemView(addViewModel, navController)
                 }
             }
         }

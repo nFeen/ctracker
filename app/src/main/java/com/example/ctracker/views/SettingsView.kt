@@ -48,11 +48,12 @@ fun SettingsContent(
                 onClick = onLogoutClick, // Использование переданной функции
                 colors = ButtonDefaults.outlinedButtonColors(
                     contentColor = MaterialTheme.colorScheme.primary,
-                    containerColor = MaterialTheme.colorScheme.onSurface
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
                 ),
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
-                Text(text = "Logout")
+                Text(text = "Logout",
+                    color = MaterialTheme.colorScheme.onPrimary)
             }
         }
     }

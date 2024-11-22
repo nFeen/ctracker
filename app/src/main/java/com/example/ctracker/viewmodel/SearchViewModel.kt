@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.ctracker.entity.Food
 import com.example.ctracker.repository.mock.MockFoodRepository
 
-class SearchViewModel(val index: Int) : ViewModel() {
+class SearchViewModel(val mealType: Int) : ViewModel() {
     val query: MutableState<String> = mutableStateOf("")
     val results: MutableState<List<Food>> = mutableStateOf(emptyList())
     val hasSearched: MutableState<Boolean> = mutableStateOf(false)

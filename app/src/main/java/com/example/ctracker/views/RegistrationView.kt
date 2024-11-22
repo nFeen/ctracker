@@ -14,6 +14,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
 import com.example.ctracker.ui.theme.CTrackerTheme
 
@@ -63,7 +64,8 @@ fun RegisterContent(
                     text = "Ctracker",
                     fontSize = 32.sp,
                     color = MaterialTheme.colorScheme.onSurface,
-                    textAlign = TextAlign.Start
+                    textAlign = TextAlign.Start,
+                    fontFamily = FontFamily.Serif
                 )
                 TextButton(onClick = onBackClick) {
                     Text(text = "Назад", color = MaterialTheme.colorScheme.onSurface)

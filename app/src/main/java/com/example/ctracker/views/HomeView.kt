@@ -1,6 +1,8 @@
 import android.annotation.SuppressLint
 import android.content.res.Configuration
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -14,8 +16,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,7 +39,6 @@ fun HomeView(viewModel: HomeViewModel, navController: NavController) {
     HomeContent(
         calorie = viewModel.calorie.value,
         maxCalories = viewModel.maxCalories.value,
-        progress = viewModel.calorie.value / viewModel.maxCalories.value.toFloat(),
         mealList = viewModel.mealList,
         onNavigateToSearch = { index -> navController.navigate("search/$index") }
     )
@@ -46,7 +49,6 @@ fun HomeView(viewModel: HomeViewModel, navController: NavController) {
 fun HomeContent(
     calorie: Int,
     maxCalories: Int,
-    progress: Float,
     mealList: List<MealModel>,
     onNavigateToSearch: (Int) -> Unit
 ) {
@@ -58,7 +60,7 @@ fun HomeContent(
                     titleContentColor = MaterialTheme.colorScheme.onSurface,
                 ),
                 title = {
-                    Text("CTracker")
+                    Text("CTracker", fontFamily = FontFamily.Serif, color = MaterialTheme.colorScheme.onPrimary)
                 }
             )
         }
@@ -77,6 +79,7 @@ fun HomeContent(
 
             Spacer(modifier = Modifier.height(8.dp))
             val progressColor = if (calorie > maxCalories) Color(0xFFFFD1A4) else Color(0xFF4CAF50)
+            val progress = calorie.toFloat() / maxCalories.toFloat()
             LinearProgressIndicator(
                 progress = progress.coerceIn(0f, 1f),
                 modifier = Modifier
@@ -143,9 +146,10 @@ fun MealOfDay(
         }
         Button(
             onClick = onAddProductClick,
-            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer),
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.tertiary)
         ) {
-            Text(text = "+")
+            Text(text = "+", color = MaterialTheme.colorScheme.onPrimaryContainer)
         }
     }
 
@@ -204,13 +208,16 @@ fun ProductItem(product: Meal) {
 
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "Вес: ${product.quantity.toInt()} г | Б: ${product.protein} г | Ж: ${product.fats} г | У: ${product.carbs} г",
+                text = "Вес: ${product.quantity.format(1)} г | Б: ${product.protein.format(1)} г | Ж: ${product.fats.format(1)} г | У: ${product.carbs.format(1)} г",
                 fontSize = 12.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }
 }
+
+// Extension function for formatting floats
+private fun Float.format(digits: Int) = "%.${digits}f".format(this)
 
 @SuppressLint("UnrememberedMutableState")
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
@@ -251,7 +258,6 @@ fun PreviewHomeContent() {
         HomeContent(
             calorie = 2200,
             maxCalories = 2000,
-            progress = 0.6f,
             mealList = mealList,
             onNavigateToSearch = {}
         )

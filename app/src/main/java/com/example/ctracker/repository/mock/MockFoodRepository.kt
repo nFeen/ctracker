@@ -23,4 +23,9 @@ object MockFoodRepository {
             foods.filter { it.name.contains(query, ignoreCase = true) }
         }
     }
+
+    fun getByID(id: Int): Food {
+        return foods.find { it.id == id } ?: throw IllegalArgumentException("Food with ID $id not found")
+    }
+
 }

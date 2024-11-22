@@ -13,12 +13,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Color(0xFF1B5E20), // Тёмно-зелёный
+    primary = Color(0xFF66BB6A), // Основной зелёный
     onPrimary = Color.White,
     primaryContainer = Color(0xFF4E4E4E), // Нейтральный серый для контейнера
     onPrimaryContainer = Color.White, // Текст или элементы на primaryContainer
     secondary = Color(0xFF6D6D6D), // Нейтральный тёмно-серый для secondary
-    tertiary = Color(0xFF6C6C6C), // Приглушённый коралловый
+    tertiary = Color(0xFF888888), // Приглушённый коралловый
     tertiaryContainer = Color(0xFF6C6C6C), // Тёмно-коричневатый для контейнера
     background = Color(0xFF1A1A1A), // Более светлый чёрный (угольный)
     surface = Color(0xFF2A2A2A), // Чуть более светлая поверхность
@@ -34,7 +34,7 @@ private val DarkColorScheme = darkColorScheme(
 
 private val LightColorScheme = lightColorScheme(
     primary = Color(0xFF66BB6A), // Основной зелёный
-    onPrimary = Color.Black,
+    onPrimary = Color.White,
     primaryContainer = Color(0xFFD0D0D0), // Нейтральный светло-серый
     onPrimaryContainer = Color.Black, // Текст или элементы на primaryContainer
     secondary = Color(0xFFB0BEC5),
