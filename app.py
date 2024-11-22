@@ -78,7 +78,8 @@ def get_profile():
         return jsonify({
             'weight': user.weight,
             'login': user.login,
-            'calorieGoal': user.calorieGoal
+            'calorieGoal': user.calorieGoal,
+            'profile_picture' : user.profile_pic
         })
     abort(404)
 
@@ -214,4 +215,4 @@ def edit_image():
     abort(404)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',port=5000,debug="true")
