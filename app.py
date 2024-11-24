@@ -10,7 +10,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] =\
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
-
+with open('avatar_standart.txt') as file:
+    base64 = file.read()
+    
 class User(db.Model):
     __tablename__ = 'Users'
     user_id = db.Column(db.Integer, primary_key=True)
@@ -64,7 +66,7 @@ def register():
     if User.query.filter_by(login=login).first():
         abort(409)  # Conflict
     password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
-    new_user = User(login=login, password_hash=password_hash)
+    new_user = User(login=login, password_hash=password_hash, profile_pic=base64)
     db.session.add(new_user)
     db.session.commit()
     return jsonify({"status": "User registered successfully"}), 200
@@ -79,7 +81,8 @@ def get_profile():
             'weight': user.weight,
             'login': user.login,
             'calorieGoal': user.calorieGoal,
-            'profile_picture' : user.profile_pic
+            'profile_picture' : user.profile_pic,
+            'height' : user.height
         })
     abort(404)
 
@@ -95,7 +98,20 @@ def update_weight():
         db.session.commit()
         return jsonify({"status": "Weight updated"}), 200
     abort(404)
-
+    
+# Update User Height
+@app.route('/user/height', methods=['PATCH'])
+def update_height():
+    data = request.json
+    user_id = data.get('user_id')
+    height = data.get('height')
+    user = User.query.get(user_id)
+    if user:
+        user.height = height
+        db.session.commit()
+        return jsonify({"status": "height updated"}), 200
+    abort(404)
+    
 # List Foods
 @app.route('/fooddb/foodlist', methods=['GET'])
 def food_list():
@@ -215,4 +231,4 @@ def edit_image():
     abort(404)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=5000,debug="true")
+    app.run(host='10.8.0.2',port=5000,debug="true")
