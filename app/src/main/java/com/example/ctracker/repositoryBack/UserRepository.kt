@@ -3,7 +3,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 object UserRepository {
-    private val api = RetrofitClient.instance
+    private val api = RetrofitClient.userApiService
 
     // Аутентификация пользователя
     suspend fun authenticateUser(login: String, password: String): Int {
@@ -77,7 +77,7 @@ object UserRepository {
     suspend fun updateHeight(userId: Int, height: Int): Boolean {
         return withContext(Dispatchers.IO) {
             try {
-                val body = UpdateWeightRequest(user_id = userId, weight = height) // Переиспользуем UpdateWeightRequest
+                val body = UpdateHeightRequest(user_id = userId, height = height) // Переиспользуем UpdateWeightRequest
                 val response = api.updateHeight(body).execute()
                 response.isSuccessful
             } catch (e: Exception) {
@@ -85,6 +85,16 @@ object UserRepository {
             }
         }
     }
-
+    suspend fun updateProfilePicture(userId: Int, profilePicture: String): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                val body = UpdatePictureRequest(user_id= userId, profile_picture = profilePicture)
+                val response = api.updateProfilePicture(body).execute()
+                response.isSuccessful
+            } catch (e: Exception) {
+                throw Exception("Ошибка при обновлении фото профиля: ${e.message}")
+            }
+        }
+    }
 }
 

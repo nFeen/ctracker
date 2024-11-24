@@ -10,5 +10,5 @@ data class User(
     var currentCalorie: Int = 0,
     val weight: Int = 75,
     val height: Int = 180,
-    val avatarBase64: String? = null // Поле для аватарки в формате Base64
+    val profile_picture: String? = null // Поле для аватарки в формате Base64
 )

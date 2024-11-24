@@ -50,7 +50,6 @@ class ProfileViewModel : ViewModel() {
                 val userProfile = UserRepository.getUserById(userId)
                 if (userProfile != null) {
                     updateStateWithProfile(userProfile)
-                    saveProfileToPreferences(userProfile)
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -89,19 +88,24 @@ class ProfileViewModel : ViewModel() {
             }
         }
     }
-
+    fun updateUserProfilePicture(newProfilePicture: String) {
+        viewModelScope.launch {
+            try {
+                val success = UserRepository.updateProfilePicture(userId, newProfilePicture)
+                if (success) {
+                    profilePic.value = newProfilePicture
+                    SharedPreferencesManager.saveString("profilePic", newProfilePicture)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
 
     private fun updateStateWithProfile(userProfile: UserProfile) {
         userName.value = userProfile.login
         userWeight.value = "${userProfile.weight ?: 0} kg"
         userHeight.value = userProfile.height
         profilePic.value = userProfile.profile_picture
-    }
-
-    private fun saveProfileToPreferences(userProfile: UserProfile) {
-        SharedPreferencesManager.saveString("userName", userProfile.login)
-        SharedPreferencesManager.saveInt("userWeight", userProfile.weight ?: 0)
-        SharedPreferencesManager.saveInt("userHeight", userProfile.height)
-        SharedPreferencesManager.saveString("profilePic", userProfile.profile_picture)
     }
 }

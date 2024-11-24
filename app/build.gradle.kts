@@ -66,10 +66,12 @@ dependencies {
     implementation(libs.androidx.foundation.android)
     implementation(libs.androidx.foundation.layout.android)
     implementation(libs.androidx.foundation.android)
+    implementation(libs.firebase.crashlytics.buildtools)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.retrofit)
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+    implementation("com.google.accompanist:accompanist-permissions:0.30.0")
 }

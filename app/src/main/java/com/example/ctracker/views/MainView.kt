@@ -1,4 +1,6 @@
 import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -25,7 +27,8 @@ import com.example.ctracker.views.AddItemView
 import com.example.ctracker.views.EditItemView
 import com.example.ctracker.views.SearchView
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@RequiresApi(Build.VERSION_CODES.O)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "RememberReturnType")
 @Composable
 fun MainView(navController: NavHostController, viewModel: MainViewModel) {
     Scaffold(
@@ -40,23 +43,25 @@ fun MainView(navController: NavHostController, viewModel: MainViewModel) {
                 navController = navController,
                 startDestination = "home",
             ) {
-                composable("profile") { ProfileView(ProfileViewModel()) }
-                composable("home") { HomeView(HomeViewModel(), navController) }
+                composable("profile") { val profileViewModel = remember{ProfileViewModel() }; ProfileView(profileViewModel)}
+                composable("home") {     val homeViewModel = remember { HomeViewModel() }; HomeView(homeViewModel, navController)}
                 composable("settings") { SettingsView(viewModel) }
                 composable("search/{index}") { backStackEntry ->
                     val index = backStackEntry.arguments?.getString("index")?.toIntOrNull() ?: 0
-                    val searchViewModel = SearchViewModel(index)
+                    val searchViewModel = remember{SearchViewModel(index)}
                     SearchView(searchViewModel, navController)
                 }
                 composable("additem/{mealType}/{index}") { backStackEntry ->
                     val mealType = backStackEntry.arguments?.getString("mealType")?.toIntOrNull() ?: 0
                     val index = backStackEntry.arguments?.getString("index")?.toIntOrNull() ?: 0
-                    val addViewModel = AddItemViewModel(index = index, mealType = mealType)
+                    val addViewModel = remember {
+                        AddItemViewModel(index = index, mealType = mealType)
+                    }
                     AddItemView(addViewModel, navController)
                 }
                 composable("editmeal/{index}") { backStackEntry ->
                     val mealId = backStackEntry.arguments?.getString("index")?.toIntOrNull() ?: 0
-                    val editMealViewModel = EditMealViewModel(mealId)
+                    val editMealViewModel = remember{EditMealViewModel(mealId)}
                     EditItemView(editMealViewModel, navController)
                 }
             }
@@ -99,10 +104,10 @@ fun NavigationBar(navController: NavController) {
                         }
                         navController.navigate(item.route) {
                             popUpTo(navController.graph.startDestinationId) {
-                                saveState = true
+                                saveState = false
                             }
-                            launchSingleTop = true
-                            restoreState = true
+                            launchSingleTop = false
+                            restoreState = false
                         }
                     }
                 }

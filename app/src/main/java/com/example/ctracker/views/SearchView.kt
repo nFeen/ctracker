@@ -30,6 +30,7 @@ fun SearchView(viewModel: SearchViewModel, navController: NavController) {
         onQueryChange = viewModel::onQuerySearch,
         onSearch = viewModel::search,
         onItemClick = { index ->
+            print("here")
             val mealType : Int = viewModel.mealType // mealType берется из ViewModel
             navController.navigate("additem/${mealType}/$index")
         }

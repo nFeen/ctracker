@@ -24,26 +24,37 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.ctracker.viewmodel.AddItemViewModel
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import com.example.ctracker.ui.theme.CTrackerTheme
+import com.example.ctracker.viewmodel.AddItemViewModel
 
 @Composable
 fun AddItemView(viewModel: AddItemViewModel, navController: NavController) {
-    AddItemContent(
-        productName = viewModel.food.name,
-        calories = viewModel.food.calories,
-        protein = viewModel.food.protein,
-        fats = viewModel.food.fat,
-        carbs = viewModel.food.carb,
-        weight = viewModel.weightState.value,
-        isError = viewModel.isError.value, // Используем флаг из ViewModel
-        onWeightChange = { input -> viewModel.updateWeight(input) },
-        onAddClick = {
-            viewModel.addMealToUser()
-            navController.popBackStack("home", false)
-        }
-    )
+    val food = viewModel.food.value
+
+    if (food == null) {
+        // Показываем сообщение о загрузке или ошибке
+        Text("Загрузка информации о продукте...")
+    } else {
+        // Если продукт загружен, отображаем его данные
+        AddItemContent(
+            productName = food.name,
+            calories = food.calories,
+            protein = food.protein,
+            fats = food.fat,
+            carbs = food.carb,
+            weight = viewModel.weightState.value,
+            isError = viewModel.isError.value, // Используем флаг из ViewModel
+            onWeightChange = { input -> viewModel.updateWeight(input) },
+            onAddClick = {
+                viewModel.addMealToUser()
+                navController.popBackStack("home", false)
+            }
+        )
+    }
 }
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

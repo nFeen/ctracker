@@ -5,12 +5,14 @@ data class LoginResponse(val user_id: Int)
 data class RegisterResponse(val status: String)
 data class UserProfile(
     val login: String,
-    val weight: Int?,
+    val weight: Int,
     val calorieGoal: Int,
     val height: Int,
     val profile_picture: String // Переименовано с avatarBase64
 )
 data class UpdateWeightRequest(val user_id: Int, val weight: Int)
+data class UpdateHeightRequest(val user_id: Int, val height: Int)
+data class UpdatePictureRequest(val user_id: Int, val profile_picture: String)
 
 interface UserApiService {
     @GET("/user/login")
@@ -29,6 +31,8 @@ interface UserApiService {
     fun updateWeight(@Body body: UpdateWeightRequest): Call<RegisterResponse>
 
     @PATCH("/user/height")
-    fun updateHeight(@Body body: UpdateWeightRequest): Call<RegisterResponse>
+    fun updateHeight(@Body body: UpdateHeightRequest): Call<RegisterResponse>
 
+    @PATCH("/user/profile_picture")
+    fun updateProfilePicture(@Body body: UpdatePictureRequest): Call<RegisterResponse>
 }
