@@ -5,72 +5,59 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.ctracker.viewmodel.AddItemViewModel
 import com.example.ctracker.ui.theme.CTrackerTheme
+import com.example.ctracker.viewmodel.EditMealViewModel
 
 @Composable
-fun AddItemView(viewModel: AddItemViewModel, navController: NavController) {
-    AddItemContent(
-        productName = viewModel.food.name,
-        calories = viewModel.food.calories,
-        protein = viewModel.food.protein,
-        fats = viewModel.food.fat,
-        carbs = viewModel.food.carb,
+fun EditItemView(viewModel: EditMealViewModel, navController: NavController) {
+    EditItemContent(
+        mealName = viewModel.meal?.name ?: "Продукт",
+        calories = viewModel.meal?.calories?.toInt() ?: 0,
+        protein = viewModel.meal?.protein ?: 0f,
+        fats = viewModel.meal?.fats ?: 0f,
+        carbs = viewModel.meal?.carbs ?: 0f,
         weight = viewModel.weightState.value,
-        isError = viewModel.isError.value, // Используем флаг из ViewModel
+        isError = viewModel.isError.value,
         onWeightChange = { input -> viewModel.updateWeight(input) },
-        onAddClick = {
-            viewModel.addMealToUser()
-            navController.popBackStack("home", false)
+        onSaveClick = {
+            if (!viewModel.isError.value) {
+                viewModel.updateMeal()
+                navController.popBackStack("home", false)
+            }
         }
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddItemContent(
-    productName: String,
+fun EditItemContent(
+    mealName: String,
     calories: Int,
     protein: Float,
     fats: Float,
     carbs: Float,
     weight: String,
-    isError: Boolean, // Принимаем флаг ошибки
+    isError: Boolean,
     onWeightChange: (String) -> Unit,
-    onAddClick: () -> Unit,
+    onSaveClick: () -> Unit,
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimary
                 ),
                 title = {
-                    Text(
-                        "CTracker",
-                        fontFamily = FontFamily.Serif,
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
+                    Text("Редактировать продукт")
                 }
             )
         }
@@ -84,9 +71,8 @@ fun AddItemContent(
         ) {
             // Название продукта
             Text(
-                text = productName,
+                text = mealName,
                 style = MaterialTheme.typography.headlineMedium,
-                color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -113,19 +99,40 @@ fun AddItemContent(
                 ) {
                     InfoBlock("Калории", "$calories ккал", Modifier.weight(1f))
                     Spacer(modifier = Modifier.width(16.dp))
-                    InfoBlock("Белки", "$protein г", Modifier.weight(1f))
+                    InfoBlock("Белки", "${protein.format(1)} г", Modifier.weight(1f))
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    InfoBlock("Жиры", "$fats г", Modifier.weight(1f))
+                    InfoBlock("Жиры", "${fats.format(1)} г", Modifier.weight(1f))
                     Spacer(modifier = Modifier.width(16.dp))
-                    InfoBlock("Углеводы", "$carbs г", Modifier.weight(1f))
+                    InfoBlock("Углеводы", "${carbs.format(1)} г", Modifier.weight(1f))
                 }
             }
 
             Spacer(modifier = Modifier.height(24.dp))
+
+            // Поле ввода веса
+            OutlinedTextField(
+                value = weight,
+                onValueChange = onWeightChange,
+                label = { Text("Вес (г)") },
+                isError = isError,
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
+            )
+            if (isError) {
+                Text(
+                    text = "Введите корректное значение больше 0",
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             // "На $weight грамм"
             val weightValue = weight.toFloatOrNull() ?: 0f
@@ -138,7 +145,7 @@ fun AddItemContent(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Блоки на вес (два ряда)
+                // Блоки на введённый вес
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -164,76 +171,20 @@ fun AddItemContent(
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
-
-            // Поле ввода для количества еды
-            OutlinedTextField(
-                value = weight,
-                onValueChange = onWeightChange,
-                label = { Text("Вес (г)") },
-                isError = isError,
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(),
-                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
-            )
-            if (isError) {
-                Text(
-                    text = "Введите корректное значение больше 0",
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(top = 4.dp)
-                )
-            }
-
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Кнопка "Добавить"
+            // Кнопка "Сохранить"
             Button(
                 onClick = {
-                    if (!isError) onAddClick()
+                    if (!isError) onSaveClick()
                 },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
                 enabled = !isError
             ) {
-                Text(text = "Добавить")
+                Text(text = "Сохранить")
             }
-        }
-    }
-}
-
-@Composable
-fun InfoBlock(title: String, value: String, modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier
-            .background(MaterialTheme.colorScheme.secondaryContainer, RoundedCornerShape(8.dp))
-            .padding(8.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                maxLines = 1,
-                softWrap = false, // Отключает перенос
-                modifier = Modifier.fillMaxWidth(),
-                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis // Уменьшение текста
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = value,
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                maxLines = 1,
-                softWrap = false,
-                modifier = Modifier.fillMaxWidth(),
-                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
-            )
         }
     }
 }
@@ -244,18 +195,18 @@ private fun Float.format(digits: Int) = "%.${digits}f".format(this)
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true)
 @Composable
-fun PreviewAddItemContent() {
+fun PreviewEditItemContent() {
     CTrackerTheme {
-        AddItemContent(
-            productName = "Яблоко",
-            calories = 52,
-            protein = 0.3f,
-            fats = 0.2f,
-            carbs = 14f,
+        EditItemContent(
+            mealName = "Яичница",
+            calories = 150,
+            protein = 12.3f,
+            fats = 10.5f,
+            carbs = 3.2f,
             weight = "200",
+            isError = false,
             onWeightChange = {},
-            onAddClick = {},
-            isError = false
+            onSaveClick = {}
         )
     }
 }

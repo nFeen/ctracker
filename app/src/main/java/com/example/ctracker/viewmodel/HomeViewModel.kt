@@ -14,7 +14,7 @@ class HomeViewModel(
 ) : ViewModel() {
 
     // ID пользователя из SharedPreferences
-    private val userId: Int = SharedPreferencesManager.getString("UserID", "-1").toInt()
+    private val userId: Int = SharedPreferencesManager.getString("UserID", "-1")?.toInt() ?: -1
 
     // Пользовательские данные
     private val user: User? = userRepository.getUserById(userId)

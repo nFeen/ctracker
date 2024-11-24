@@ -1,43 +1,38 @@
 package com.example.ctracker.viewmodel
 
 import SharedPreferencesManager
+import UserProfile
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.example.ctracker.CTrackerApp
-import com.example.ctracker.entity.User
-import com.example.ctracker.repository.mock.MockMealRepository
-import com.example.ctracker.repository.mock.MockUserRepository
-import java.util.Calendar
-import java.util.Date
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
-class ProfileViewModel(
-    private val userRepository: MockUserRepository = MockUserRepository,
-    private val mealRepository: MockMealRepository = MockMealRepository
-) : ViewModel() {
+class ProfileViewModel : ViewModel() {
 
     // Получение ID пользователя из SharedPreferences
     private val userId: Int = SharedPreferencesManager.getString("UserID", "-1").toInt()
 
-    // Пользовательские данные
-    private val user: User? = userRepository.getUserById(userId)
-
     // Макросы и калории
-    val fats = mutableIntStateOf(0)
-    val carbs = mutableIntStateOf(0)
-    val protein = mutableIntStateOf(0)
-    val maxCalorie = mutableIntStateOf(user?.maxCalorie ?: 2500)
-    val calorie = mutableIntStateOf(user?.currentCalorie ?: 0)
+    val fats = mutableIntStateOf(SharedPreferencesManager.getInt("fats", 0))
+    val carbs = mutableIntStateOf(SharedPreferencesManager.getInt("carbs", 0))
+    val protein = mutableIntStateOf(SharedPreferencesManager.getInt("protein", 0))
+    val maxCalorie = mutableIntStateOf(SharedPreferencesManager.getInt("maxCalorie", 2500))
+    val calorie = mutableIntStateOf(SharedPreferencesManager.getInt("calorie", 0))
 
     // Логин пользователя
-    val userName = mutableStateOf(user?.login ?: "Unknown User")
+    val userName = mutableStateOf(SharedPreferencesManager.getString("userName", "Unknown User"))
+    val userHeight = mutableStateOf(SharedPreferencesManager.getInt("userHeight", 0))
+    val userWeight = mutableStateOf("${SharedPreferencesManager.getInt("userWeight", 0)} kg")
+    val profilePic = mutableStateOf(SharedPreferencesManager.getString("profilePic", ""))
 
-    val userHeight = mutableStateOf(user?.height ?: 180)
 
-    // Вес пользователя
-    val userWeight = mutableStateOf("${user?.weight ?: 75} kg")
 
-    // Данные для графика
+    // Инициализация данных пользователя
+    init {
+        loadUserData()
+    }
+
     val chartData = mutableListOf(
         1870 to "20.11",
         20000 to "20.11",
@@ -48,26 +43,65 @@ class ProfileViewModel(
         1600 to "20.11"
     )
 
-    init {
-        calculateMacrosFromMeals()
+    // Загрузка данных пользователя из репозитория
+    private fun loadUserData() {
+        viewModelScope.launch {
+            try {
+                val userProfile = UserRepository.getUserById(userId)
+                if (userProfile != null) {
+                    updateStateWithProfile(userProfile)
+                    saveProfileToPreferences(userProfile)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // Можно добавить обработку ошибок, например, вывод в UI
+            }
+        }
     }
 
-    // Подсчет данных макросов (жиров, белков, углеводов) по сегодняшним приемам пищи
-    private fun calculateMacrosFromMeals() {
-        val todayMeals = mealRepository.getMealsForUser(userId).filter { isToday(it.date) }
-
-        fats.value = todayMeals.sumOf { it.fats.toInt() }
-        carbs.value = todayMeals.sumOf { it.carbs.toInt() }
-        protein.value = todayMeals.sumOf { it.protein.toInt() }
+    // Обновление веса пользователя
+    fun updateUserWeight(newWeight: Int) {
+        viewModelScope.launch {
+            try {
+                val success = UserRepository.updateWeight(userId, newWeight)
+                if (success) {
+                    userWeight.value = "$newWeight kg"
+                    SharedPreferencesManager.saveInt("userWeight", newWeight)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // Можно добавить обработку ошибок, например, вывод в UI
+            }
+        }
     }
 
-    // Проверяет, является ли дата сегодняшней
-    private fun isToday(date: Date): Boolean {
-        val calendar = Calendar.getInstance()
-        val today = Calendar.getInstance()
-        calendar.time = date
+    fun updateUserHeight(newHeight: Int) {
+        viewModelScope.launch {
+            try {
+                val success = UserRepository.updateHeight(userId, newHeight)
+                if (success) {
+                    userHeight.value = newHeight
+                    SharedPreferencesManager.saveInt("userHeight", newHeight)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // Можно добавить обработку ошибок
+            }
+        }
+    }
 
-        return today.get(Calendar.YEAR) == calendar.get(Calendar.YEAR) &&
-                today.get(Calendar.DAY_OF_YEAR) == calendar.get(Calendar.DAY_OF_YEAR)
+
+    private fun updateStateWithProfile(userProfile: UserProfile) {
+        userName.value = userProfile.login
+        userWeight.value = "${userProfile.weight ?: 0} kg"
+        userHeight.value = userProfile.height
+        profilePic.value = userProfile.profile_picture
+    }
+
+    private fun saveProfileToPreferences(userProfile: UserProfile) {
+        SharedPreferencesManager.saveString("userName", userProfile.login)
+        SharedPreferencesManager.saveInt("userWeight", userProfile.weight ?: 0)
+        SharedPreferencesManager.saveInt("userHeight", userProfile.height)
+        SharedPreferencesManager.saveString("profilePic", userProfile.profile_picture)
     }
 }

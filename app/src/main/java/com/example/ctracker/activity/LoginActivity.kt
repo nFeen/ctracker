@@ -22,7 +22,7 @@ class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val userId = SharedPreferencesManager.getString("UserID", "-1").toInt()
+        val userId = SharedPreferencesManager.getString("UserID", "-1")?.toInt()
 
         if (userId != -1) {
             val i = Intent(this@LoginActivity, MainActivity::class.java)

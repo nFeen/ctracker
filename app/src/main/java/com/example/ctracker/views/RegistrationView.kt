@@ -175,8 +175,8 @@ fun PreviewRegisterContent() {
             onRegisterClick = { _ -> },
             onBackClick = {},
             navigateToLogin = {} ,
-            isLoginError = true,
-            isPasswordError = true)
+            isLoginError = false,
+            isPasswordError = false)
     }
 
 }

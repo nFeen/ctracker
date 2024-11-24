@@ -1,9 +1,9 @@
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.navigation.Navigation
-import com.example.ctracker.repository.mock.MockUserRepository
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
-class RegistrationViewModel() : ViewModel() {
+class RegistrationViewModel : ViewModel() {
 
     var login = mutableStateOf("")
     var password = mutableStateOf("")
@@ -32,43 +32,54 @@ class RegistrationViewModel() : ViewModel() {
 
     fun onRegisterClick(onSuccess: () -> Unit) {
         // Проверка логина
-        if (login.value.length > 20) {
-            isLoginError.value = true
-            errorMessage.value = "Логин должен быть длиной не более 20 символов"
-            return
+        when {
+            login.value.length > 20 -> {
+                isLoginError.value = true
+                errorMessage.value = "Логин должен быть длиной не более 20 символов"
+                return
+            }
+            login.value.length < 5 -> {
+                isLoginError.value = true
+                errorMessage.value = "Логин должен быть длиной не менее 5 символов"
+                return
+            }
+            !loginRegex.matches(login.value) -> {
+                isLoginError.value = true
+                errorMessage.value =
+                    "Логин должен содержать только латинские буквы, цифры, '.', или '-' и начинаться с буквы"
+                return
+            }
         }
 
-        if (login.value.length < 5) {
-            isLoginError.value = true
-            errorMessage.value = "Логин должен быть длиной не менее 5 символов"
-            return
-        }
-
-        if (!loginRegex.matches(login.value)) {
-            isLoginError.value = true
-            errorMessage.value =
-                "Логин должен содержать только латинские буквы, цифры, '.', или '-' и начинаться с буквы"
-            return
-        }
         // Проверка пароля
-        if (password.value.length < 8) {
-            isPasswordError.value = true
-            errorMessage.value = "Пароль должен быть длиной не менее 8 символов"
-            return
+        when {
+            password.value.length < 8 -> {
+                isPasswordError.value = true
+                errorMessage.value = "Пароль должен быть длиной не менее 8 символов"
+                return
+            }
+            !passwordRegex.matches(password.value) -> {
+                isPasswordError.value = true
+                errorMessage.value =
+                    "Пароль должен содержать только латинские буквы, и хотя бы одну цифру"
+                return
+            }
         }
 
-        if (!passwordRegex.matches(password.value)) {
-            isPasswordError.value = true
-            errorMessage.value =
-                "Пароль должен содержать только латинские буквы, и хотя бы одну цифру"
-            return
-        }
-        // Проверка добавления пользователя
-        if (MockUserRepository.addUser(login.value, password.value)) {
-            onSuccess()
-        } else {
-            isLoginError.value = true
-            errorMessage.value = "Пользователь уже существует"
+        // Асинхронная регистрация пользователя
+        viewModelScope.launch {
+            try {
+                val success = UserRepository.addUser(login.value, password.value)
+                if (success) {
+                    onSuccess()
+                } else {
+                    isLoginError.value = true
+                    errorMessage.value = "Пользователь уже существует"
+                }
+            } catch (e: Exception) {
+                isLoginError.value = true
+                errorMessage.value = "Ошибка регистрации: ${e.message}"
+            }
         }
     }
 }

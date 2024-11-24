@@ -38,5 +38,16 @@ object MockMealRepository {
         calendar.add(Calendar.DAY_OF_YEAR, daysAgo)
         return calendar.time
     }
+
+    fun getMealById(id: Int): Meal? {
+        return meals.find { it.id == id }
+    }
+
+    fun updateMeal(meal: Meal) {
+        val index = meals.indexOfFirst { it.id == meal.id }
+        if (index != -1) {
+            meals[index] = meal
+        }
+    }
 }
 

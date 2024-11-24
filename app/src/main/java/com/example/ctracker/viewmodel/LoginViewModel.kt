@@ -1,9 +1,8 @@
-import android.content.Context
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.ctracker.entity.User
-import com.example.ctracker.repository.mock.MockUserRepository
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
 
@@ -24,20 +23,23 @@ class LoginViewModel : ViewModel() {
     }
 
     fun onLoginClick() {
-        if (!loginRegex.matches(login.value) or !passwordRegex.matches(password.value)) {
+        if (!loginRegex.matches(login.value) || !passwordRegex.matches(password.value)) {
             loginSuccess.value = false
             errorMessage.value = "Логин или пароль неверные"
             return
         }
-        // Аутентификация пользователя
-        val user: User? = MockUserRepository.authenticateUser(login.value, password.value)
-        if (user != null) {
-            loginSuccess.value = true
-            errorMessage.value = ""
-            SharedPreferencesManager.saveString("UserID", user.id.toString())
-        } else {
-            loginSuccess.value = false
-            errorMessage.value = "Логин или пароль неверные (ДЛЯ ТЕСТА, АУТЕНТИФИКАКЦИЯ НЕ ПРОШЛА)"
+
+        // Выполнение сетевой операции в корутине
+        viewModelScope.launch {
+            try {
+                val userId = UserRepository.authenticateUser(login.value, password.value)
+                loginSuccess.value = true
+                errorMessage.value = ""
+                SharedPreferencesManager.saveString("UserID", userId.toString())
+            } catch (e: Exception) {
+                loginSuccess.value = false
+                errorMessage.value = e.message ?: "Неизвестная ошибка"
+            }
         }
     }
 }

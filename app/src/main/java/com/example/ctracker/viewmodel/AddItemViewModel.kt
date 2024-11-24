@@ -9,7 +9,7 @@ import com.example.ctracker.repository.mock.MockMealRepository
 import java.util.Date
 
 class AddItemViewModel(private val index: Int, private val mealType: Int) : ViewModel() {
-    private val userId: Int = SharedPreferencesManager.getString("UserID", "-1").toInt()
+    private val userId: Int = SharedPreferencesManager.getString("UserID", "-1")!!.toInt()
     val food: Food = MockFoodRepository.getByID(index)
     val weightState = mutableStateOf("50")
     val isError = mutableStateOf(false)

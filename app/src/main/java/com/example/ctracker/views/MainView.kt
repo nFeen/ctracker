@@ -16,11 +16,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import com.example.ctracker.viewmodel.AddItemViewModel
+import com.example.ctracker.viewmodel.EditMealViewModel
 import com.example.ctracker.viewmodel.HomeViewModel
 import com.example.ctracker.views.ProfileView
 import com.example.ctracker.viewmodel.ProfileViewModel
 import com.example.ctracker.viewmodel.SearchViewModel
 import com.example.ctracker.views.AddItemView
+import com.example.ctracker.views.EditItemView
 import com.example.ctracker.views.SearchView
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -52,10 +54,16 @@ fun MainView(navController: NavHostController, viewModel: MainViewModel) {
                     val addViewModel = AddItemViewModel(index = index, mealType = mealType)
                     AddItemView(addViewModel, navController)
                 }
+                composable("editmeal/{index}") { backStackEntry ->
+                    val mealId = backStackEntry.arguments?.getString("index")?.toIntOrNull() ?: 0
+                    val editMealViewModel = EditMealViewModel(mealId)
+                    EditItemView(editMealViewModel, navController)
+                }
             }
         }
     }
 }
+
 
 @Composable
 fun NavigationBar(navController: NavController) {
@@ -84,6 +92,9 @@ fun NavigationBar(navController: NavController) {
                 onClick = {
                     if (item.route != currentRoute) {
                         if (currentRoute == "search/{index}") {
+                            navController.popBackStack("home", inclusive = false)
+                        }
+                        if (currentRoute == "editmeal/{index}") {
                             navController.popBackStack("home", inclusive = false)
                         }
                         navController.navigate(item.route) {

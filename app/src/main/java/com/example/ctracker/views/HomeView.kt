@@ -40,7 +40,8 @@ fun HomeView(viewModel: HomeViewModel, navController: NavController) {
         calorie = viewModel.calorie.value,
         maxCalories = viewModel.maxCalories.value,
         mealList = viewModel.mealList,
-        onNavigateToSearch = { index -> navController.navigate("search/$index") }
+        onNavigateToSearch = { index -> navController.navigate("search/$index") },
+        onNavigateToEditMeal = { mealId -> navController.navigate("editmeal/$mealId") }
     )
 }
 
@@ -50,7 +51,8 @@ fun HomeContent(
     calorie: Int,
     maxCalories: Int,
     mealList: List<MealModel>,
-    onNavigateToSearch: (Int) -> Unit
+    onNavigateToSearch: (Int) -> Unit,
+    onNavigateToEditMeal: (Int) -> Unit // Добавляем обработчик для перехода на экран редактирования
 ) {
     Scaffold(
         topBar = {
@@ -94,7 +96,8 @@ fun HomeContent(
             mealList.forEachIndexed { index, mealModel ->
                 MealOfDay(
                     mealModel = mealModel,
-                    onAddProductClick = { onNavigateToSearch(index) }
+                    onAddProductClick = { onNavigateToSearch(index) },
+                    onEditProductClick = onNavigateToEditMeal // Передаём обработчик для редактирования
                 )
                 Spacer(modifier = Modifier.height(16.dp))
             }
@@ -105,7 +108,8 @@ fun HomeContent(
 @Composable
 fun MealOfDay(
     mealModel: MealModel,
-    onAddProductClick: () -> Unit
+    onAddProductClick: () -> Unit,
+    onEditProductClick: (Int) -> Unit // Добавляем обработчик для редактирования
 ) {
     val icon: ImageVector = if (mealModel.isProductListVisible.value) {
         Icons.Filled.KeyboardArrowUp
@@ -163,7 +167,7 @@ fun MealOfDay(
                 .verticalScroll(rememberScrollState())
         ) {
             mealModel.productList.forEach { product ->
-                ProductItem(product = product)
+                ProductItem(product = product, onEditProductClick = onEditProductClick)
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }
@@ -172,9 +176,9 @@ fun MealOfDay(
 
 
 @Composable
-fun ProductItem(product: Meal) {
+fun ProductItem(product: Meal, onEditProductClick: (Int) -> Unit) {
     Button(
-        onClick = { /* TODO: обработка нажатия на продукт */ },
+        onClick = { onEditProductClick(product.id) }, // Передаём ID продукта
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp),
@@ -259,7 +263,8 @@ fun PreviewHomeContent() {
             calorie = 2200,
             maxCalories = 2000,
             mealList = mealList,
-            onNavigateToSearch = {}
+            onNavigateToSearch = {},
+            onNavigateToEditMeal = {}
         )
     }
 }
