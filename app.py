@@ -111,7 +111,20 @@ def update_height():
         db.session.commit()
         return jsonify({"status": "height updated"}), 200
     abort(404)
-    
+
+# Update User Profile Picture
+@app.route('/user/profile_picture', methods=['PATCH'])
+def update_profile_picture():
+    data = request.json
+    user_id = data.get('user_id')
+    profile_picture = data.get('profile_picture')
+    user = User.query.get(user_id)
+    if user:
+        user.profile_pic = profile_picture
+        db.session.commit()
+        return jsonify({"status": "profile picture updated"}), 200
+    abort(404)
+
 # List Foods
 @app.route('/fooddb/foodlist', methods=['GET'])
 def food_list():
@@ -230,5 +243,11 @@ def edit_image():
         return jsonify({"status": "Profile picture updated successfully"}), 200
     abort(404)
 
+@app.before_request
+def log_request_info():
+    if app.debug:  # Логирование только в режиме debug
+        print(f"Headers: {request.headers}")
+        print(f"Body: {request.get_data(as_text=True)}")
+        
 if __name__ == '__main__':
     app.run(host='10.8.0.2',port=5000,debug="true")
