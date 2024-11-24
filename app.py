@@ -160,7 +160,33 @@ def get_food_item():
             'protein': food.protein
         })
     abort(404)
+    
+@app.route('/fooddb/search', methods=['GET'])
+def search_foods():
+    query = request.args.get('query', '').strip()
+    if not query:
+        return jsonify({"error": "Query parameter is required"}), 400
 
+    # Ищем записи, которые содержат строку запроса (регистр игнорируется)
+    foods = Food.query.filter(Food.name.ilike(f"%{query}%")).all()
+
+    if foods:
+        result = [
+            {
+                'food_id': food.food_id,
+                'name': food.name,
+                'calories': food.calories,
+                'protein': food.protein,
+                'fats': food.fats,
+                'carbs': food.carbs,
+                'description': food.description
+            }
+            for food in foods
+        ]
+        return jsonify(result), 200
+    else:
+        return jsonify({"message": "No foods found"}), 404
+    
 # Add Meal
 @app.route('/meals/add_meal', methods=['POST'])
 def add_meal():
