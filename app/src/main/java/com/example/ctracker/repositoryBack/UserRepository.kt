@@ -26,16 +26,17 @@ object UserRepository {
     }
 
     // Регистрация пользователя
-    suspend fun addUser(login: String, password: String): Boolean {
+    suspend fun addUser(login: String, password: String): RegisterResponse? {
         return withContext(Dispatchers.IO) {
             try {
                 val body = mapOf("login" to login, "password" to password)
                 val response = api.register(body).execute()
                 if (response.isSuccessful) {
-                    true
+                    // Десериализуем тело ответа как RegisterResponse
+                    response.body() ?: throw Exception("Пустой ответ от сервера")
                 } else {
                     when (response.code()) {
-                        409 -> false // Пользователь уже существует
+                        409 -> null // Пользователь уже существует
                         else -> throw HttpException(response)
                     }
                 }
@@ -44,6 +45,7 @@ object UserRepository {
             }
         }
     }
+
 
     // Получение профиля пользователя
     suspend fun getUserById(userId: Int): UserProfile? {

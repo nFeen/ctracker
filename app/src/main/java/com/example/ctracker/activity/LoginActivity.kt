@@ -34,15 +34,23 @@ class LoginActivity : ComponentActivity() {
             setContent {
                 CTrackerTheme {
                     val loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+                    val registerViewModel = ViewModelProvider(this)[RegistrationViewModel::class.java]
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
                         startDestination = "login",
                     ) {
                         composable("login") { LoginView(loginViewModel, navController) }
-                        composable ("registration"){ RegisterView(RegistrationViewModel(), navController)}
+                        composable ("registration"){ RegisterView(registerViewModel, navController)}
                     }
 
+                    registerViewModel.loginSuccess.observe(this, Observer { success ->
+                        if (success) {
+                            val i = Intent(this@LoginActivity, MainActivity::class.java)
+                            startActivity(i)
+                            finish()
+                        }
+                    })
                     //Проверка на удачный вход
                     loginViewModel.loginSuccess.observe(this, Observer { success ->
                         if (success) {
@@ -51,6 +59,8 @@ class LoginActivity : ComponentActivity() {
                             finish()
                         }
                     })
+
+
                 }
             }
         }

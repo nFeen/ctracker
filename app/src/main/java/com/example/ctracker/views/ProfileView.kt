@@ -470,7 +470,7 @@ fun ProfileContent(
                     confirmButton = {
                         Button(onClick = {
                             val weight = newWeight.value.toIntOrNull()
-                            if (weight != null) {
+                            if (weight != null&& height in 1..300) {
                                 onUpdateWeight(weight)
                                 isWeightDialogOpen.value = false
                             }
@@ -502,7 +502,7 @@ fun ProfileContent(
                     confirmButton = {
                         Button(onClick = {
                             val height = newHeight.value.toIntOrNull()
-                            if (height != null) {
+                            if (height != null && height in 1..300) {
                                 onUpdateHeight(height)
                                 isHeightDialogOpen.value = false
                             }
@@ -581,7 +581,7 @@ fun ProfileContent(
                 confirmButton = {
                     Button(onClick = {
                         val calorieGoal = newCalorieGoal.value.toIntOrNull()
-                        if (calorieGoal != null) {
+                        if (calorieGoal != null && height in 1..10000) {
                             onUpdateCalorieGoal(calorieGoal)
                             isCalorieGoalDialogOpen.value = false
                         }

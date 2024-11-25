@@ -2,27 +2,77 @@ package com.example.ctracker.viewmodel
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.ctracker.entity.Food
 import com.example.ctracker.entity.Meal
-import com.example.ctracker.repository.mock.MockMealRepository
+import com.example.ctracker.repositoryBack.FoodRepository
+import com.example.ctracker.repositoryBack.MealRepository
+import kotlinx.coroutines.launch
+
 
 class EditMealViewModel(private val mealId: Int) : ViewModel() {
-    val meal: Meal? = MockMealRepository.getMealById(mealId)
-    val weightState = mutableStateOf(meal?.quantity?.toInt().toString())
+    val weightState = mutableStateOf("")
+    val food = mutableStateOf<Food?>(null)
     val isError = mutableStateOf(false)
+    val isLoading = mutableStateOf(false)
+    val errorMessage = mutableStateOf<String?>(null)
+
+    init {
+        loadMealDetails()
+    }
+
+    private fun loadMealDetails() {
+        isLoading.value = true
+        viewModelScope.launch {
+            try {
+                // Получаем данные о приеме пищи
+                val mealResponse = MealRepository.getMealById(mealId)
+                if (mealResponse != null) {
+                    weightState.value = mealResponse.quantity.toString()
+
+                    // Загружаем данные о продукте по food_id
+                    val foodResponse = FoodRepository.getFoodById(mealResponse.food_id)
+                    if (foodResponse != null) {
+                        food.value = Food(
+                            id = foodResponse.food_id,
+                            name = foodResponse.name,
+                            calories = foodResponse.calorie,
+                            fat = foodResponse.fats,
+                            carb = foodResponse.carbs,
+                            protein = foodResponse.protein
+                        )
+                    } else {
+                        errorMessage.value = "Продукт не найден"
+                    }
+                } else {
+                    errorMessage.value = "Прием пищи не найден"
+                }
+            } catch (e: Exception) {
+                errorMessage.value = "Ошибка загрузки данных: ${e.message}"
+            } finally {
+                isLoading.value = false
+            }
+        }
+    }
 
     fun updateMeal() {
-        val updatedWeight = weightState.value.toFloatOrNull()
+        val updatedWeight = weightState.value.toIntOrNull()
         if (updatedWeight == null || updatedWeight <= 0) {
             isError.value = true
             return
         }
-        meal?.let {
-            it.quantity = updatedWeight
-            it.calories = it.calories / it.quantity * updatedWeight
-            it.protein = it.protein / it.quantity * updatedWeight
-            it.fats = it.fats / it.quantity * updatedWeight
-            it.carbs = it.carbs / it.quantity * updatedWeight
-            MockMealRepository.updateMeal(it)
+
+        viewModelScope.launch {
+            try {
+                val success = MealRepository.editMeal(mealId, updatedWeight)
+                if (success) {
+                    println("Прием пищи успешно обновлен")
+                } else {
+                    errorMessage.value = "Не удалось обновить прием пищи"
+                }
+            } catch (e: Exception) {
+                errorMessage.value = "Ошибка при обновлении приема пищи: ${e.message}"
+            }
         }
     }
 
@@ -35,6 +85,6 @@ class EditMealViewModel(private val mealId: Int) : ViewModel() {
             else -> sanitizedInput.toString()
         }
         weightState.value = validatedWeight
-        isError.value = validatedWeight.isEmpty() || validatedWeight.toFloatOrNull()?.let { it <= 0f } ?: true
+        isError.value = validatedWeight.isEmpty() || validatedWeight.toIntOrNull()?.let { it <= 0 } ?: true
     }
 }

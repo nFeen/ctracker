@@ -59,19 +59,36 @@ class ProfileViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val meals = MealRepository.getMeals(userId, currentDate)
-                val totalCalories = meals.sumOf { it.calories }
-                val totalProtein = meals.sumOf { it.protein.toInt() }
-                val totalFats = meals.sumOf { it.fats.toInt() }
-                val totalCarbs = meals.sumOf { it.carbs.toInt() }
+                if (meals.isNotEmpty()) {
+                    val totalCalories = meals.sumOf { it.calories.toInt() }
+                    val totalProtein = meals.sumOf { it.protein.toInt() }
+                    val totalFats = meals.sumOf { it.fats.toInt() }
+                    val totalCarbs = meals.sumOf { it.carbs.toInt() }
 
-                calorie.value = totalCalories
-                protein.value = totalProtein
-                fats.value = totalFats
-                carbs.value = totalCarbs
+                    calorie.value = totalCalories
+                    protein.value = totalProtein
+                    fats.value = totalFats
+                    carbs.value = totalCarbs
 
-                saveMacrosToSharedPreferences(totalCalories, totalProtein, totalFats, totalCarbs)
+                    saveMacrosToSharedPreferences(totalCalories, totalProtein, totalFats, totalCarbs)
+                } else {
+                    // Если данных за текущий день нет, устанавливаем макросы в 0
+                    calorie.value = 0
+                    protein.value = 0
+                    fats.value = 0
+                    carbs.value = 0
+
+                    saveMacrosToSharedPreferences(0, 0, 0, 0)
+                }
             } catch (e: Exception) {
                 e.printStackTrace()
+                // В случае ошибки также устанавливаем макросы в 0
+                calorie.value = 0
+                protein.value = 0
+                fats.value = 0
+                carbs.value = 0
+
+                saveMacrosToSharedPreferences(0, 0, 0, 0)
             }
         }
     }
@@ -87,7 +104,17 @@ class ProfileViewModel : ViewModel() {
             val calendar = Calendar.getInstance().apply { add(Calendar.DATE, -offset) }
             inputDateFormatter.format(calendar.time)
         }
+        // Загрузка данных из SharedPreferences
+        val savedChartData = loadChartDataFromSharedPreferences()
 
+        // Если данных в SharedPreferences нет, заполняем нулями с датами
+        if (savedChartData.isEmpty()) {
+            chartData.value = dates.map { date ->
+                0 to outputDateFormatter.format(inputDateFormatter.parse(date)!!)
+            }
+        } else {
+            chartData.value = savedChartData
+        }
         viewModelScope.launch {
             try {
                 val chartValues = mutableListOf<Pair<Int, String>>()
@@ -96,7 +123,7 @@ class ProfileViewModel : ViewModel() {
                     try {
                         // Получаем приемы пищи за указанную дату
                         val meals = MealRepository.getMeals(userId, date)
-                        val totalCalories = meals.sumOf { it.calories }
+                        val totalCalories = meals.sumOf { it.calories.toInt() }
 
                         // Преобразуем дату для отображения на графике
                         val formattedDate =

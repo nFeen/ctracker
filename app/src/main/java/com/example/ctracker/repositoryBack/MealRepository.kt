@@ -23,7 +23,21 @@ object MealRepository {
             }
         }
     }
-
+    // Получение информации о конкретном приеме пищи
+    suspend fun getMealById(mealId: Int): MealResponse? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = api.getMeal(mealId).execute()
+                if (response.isSuccessful) {
+                    response.body()
+                } else {
+                    throw HttpException(response)
+                }
+            } catch (e: Exception) {
+                throw Exception("Ошибка при получении информации о приёме пищи: ${e.message}")
+            }
+        }
+    }
     // Добавление нового приема пищи
     suspend fun addMeal(request: AddMealRequest): Boolean {
         return withContext(Dispatchers.IO) {

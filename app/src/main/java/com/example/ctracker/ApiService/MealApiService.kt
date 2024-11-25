@@ -7,7 +7,7 @@ data class MealResponse(
     val meal_id: Int,
     val food_id: Int,
     val quantity: Int,
-    val calories: Int,
+    val calories: Float,
     val protein: Float,
     val fats: Float,
     val carbs: Float,
@@ -47,4 +47,9 @@ interface MealApiService {
 
     @DELETE("/meals/delete_meal")
     fun deleteMeal(@Body body: DeleteMealRequest): Call<Map<String, String>>
+
+    @GET("/meals/get_meal")
+    fun getMeal(
+        @Query("meal_id") mealId: Int
+    ): Call<MealResponse>
 }

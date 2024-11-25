@@ -23,11 +23,11 @@ import com.example.ctracker.viewmodel.EditMealViewModel
 @Composable
 fun EditItemView(viewModel: EditMealViewModel, navController: NavController) {
     EditItemContent(
-        mealName = viewModel.meal?.name ?: "Продукт",
-        calories = viewModel.meal?.calories?.toInt() ?: 0,
-        protein = viewModel.meal?.protein ?: 0f,
-        fats = viewModel.meal?.fats ?: 0f,
-        carbs = viewModel.meal?.carbs ?: 0f,
+        mealName = viewModel.food?.value?.name ?: "Продукт",
+        calories = viewModel.food?.value?.calories?.toInt() ?: 0,
+        protein = viewModel.food?.value?.protein ?: 0f,
+        fats = viewModel.food?.value?.fat ?: 0f,
+        carbs = viewModel.food?.value?.carb ?: 0f,
         weight = viewModel.weightState.value,
         isError = viewModel.isError.value,
         onWeightChange = { input -> viewModel.updateWeight(input) },

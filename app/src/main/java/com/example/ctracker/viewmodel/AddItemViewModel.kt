@@ -8,8 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.ctracker.ApiService.AddMealRequest
 import com.example.ctracker.entity.Food
 import com.example.ctracker.entity.Meal
-import com.example.ctracker.repository.mock.MockFoodRepository
-import com.example.ctracker.repository.mock.MockMealRepository
 import com.example.ctracker.repositoryBack.FoodRepository
 import com.example.ctracker.repositoryBack.MealRepository
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -41,7 +39,7 @@ class AddItemViewModel(private val index: Int, private val mealType: Int) : View
                 if (foodResponse != null) {
                     food.value = Food(
                         id = foodResponse.food_id,
-                        name = foodResponse.food,
+                        name = foodResponse.name,
                         calories = foodResponse.calorie,
                         protein = foodResponse.protein,
                         fat = foodResponse.fats,

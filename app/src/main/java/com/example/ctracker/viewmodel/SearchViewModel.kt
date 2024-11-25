@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ctracker.entity.Food
-import com.example.ctracker.repository.mock.MockFoodRepository
 import com.example.ctracker.repositoryBack.FoodRepository
 import kotlinx.coroutines.launch
 
@@ -29,10 +28,11 @@ class SearchViewModel(val mealType: Int) : ViewModel() {
         viewModelScope.launch {
             try {
                 val foods = FoodRepository.searchFoods(query.value)
+                println("fodds results $foods")
                 results.value = foods.map {
                     Food(
                         id = it.food_id,
-                        name = it.food,
+                        name = it.name,
                         calories = it.calorie,
                         protein = it.protein,
                         fat = it.fats,

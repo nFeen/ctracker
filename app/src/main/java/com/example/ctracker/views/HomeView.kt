@@ -2,7 +2,6 @@ import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -16,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontFamily
@@ -213,7 +211,7 @@ fun ProductItem(product: Meal, onEditProductClick: (Int) -> Unit) {
 
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "Вес: ${product.quantity.format(1)} г | Б: ${product.protein.format(1)} г | Ж: ${product.fats.format(1)} г | У: ${product.carbs.format(1)} г",
+                text = "Вес: ${product.quantity} г | Б: ${product.protein.format(1)} г | Ж: ${product.fats.format(1)} г | У: ${product.carbs.format(1)} г",
                 fontSize = 12.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -234,23 +232,23 @@ fun PreviewHomeContent() {
     val date: Date = calendar.time
 
     val breakfastProducts = listOf(
-        Meal(1, 0, "Яичница", 70F, 6.0F, 5.0F, 1.0F, 10.0F, date),
-        Meal(2, 0, "Тост", 120F, 4.0F, 2.0F, 20.0F, 10.0F, date)
+        Meal(1, 0, "Яичница", 70F, 6.0F, 5.0F, 1.0F, 10, date.toString()),
+        Meal(2, 0, "Тост", 120F, 4.0F, 2.0F, 20.0F, 10, date.toString())
     )
 
     val lunchProducts = listOf(
-        Meal(3, 1, "Суп", 200F, 10.0F, 8.0F, 30.0F, 15.0F, date),
-        Meal(4, 1, "Салат", 150F, 5.0F, 7.0F, 12.0F, 10.0F, date)
+        Meal(3, 1, "Суп", 200F, 10.0F, 8.0F, 30.0F, 15, date.toString()),
+        Meal(4, 1, "Салат", 150F, 5.0F, 7.0F, 12.0F, 10, date.toString())
     )
 
     val dinnerProducts = listOf(
-        Meal(5, 2, "Паста", 400F, 12.0F, 10.0F, 50.0F, 20.0F, date),
-        Meal(6, 2, "Курица", 250F, 30.0F, 5.0F, 2.0F, 15.0F, date)
+        Meal(5, 2, "Паста", 400F, 12.0F, 10.0F, 50.0F, 20, date.toString()),
+        Meal(6, 2, "Курица", 250F, 30.0F, 5.0F, 2.0F, 10, date.toString())
     )
 
     val additionalProducts = listOf(
-        Meal(7, 3, "Шоколад", 120F, 2.0F, 8.0F, 10.0F, 5.0F, date),
-        Meal(8, 3, "Орехи", 150F, 4.0F, 10.0F, 5.0F, 7.0F, date)
+        Meal(7, 3, "Шоколад", 120F, 2.0F, 8.0F, 10.0F, 5, date.toString()),
+        Meal(8, 3, "Орехи", 150F, 4.0F, 10.0F, 5.0F, 7, date.toString())
     )
 
     val mealList = listOf(

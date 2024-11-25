@@ -1,4 +1,5 @@
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
@@ -10,6 +11,7 @@ class RegistrationViewModel : ViewModel() {
     var errorMessage = mutableStateOf("")
     var isLoginError = mutableStateOf(false)
     var isPasswordError = mutableStateOf(false)
+    var loginSuccess = MutableLiveData(false)
 
     private val loginRegex = Regex("^[A-Za-z][A-Za-z\\d.-]{0,19}$")
     private val passwordRegex = Regex("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
@@ -69,8 +71,10 @@ class RegistrationViewModel : ViewModel() {
         // Асинхронная регистрация пользователя
         viewModelScope.launch {
             try {
-                val success = UserRepository.addUser(login.value, password.value)
-                if (success) {
+                val response = UserRepository.addUser(login.value, password.value)
+                if (response != null) {
+                    loginSuccess.value = true
+                    SharedPreferencesManager.saveString("UserID", response.user_id.toString())
                     onSuccess()
                 } else {
                     isLoginError.value = true

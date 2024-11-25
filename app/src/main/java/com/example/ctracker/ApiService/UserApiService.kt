@@ -2,7 +2,7 @@ import retrofit2.Call
 import retrofit2.http.*
 
 data class LoginResponse(val user_id: Int)
-data class RegisterResponse(val status: String)
+data class RegisterResponse(val user_id: Int)
 data class UserProfile(
     val login: String,
     val weight: Int,
