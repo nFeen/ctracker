@@ -232,6 +232,9 @@ def food_list():
 
         # Проверяем, существует ли продукт в базе
         existing_food = Food.query.filter_by(food_id=food_id).first()
+        
+        if "Per 1 serving" in food_description:
+            continue
         if not existing_food:
             # Если продукта нет в базе, добавляем его
             details_url = "https://platform.fatsecret.com/rest/server.api"
@@ -259,8 +262,7 @@ def food_list():
                     primary_serving = servings[0]
                 else:
                     primary_serving = servings
-                if primary_serving.get("measurement_description", "").lower() == "serving":
-                    continue
+                    
                 # Получаем значение единицы измерения
                 metric_serving_amount = float(primary_serving.get("metric_serving_amount", 100))  # Если отсутствует, устанавливаем 100
                 metric_serving_unit = primary_serving.get("metric_serving_unit", "g")
