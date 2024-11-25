@@ -13,6 +13,7 @@ data class UserProfile(
 data class UpdateWeightRequest(val user_id: Int, val weight: Int)
 data class UpdateHeightRequest(val user_id: Int, val height: Int)
 data class UpdatePictureRequest(val user_id: Int, val profile_picture: String)
+data class UpdateCalorieGoalRequest(val user_id: Int, val caloriegoal: Int)
 
 interface UserApiService {
     @GET("/user/login")
@@ -35,4 +36,7 @@ interface UserApiService {
 
     @PATCH("/user/profile_picture")
     fun updateProfilePicture(@Body body: UpdatePictureRequest): Call<RegisterResponse>
+
+    @PATCH("/user/caloriegoal")
+    fun updateCalorieGoal(@Body body: UpdateCalorieGoalRequest): Call<RegisterResponse>
 }

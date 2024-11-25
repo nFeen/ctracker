@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import com.example.ctracker.ui.theme.CTrackerTheme
 import com.example.ctracker.viewmodel.AddItemViewModel
 import com.example.ctracker.viewmodel.EditMealViewModel
 import com.example.ctracker.viewmodel.HomeViewModel
@@ -25,6 +26,7 @@ import com.example.ctracker.viewmodel.ProfileViewModel
 import com.example.ctracker.viewmodel.SearchViewModel
 import com.example.ctracker.views.AddItemView
 import com.example.ctracker.views.EditItemView
+import com.example.ctracker.views.NavigationBottomBar
 import com.example.ctracker.views.SearchView
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -33,7 +35,7 @@ import com.example.ctracker.views.SearchView
 fun MainView(navController: NavHostController, viewModel: MainViewModel) {
     Scaffold(
         bottomBar = {
-            NavigationBar(navController = navController)
+            NavigationBottomBar(navController = navController)
         }
     ) { innerPadding ->
         Column(
@@ -68,62 +70,13 @@ fun MainView(navController: NavHostController, viewModel: MainViewModel) {
         }
     }
 }
-
-
-@Composable
-fun NavigationBar(navController: NavController) {
-    val items = listOf(
-        BottomNavItem.Profile,
-        BottomNavItem.Home,
-        BottomNavItem.Settings
-    )
-
-    NavigationBar(
-        containerColor = MaterialTheme.colorScheme.primary,
-        contentColor = MaterialTheme.colorScheme.onPrimary
-    ) {
-        val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
-        items.forEach { item ->
-            NavigationBarItem(
-                icon = {
-                    Image(
-                        imageVector = item.icon,
-                        contentDescription = item.title
-                    )
-                },
-                label = { Text(text = item.title, color = MaterialTheme.colorScheme.onBackground) },
-                selected = currentRoute == item.route,
-                colors = NavigationBarItemDefaults.colors(indicatorColor = MaterialTheme.colorScheme.onPrimary),
-                onClick = {
-                    if (item.route != currentRoute) {
-                        if (currentRoute == "search/{index}") {
-                            navController.popBackStack("home", inclusive = false)
-                        }
-                        if (currentRoute == "editmeal/{index}") {
-                            navController.popBackStack("home", inclusive = false)
-                        }
-                        navController.navigate(item.route) {
-                            popUpTo(navController.graph.startDestinationId) {
-                                saveState = false
-                            }
-                            launchSingleTop = false
-                            restoreState = false
-                        }
-                    }
-                }
-            )
-        }
-    }
-}
-
-sealed class BottomNavItem(val route: String, val icon: ImageVector, val title: String) {
-    object Profile : BottomNavItem("profile", Icons.Default.Person, "Profile")
-    object Home : BottomNavItem("home", Icons.Default.Home, "Home")
-    object Settings : BottomNavItem("settings", Icons.Default.Settings, "Settings")
-}
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun PreviewMainView() {
-    val viewModel = MainViewModel()
-    MainView( navController = rememberNavController(), viewModel=viewModel)
+    CTrackerTheme {
+    Scaffold(
+        bottomBar = {
+            NavigationBottomBar(navController = rememberNavController())
+        }){}}
 }

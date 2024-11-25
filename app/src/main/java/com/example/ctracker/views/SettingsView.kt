@@ -6,9 +6,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import com.example.ctracker.ui.theme.CTrackerTheme
+import com.example.ctracker.views.NavigationBottomBar
 
 @Composable
 fun SettingsView(viewModel: MainViewModel) {
@@ -30,7 +33,9 @@ fun SettingsContent(
                     titleContentColor = MaterialTheme.colorScheme.onSurface,
                 ),
                 title = {
-                    Text("Настройки")
+                    Text("Настройки",
+                        fontFamily = FontFamily.Serif,
+                        color = MaterialTheme.colorScheme.onPrimary)
                 }
             )
         }
@@ -64,8 +69,13 @@ fun SettingsContent(
 @Composable
 fun PreviewSettingsContent() {
     CTrackerTheme {
-        SettingsContent(
-            onLogoutClick = { }
-        )
+        Scaffold(
+            bottomBar = {
+                NavigationBottomBar(navController = rememberNavController())
+            }) {
+            SettingsContent(
+                onLogoutClick = { }
+            )
+        }
     }
 }

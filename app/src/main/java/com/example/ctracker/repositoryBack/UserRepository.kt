@@ -96,5 +96,17 @@ object UserRepository {
             }
         }
     }
+    suspend fun updateCalorieGoal(userId: Int, calorieGoal: Int): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                val body = UpdateCalorieGoalRequest(user_id = userId, caloriegoal = calorieGoal)
+                val response = api.updateCalorieGoal(body).execute()
+                response.isSuccessful
+            } catch (e: Exception) {
+                throw Exception("Ошибка при обновлении цели по калориям: ${e.message}")
+            }
+        }
+    }
+
 }
 

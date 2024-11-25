@@ -30,6 +30,7 @@ import com.example.ctracker.entity.Meal
 import com.example.ctracker.ui.theme.CTrackerTheme
 import com.example.ctracker.viewmodel.HomeViewModel
 import com.example.ctracker.viewmodel.MealModel
+import com.example.ctracker.views.NavigationBottomBar
 import java.util.Calendar
 import java.util.Date
 
@@ -223,7 +224,7 @@ fun ProductItem(product: Meal, onEditProductClick: (Int) -> Unit) {
 // Extension function for formatting floats
 private fun Float.format(digits: Int) = "%.${digits}f".format(this)
 
-@SuppressLint("UnrememberedMutableState")
+@SuppressLint("UnrememberedMutableState", "UnusedMaterial3ScaffoldPaddingParameter")
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true)
 @Composable
@@ -259,12 +260,17 @@ fun PreviewHomeContent() {
         MealModel("Другое", additionalProducts, mutableStateOf(false)) { }
     )
     CTrackerTheme {
-        HomeContent(
-            calorie = 2200,
-            maxCalories = 2000,
-            mealList = mealList,
-            onNavigateToSearch = {},
-            onNavigateToEditMeal = {}
-        )
+        Scaffold(
+            bottomBar = {
+                NavigationBottomBar(navController = rememberNavController())
+            }) {
+            HomeContent(
+                calorie = 2200,
+                maxCalories = 2000,
+                mealList = mealList,
+                onNavigateToSearch = {},
+                onNavigateToEditMeal = {}
+            )
+        }
     }
 }

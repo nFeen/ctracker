@@ -1,5 +1,6 @@
 package com.example.ctracker.views
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,6 +20,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.ctracker.ui.theme.CTrackerTheme
 
 @Composable
@@ -31,7 +33,7 @@ fun SearchView(viewModel: SearchViewModel, navController: NavController) {
         onSearch = viewModel::search,
         onItemClick = { index ->
             print("here")
-            val mealType : Int = viewModel.mealType // mealType берется из ViewModel
+            val mealType: Int = viewModel.mealType // mealType берется из ViewModel
             navController.navigate("additem/${mealType}/$index")
         }
     )
@@ -56,9 +58,11 @@ fun SearchContent(
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 ),
                 title = {
-                    Text("CTracker",
+                    Text(
+                        "CTracker",
                         fontFamily = FontFamily.Serif,
-                        color = MaterialTheme.colorScheme.onPrimary)
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
                 }
             )
         }
@@ -73,7 +77,7 @@ fun SearchContent(
             OutlinedTextField(
                 value = query,
                 onValueChange = onQueryChange,
-                placeholder = { Text ("Введите название продукта")},
+                placeholder = { Text("Введите название продукта") },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions.Default.copy(
                     imeAction = ImeAction.Done
@@ -113,9 +117,10 @@ fun SearchContent(
 }
 
 @Composable
-fun ProductItem
-            (product: Food,
-             onAddProductClick: () -> Unit) {
+fun ProductItem(
+    product: Food,
+    onAddProductClick: () -> Unit
+) {
     Button(
         onClick = { onAddProductClick() },
         modifier = Modifier
@@ -159,29 +164,35 @@ fun ProductItem
     }
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true)
 @Composable
 fun SearchContentPreview() {
     CTrackerTheme {
-        SearchContent(
-            query = "",
-            results = listOf(
-                Food(1, "Яблоко", 52, 0.2f, 14f, 0.3f),
-                Food(2, "Банан", 89, 0.3f, 23f, 1.1f),
-                Food(3, "Куриное филе", 165, 3.6f, 0f, 31f),
-                Food(4, "Овсянка", 68, 1.4f, 12f, 2.4f),
-                Food(5, "Яйцо вареное", 155, 11f, 1.1f, 13f),
-                Food(6, "Молоко", 42, 1f, 5f, 3.4f),
-                Food(7, "Рис", 130, 0.3f, 28f, 2.7f),
-                Food(8, "Гречка", 110, 1.6f, 20f, 4.2f),
-                Food(9, "Помидор", 18, 0.2f, 3.9f, 0.9f),
-                Food(10, "Огурец", 15, 0.1f, 3.6f, 0.7f)
-            ),
-            hasSearched = true,
-            onQueryChange = {},
-            onSearch = {},
-            onItemClick = {}
-        )
+        Scaffold(
+            bottomBar = {
+                NavigationBottomBar(navController = rememberNavController())
+            }) {
+            SearchContent(
+                query = "",
+                results = listOf(
+                    Food(1, "Яблоко", 52, 0.2f, 14f, 0.3f),
+                    Food(2, "Банан", 89, 0.3f, 23f, 1.1f),
+                    Food(3, "Куриное филе", 165, 3.6f, 0f, 31f),
+                    Food(4, "Овсянка", 68, 1.4f, 12f, 2.4f),
+                    Food(5, "Яйцо вареное", 155, 11f, 1.1f, 13f),
+                    Food(6, "Молоко", 42, 1f, 5f, 3.4f),
+                    Food(7, "Рис", 130, 0.3f, 28f, 2.7f),
+                    Food(8, "Гречка", 110, 1.6f, 20f, 4.2f),
+                    Food(9, "Помидор", 18, 0.2f, 3.9f, 0.9f),
+                    Food(10, "Огурец", 15, 0.1f, 3.6f, 0.7f)
+                ),
+                hasSearched = true,
+                onQueryChange = {},
+                onSearch = {},
+                onItemClick = {}
+            )
+        }
     }
 }

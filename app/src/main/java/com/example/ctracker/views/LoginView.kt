@@ -1,3 +1,4 @@
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -17,6 +18,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
 import com.example.ctracker.ui.theme.CTrackerTheme
+import com.example.ctracker.views.NavigationBottomBar
 
 @Composable
 fun LoginView(
@@ -92,8 +94,7 @@ fun LoginContent(
                         modifier = Modifier.padding(bottom = 8.dp),
                         textAlign = TextAlign.Center
                     )
-                }
-                else{
+                } else {
                     Spacer(modifier = Modifier.height(40.dp))
                 }
                 OutlinedTextField(
@@ -150,18 +151,21 @@ fun LoginContent(
     }
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true)
 @Composable
 fun PreviewLoginView() {
-    CTrackerTheme { LoginContent(
-        login = "",
-        onLoginChanged = {},
-        password = "",
-        onPasswordChanged = {},
-        errorMessage = "123",
-        onLoginClick = {},
-        onRegisterClick = {}
-    )}
-
+    CTrackerTheme {
+        LoginContent(
+            login = "",
+            onLoginChanged = {},
+            password = "",
+            onPasswordChanged = {},
+            errorMessage = "",
+            onLoginClick = {},
+            onRegisterClick = {}
+        )
+    }
 }
+

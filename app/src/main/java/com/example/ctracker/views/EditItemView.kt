@@ -1,18 +1,22 @@
 package com.example.ctracker.views
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.ctracker.ui.theme.CTrackerTheme
 import com.example.ctracker.viewmodel.EditMealViewModel
 
@@ -121,7 +125,15 @@ fun EditItemContent(
                 isError = isError,
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
-                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Done // Устанавливаем действие "Готово"
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        if (!isError) onSaveClick() // Вызываем функцию, если нет ошибки
+                    }
+                )
             )
             if (isError) {
                 Text(
@@ -192,21 +204,27 @@ fun EditItemContent(
 // Extension function for formatting floats
 private fun Float.format(digits: Int) = "%.${digits}f".format(this)
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true)
 @Composable
 fun PreviewEditItemContent() {
     CTrackerTheme {
-        EditItemContent(
-            mealName = "Яичница",
-            calories = 150,
-            protein = 12.3f,
-            fats = 10.5f,
-            carbs = 3.2f,
-            weight = "200",
-            isError = false,
-            onWeightChange = {},
-            onSaveClick = {}
-        )
+        Scaffold(
+            bottomBar = {
+                NavigationBottomBar(navController = rememberNavController())
+            }) {
+            EditItemContent(
+                mealName = "Яичница",
+                calories = 150,
+                protein = 12.3f,
+                fats = 10.5f,
+                carbs = 3.2f,
+                weight = "200",
+                isError = false,
+                onWeightChange = {},
+                onSaveClick = {}
+            )
+        }
     }
 }

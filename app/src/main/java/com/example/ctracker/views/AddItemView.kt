@@ -1,9 +1,11 @@
 package com.example.ctracker.views
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -26,6 +28,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.text.input.ImeAction
+import androidx.navigation.compose.rememberNavController
 import com.example.ctracker.ui.theme.CTrackerTheme
 import com.example.ctracker.viewmodel.AddItemViewModel
 
@@ -185,7 +189,15 @@ fun AddItemContent(
                 isError = isError,
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
-                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Done // Устанавливаем действие "Готово"
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        if (!isError) onAddClick() // Вызываем функцию, если нет ошибки
+                    }
+                )
             )
             if (isError) {
                 Text(
@@ -252,21 +264,29 @@ fun InfoBlock(title: String, value: String, modifier: Modifier = Modifier) {
 // Extension function for formatting floats
 private fun Float.format(digits: Int) = "%.${digits}f".format(this)
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true)
 @Composable
 fun PreviewAddItemContent() {
     CTrackerTheme {
-        AddItemContent(
-            productName = "Яблоко",
-            calories = 52,
-            protein = 0.3f,
-            fats = 0.2f,
-            carbs = 14f,
-            weight = "200",
-            onWeightChange = {},
-            onAddClick = {},
-            isError = false
-        )
+        Scaffold(
+            bottomBar = {
+                NavigationBottomBar(navController = rememberNavController())
+            }) {
+            CTrackerTheme {
+                AddItemContent(
+                    productName = "Яблоко",
+                    calories = 52,
+                    protein = 0.3f,
+                    fats = 0.2f,
+                    carbs = 14f,
+                    weight = "200",
+                    onWeightChange = {},
+                    onAddClick = {},
+                    isError = false
+                )
+            }
+        }
     }
 }

@@ -17,10 +17,12 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
 import com.example.ctracker.ui.theme.CTrackerTheme
+import com.example.ctracker.views.NavigationBottomBar
 
 @Composable
 fun RegisterView(viewModel: RegistrationViewModel, navController: NavController) {
-    RegisterContent(login = viewModel.login.value,
+    RegisterContent(
+        login = viewModel.login.value,
         password = viewModel.password.value,
         errorMessage = viewModel.errorMessage.value,
         onLoginChanged = viewModel::onLoginChanged,
@@ -98,8 +100,7 @@ fun RegisterContent(
                         modifier = Modifier.padding(bottom = 8.dp),
                         textAlign = TextAlign.Center
                     )
-                }
-                else{
+                } else {
                     Spacer(modifier = Modifier.height(40.dp))
                 }
                 OutlinedTextField(
@@ -114,7 +115,8 @@ fun RegisterContent(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Поле ввода пароля
-                OutlinedTextField(value = password,
+                OutlinedTextField(
+                    value = password,
                     onValueChange = onPasswordChanged,
                     label = { Text(text = "Пароль") },
                     singleLine = true,
@@ -167,16 +169,18 @@ fun RegisterContent(
 @Composable
 fun PreviewRegisterContent() {
     CTrackerTheme {
-        RegisterContent(login = "",
+        RegisterContent(
+            login = "",
             password = "",
-            errorMessage = "213",
+            errorMessage = "",
             onLoginChanged = {},
             onPasswordChanged = {},
             onRegisterClick = { _ -> },
             onBackClick = {},
-            navigateToLogin = {} ,
+            navigateToLogin = {},
             isLoginError = false,
-            isPasswordError = false)
+            isPasswordError = false
+        )
     }
-
 }
+

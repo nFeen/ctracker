@@ -1,5 +1,8 @@
 [versions]
+accompanistPermissions = "0.30.0"
+accompanistText = "0.36.0"
 agp = "8.6.1"
+converterGson = "2.9.0"
 hiltAndroid = "2.50"
 hiltAndroidGradlePlugin = "2.44"
 hiltNavigationCompose = "1.2.0"
@@ -22,10 +25,13 @@ foundationLayoutAndroid = "1.7.2"
 firebaseCrashlyticsBuildtools = "3.0.2"
 
 [libraries]
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
+accompanist-text = { module = "com.google.accompanist:accompanist-text", version.ref = "accompanistText" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson" }
+google-accompanist-text = { module = "com.google.accompanist:accompanist-text" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
 hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hiltAndroidGradlePlugin" }
@@ -50,6 +56,7 @@ androidx-foundation-android = { group = "androidx.compose.foundation", name = "f
 androidx-foundation-layout-android = { group = "androidx.compose.foundation", name = "foundation-layout-android", version.ref = "foundationLayoutAndroid" }
 okhttp = { module = "com.squareup.okhttp3:okhttp" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit2-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 retrofit2-retrofit = { module = "com.squareup.retrofit2:retrofit" }
 firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
 

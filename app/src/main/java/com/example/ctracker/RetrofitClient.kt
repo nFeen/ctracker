@@ -1,4 +1,5 @@
 import com.example.ctracker.ApiService.FoodApiService
+import com.example.ctracker.ApiService.MealApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -29,5 +30,9 @@ object RetrofitClient {
 
     val foodApiService: FoodApiService by lazy {
         retrofit.create(FoodApiService::class.java)
+    }
+
+    val mealApiService: MealApiService by lazy {
+        retrofit.create(MealApiService::class.java)
     }
 }

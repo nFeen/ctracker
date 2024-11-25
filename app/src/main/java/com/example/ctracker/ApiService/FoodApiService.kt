@@ -12,9 +12,6 @@ data class FoodResponse(
     val protein: Float
 )
 
-data class EditMealRequest(val meal_id: Int, val quantity: Int)
-data class DeleteMealRequest(val meal_id: Int)
-
 interface FoodApiService {
     @GET("/fooddb/search")
     fun searchFoods(@Query("food") foodName: String): Call<List<FoodResponse>>

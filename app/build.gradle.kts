@@ -71,7 +71,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.retrofit)
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation(libs.retrofit2.converter.gson)
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
-    implementation("com.google.accompanist:accompanist-permissions:0.30.0")
+    implementation(libs.accompanist.permissions)
+    implementation("com.google.code.gson:gson:2.10")
 }

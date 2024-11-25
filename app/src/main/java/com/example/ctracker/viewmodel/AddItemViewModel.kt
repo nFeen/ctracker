@@ -5,15 +5,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ctracker.ApiService.AddMealRequest
 import com.example.ctracker.entity.Food
 import com.example.ctracker.entity.Meal
 import com.example.ctracker.repository.mock.MockFoodRepository
 import com.example.ctracker.repository.mock.MockMealRepository
 import com.example.ctracker.repositoryBack.FoodRepository
+import com.example.ctracker.repositoryBack.MealRepository
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 class AddItemViewModel(private val index: Int, private val mealType: Int) : ViewModel() {
     private val userId: Int = SharedPreferencesManager.getString("UserID", "-1")!!.toInt()
@@ -59,23 +63,33 @@ class AddItemViewModel(private val index: Int, private val mealType: Int) : View
         if (currentFood == null || isError.value) return // Прерываем, если есть ошибка или продукт не загружен
 
         val weight = weightState.value.toFloatOrNull() ?: 0f
-        val adjustedCalories = currentFood.calories * (weight / 100)
-        val adjustedProtein = currentFood.protein * (weight / 100)
-        val adjustedFats = currentFood.fat * (weight / 100)
-        val adjustedCarbs = currentFood.carb * (weight / 100)
+        val quantity = weight.toInt() // Преобразуем вес в целое число для запроса
 
-        val meal = Meal(
-            id = 0, // ID сгенерируется в репозитории
-            mealType = mealType,
-            name = currentFood.name,
-            calories = adjustedCalories,
-            carbs = adjustedCarbs,
-            fats = adjustedFats,
-            protein = adjustedProtein,
-            quantity = weight,
-            date = Date()
+        // Получаем текущую дату в формате yyyy-MM-dd
+        val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val currentDate = dateFormatter.format(Date())
+
+        // Создаем запрос для добавления приема пищи
+        val addMealRequest = AddMealRequest(
+            user_id = userId,
+            food_id = currentFood.id,
+            quantity = quantity,
+            date = currentDate,
+            part_of_the_day = mealType // Используем mealType как part_of_the_day
         )
-        // MealRepository.addMeal(userId, meal) - Добавление логики для MealRepository позже
+
+        viewModelScope.launch {
+            try {
+                val success = MealRepository.addMeal(addMealRequest)
+                if (success) {
+                    println("Прием пищи успешно добавлен")
+                } else {
+                    println("Не удалось добавить прием пищи")
+                }
+            } catch (e: Exception) {
+                println("Ошибка при добавлении приема пищи: ${e.message}")
+            }
+        }
     }
 
     fun updateWeight(input: String) {
