@@ -102,14 +102,6 @@ with app.app_context():
     db.session.add_all(users)
     db.session.commit()
 
-    # 2. Add Foods
-    foods = [
-        Food(name="Chicken Breast", calories=165, protein=31, fats=3.6, carbs=0, description="Grilled chicken breast"),
-        Food(name="Brown Rice", calories=215, protein=5, fats=1.8, carbs=45, description="Cooked brown rice"),
-        Food(name="Apple", calories=95, protein=0.5, fats=0.3, carbs=25, description="Fresh apple"),
-        Food(name="Broccoli", calories=55, protein=3.7, fats=0.6, carbs=11, description="Steamed broccoli"),
-        Food(name="Cheddar Cheese", calories=110, protein=7, fats=9, carbs=1, description="Cheddar cheese slice")
-    ]
 
     # Add foods to the session
     db.session.add_all(foods)
