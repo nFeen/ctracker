@@ -103,21 +103,4 @@ with app.app_context():
     db.session.commit()
 
 
-    # Add foods to the session
-    db.session.add_all(foods)
-    db.session.commit()
-
-    # 3. Add Meals
-    meals = [
-        Meal(user_id=1, date='2024-11-15', part_of_the_day=0, food_id=1, quantity=100, calories=165, protein=31, carbs=0, fats=3.6),
-        Meal(user_id=1, date='2024-11-15', part_of_the_day=1, food_id=2, quantity=100, calories=215, protein=5, carbs=45, fats=1.8),
-        Meal(user_id=2, date='2024-11-15', part_of_the_day=2, food_id=3, quantity=200, calories=190, protein=1, carbs=50, fats=0.6),
-        Meal(user_id=3, date='2024-11-15', part_of_the_day=3, food_id=4, quantity=100, calories=55, protein=3.7, carbs=11, fats=0.6),
-        Meal(user_id=4, date='2024-11-16', part_of_the_day=0, food_id=5, quantity=300, calories=330, protein=21, carbs=3, fats=27)
-    ]
-
-    # Add meals to the session
-    db.session.add_all(meals)
-    db.session.commit()
-
     print("Database initialized with test data.")
