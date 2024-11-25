@@ -133,7 +133,7 @@ def food_list():
     if foods:
         result = [
             {
-                'food': food.name,
+                'name': food.name,
                 'food_id': food.food_id,
                 'calorie': food.calories,
                 'carbs': food.carbs,
@@ -152,7 +152,7 @@ def get_food_item():
     food = Food.query.get(food_id)
     if food:
         return jsonify({
-            'food': food.name,
+            'name': food.name,
             'food_id': food.food_id,
             'calorie': food.calories,
             'carbs': food.carbs,
