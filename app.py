@@ -69,7 +69,7 @@ def register():
     new_user = User(login=login, password_hash=password_hash, profile_pic=base64)
     db.session.add(new_user)
     db.session.commit()
-    return jsonify({"status": "User registered successfully"}), 200
+    return jsonify({'user_id': new_user.user_id})
 
 # Get User Profile
 @app.route('/user/getprofile', methods=['GET'])
@@ -276,6 +276,6 @@ def get_meal():
     else:
         return jsonify({"error": "Meal not found"}), 404
 
-  
+
 if __name__ == '__main__':
     app.run(host='10.8.0.2',port=5000,debug="true")
