@@ -252,6 +252,30 @@ def edit_calorieGoal():
         db.session.commit()
         return jsonify({"status": "calorieGoal updated successfully"}), 200
     abort(404)
+    
+@app.route('/meals/get_meal', methods=['GET'])
+def get_meal():
+    meal_id = request.args.get('meal_id')
+    if not meal_id:
+        return jsonify({"error": "meal_id parameter is required"}), 400
+
+    meal = Meal.query.get(meal_id)
+    if meal:
+        return jsonify({
+            'meal_id': meal.meal_id,
+            'user_id': meal.user_id,
+            'food_id': meal.food_id,
+            'quantity': meal.quantity,
+            'calories': meal.calories,
+            'protein': meal.protein,
+            'fats': meal.fats,
+            'carbs': meal.carbs,
+            'date': meal.date,
+            'part_of_the_day': meal.part_of_the_day
+        }), 200
+    else:
+        return jsonify({"error": "Meal not found"}), 404
+
   
 if __name__ == '__main__':
     app.run(host='10.8.0.2',port=5000,debug="true")
