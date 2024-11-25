@@ -126,7 +126,7 @@ def update_profile_picture():
     abort(404)
 
 # List Foods
-@app.route('/fooddb/foodlist', methods=['GET'])
+@app.route('/fooddb/search', methods=['GET'])
 def food_list():
     food_name = request.args.get('food')
     foods = Food.query.filter(Food.name.contains(food_name))
@@ -160,32 +160,6 @@ def get_food_item():
             'protein': food.protein
         })
     abort(404)
-    
-@app.route('/fooddb/search', methods=['GET'])
-def search_foods():
-    query = request.args.get('query', '').strip()
-    if not query:
-        return jsonify({"error": "Query parameter is required"}), 400
-
-    # Ищем записи, которые содержат строку запроса (регистр игнорируется)
-    foods = Food.query.filter(Food.name.ilike(f"%{query}%")).all()
-
-    if foods:
-        result = [
-            {
-                'food_id': food.food_id,
-                'name': food.name,
-                'calories': food.calories,
-                'protein': food.protein,
-                'fats': food.fats,
-                'carbs': food.carbs,
-                'description': food.description
-            }
-            for food in foods
-        ]
-        return jsonify(result), 200
-    else:
-        return jsonify({"message": "No foods found"}), 404
     
 # Add Meal
 @app.route('/meals/add_meal', methods=['POST'])
@@ -268,12 +242,16 @@ def edit_image():
         db.session.commit()
         return jsonify({"status": "Profile picture updated successfully"}), 200
     abort(404)
-
-@app.before_request
-def log_request_info():
-    if app.debug:  # Логирование только в режиме debug
-        print(f"Headers: {request.headers}")
-        print(f"Body: {request.get_data(as_text=True)}")
-        
+    
+@app.route('/user/caloriegoal', methods=['PATCH'])
+def edit_calorieGoal():
+    data = request.json
+    user = User.query.get(data['user_id'])
+    if user:
+        user.calorieGoal = data['caloriegoal']
+        db.session.commit()
+        return jsonify({"status": "calorieGoal updated successfully"}), 200
+    abort(404)
+  
 if __name__ == '__main__':
     app.run(host='10.8.0.2',port=5000,debug="true")

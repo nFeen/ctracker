@@ -58,7 +58,7 @@ with app.app_context():
     users = [
         User(
             login="user1",
-            password_hash=bcrypt.generate_password_hash("password1").decode('utf-8'),
+            password_hash=bcrypt.generate_password_hash("Password1").decode('utf-8'),
             weight=70.0,
             height=175,
             calorieGoal=2200,
