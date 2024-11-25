@@ -12,7 +12,10 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -192,11 +195,18 @@ fun ProductItem(product: Meal, onEditProductClick: (Int) -> Unit) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
+                var multiplier by remember { mutableStateOf(1f) }
                 Text(
                     text = product.name,
                     fontSize = 16.sp,
                     color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    onTextLayout = {
+                        if (it.hasVisualOverflow) {
+                            multiplier *= 0.99f // you can tune this constant
+                        }
+                    },
+                    maxLines = 2,
                 )
 
                 Text(

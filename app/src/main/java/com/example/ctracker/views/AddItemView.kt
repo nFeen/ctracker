@@ -64,7 +64,7 @@ fun AddItemView(viewModel: AddItemViewModel, navController: NavController) {
 @Composable
 fun AddItemContent(
     productName: String,
-    calories: Int,
+    calories: Float,
     protein: Float,
     fats: Float,
     carbs: Float,
@@ -277,7 +277,7 @@ fun PreviewAddItemContent() {
             CTrackerTheme {
                 AddItemContent(
                     productName = "Яблоко",
-                    calories = 52,
+                    calories = 52F,
                     protein = 0.3f,
                     fats = 0.2f,
                     carbs = 14f,
