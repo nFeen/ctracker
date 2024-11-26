@@ -15,8 +15,6 @@ from urllib.parse import urlencode, quote
 from requests_oauthlib import OAuth1Session
 
 # Добавьте ваши ключи аутентификации для FatSecret API
-CONSUMER_KEY = 'ваш_consumer_key'
-CONSUMER_SECRET = 'ваш_consumer_secret'
 
 app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -26,7 +24,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 with open('avatar_standart.txt') as file:
-    avatar_in_base64 = file.read()
+    avatar_base64 = file.read()
     
 # Загружаем переменные окружения из .env
 load_dotenv()
@@ -88,7 +86,7 @@ def register():
     if User.query.filter_by(login=login).first():
         abort(409)  # Conflict
     password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
-    new_user = User(login=login, password_hash=password_hash, profile_pic=base64)
+    new_user = User(login=login, password_hash=password_hash, profile_pic=avatar_base64)
     db.session.add(new_user)
     db.session.commit()
     return jsonify({'user_id': new_user.user_id})
@@ -198,7 +196,7 @@ def food_list():
     params = {
         "method": "foods.search",
         "format": "json",
-        "max_results" : 20,
+        "max_results" : 11,
         "search_expression": food_name,
         "oauth_consumer_key": FATSECRET_CONSUMER_KEY,
         "oauth_nonce": os.urandom(8).hex(),
@@ -384,11 +382,11 @@ def edit_meal():
         return jsonify({"status": "Meal updated successfully"}), 200
     abort(404)
 
-# Delete Meal
+# Get Meals by User, Date, and Part of Day
 @app.route('/meals/delete_meal', methods=['DELETE'])
 def delete_meal():
-    data = request.json
-    meal = Meal.query.get(data['meal_id'])
+    meal_id = request.args.get('meal_id')
+    meal = Meal.query.get(meal_id)
     if meal:
         db.session.delete(meal)
         db.session.commit()
@@ -441,4 +439,4 @@ def get_meal():
 
 
 if __name__ == '__main__':
-    app.run(host='10.8.0.2',port=5000,debug="true")
+    app.run(host='10.8.0.1',port=5000,debug="true")
