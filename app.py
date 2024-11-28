@@ -255,11 +255,10 @@ def food_list():
     # Параметры запроса
     search_url = "https://platform.fatsecret.com/rest/server.api"
     while total_results is None or (len(results) < 10 and page * 10 < total_results):
-        page += 1
         params = {
             "method": "foods.search",
             "format": "json",
-            "max_results" : 11,
+            "max_results" : 10,
             "page_number": page,
             "search_expression": food_name,
             "oauth_consumer_key": FATSECRET_CONSUMER_KEY,
@@ -268,6 +267,7 @@ def food_list():
             "oauth_timestamp": str(int(time.time())),
             "oauth_version": "1.0"
         }
+        page += 1
         # Генерация подписи для запроса
         base_string = "&".join(f"{key}={requests.utils.quote(str(value), safe='')}" for key, value in sorted(params.items()))
         signature_base_string = f"GET&{requests.utils.quote(search_url, safe='')}&{requests.utils.quote(base_string, safe='')}"
@@ -365,6 +365,7 @@ def food_list():
                     'fats': existing_food.fats if existing_food else round(fats, 2),
                     'protein': existing_food.protein if existing_food else round(protein, 2)
                 })
+    print(page, unique_names)
     return jsonify(results), 200
 
 # Get Food Item by ID
