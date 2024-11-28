@@ -1,0 +1,1695 @@
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://10.8.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 103-985-670
+10.8.0.3 - - [25/Nov/2024 23:33:22] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:98: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  user = User.query.get(user_id)
+10.8.0.3 - - [25/Nov/2024 23:33:23] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:313: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  food = Food.query.get(food_id)
+10.8.0.3 - - [25/Nov/2024 23:33:25] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:33:30] "GET /fooddb/search?food=cheese%20 HTTP/1.1" 200 -
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://10.8.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 103-985-670
+10.8.0.3 - - [25/Nov/2024 23:35:22] "GET /fooddb/search?food=cheese HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:313: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  food = Food.query.get(food_id)
+10.8.0.3 - - [25/Nov/2024 23:35:28] "GET /fooddb/get_item?food_id=1240 HTTP/1.1" 200 -
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://10.8.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 103-985-670
+10.8.0.3 - - [25/Nov/2024 23:37:18] "GET /fooddb/search?food=cheese HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:37:26] "GET /fooddb/search?food=Apple%20 HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:313: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  food = Food.query.get(food_id)
+10.8.0.3 - - [25/Nov/2024 23:37:30] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:330: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  user = User.query.get(user_id)
+/home/anton/ctracker/app.py:333: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  food = Food.query.get(food_id)
+10.8.0.3 - - [25/Nov/2024 23:37:34] "POST /meals/add_meal HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:37:34] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:98: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  user = User.query.get(user_id)
+10.8.0.3 - - [25/Nov/2024 23:37:34] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:37:34] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:37:35] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:37:40] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:37:40] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:37:40] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:37:40] "[33mGET /meals/meals?user_id=1&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [25/Nov/2024 23:37:41] "[33mGET /meals/meals?user_id=1&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [25/Nov/2024 23:37:41] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:37:41] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:37:41] "[33mGET /meals/meals?user_id=1&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [25/Nov/2024 23:37:41] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:37:41] "[33mGET /meals/meals?user_id=1&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [25/Nov/2024 23:37:41] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:37:42] "[33mGET /meals/meals?user_id=1&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [25/Nov/2024 23:37:42] "[33mGET /meals/meals?user_id=1&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [25/Nov/2024 23:37:49] "GET /fooddb/search?food=taci HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:37:55] "GET /fooddb/get_item?food_id=296432 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:45:54] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:45:54] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:45:56] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:45:56] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:45:56] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:45:56] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:45:57] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:45:57] "[33mGET /meals/meals?user_id=1&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [25/Nov/2024 23:45:57] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:45:57] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:45:57] "[33mGET /meals/meals?user_id=1&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [25/Nov/2024 23:45:57] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:45:58] "[33mGET /meals/meals?user_id=1&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [25/Nov/2024 23:45:58] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [25/Nov/2024 23:45:58] "[33mGET /meals/meals?user_id=1&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [25/Nov/2024 23:45:58] "[33mGET /meals/meals?user_id=1&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [25/Nov/2024 23:45:58] "[33mGET /meals/meals?user_id=1&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:46:00] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:46:00] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:46:01] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:46:01] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:46:03] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:46:03] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:46:03] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:46:03] "[33mGET /meals/meals?user_id=1&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:46:03] "[33mGET /meals/meals?user_id=1&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:46:03] "[33mGET /meals/meals?user_id=1&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:46:03] "[33mGET /meals/meals?user_id=1&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:46:04] "[33mGET /meals/meals?user_id=1&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:46:04] "[33mGET /meals/meals?user_id=1&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:46:56] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:46:56] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:46:56] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:46:57] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:46:58] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:46:58] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:46:58] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:46:58] "[33mGET /meals/meals?user_id=1&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:46:58] "[33mGET /meals/meals?user_id=1&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:46:58] "[33mGET /meals/meals?user_id=1&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:46:58] "[33mGET /meals/meals?user_id=1&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:46:59] "[33mGET /meals/meals?user_id=1&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:46:59] "[33mGET /meals/meals?user_id=1&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:47:14] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:14] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:14] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:14] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:25] "GET /fooddb/search?food=яйцо HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:27] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:27] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:27] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:27] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:38] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:38] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:38] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:39] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:48] "GET /fooddb/search?food=яйцо HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:49] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:49] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:50] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:50] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:50] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:50] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:50] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:50] "[33mGET /meals/meals?user_id=1&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:47:51] "[33mGET /meals/meals?user_id=1&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:47:51] "[33mGET /meals/meals?user_id=1&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:47:51] "[33mGET /meals/meals?user_id=1&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:47:51] "[33mGET /meals/meals?user_id=1&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:47:51] "[33mGET /meals/meals?user_id=1&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:47:52] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:52] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:52] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:52] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:58] "GET /fooddb/search?food=гречка HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:59] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:59] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:59] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:47:59] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:49:05] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:49:05] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:49:05] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:49:05] "[33mGET /meals/meals?user_id=1&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:49:06] "[33mGET /meals/meals?user_id=1&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:49:06] "[33mGET /meals/meals?user_id=1&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:49:06] "[33mGET /meals/meals?user_id=1&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:49:06] "[33mGET /meals/meals?user_id=1&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:49:06] "[33mGET /meals/meals?user_id=1&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:54:22] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:54:22] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:54:22] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:54:22] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:54:28] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:54:28] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:54:28] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [25/Nov/2024 23:54:28] "[33mGET /meals/meals?user_id=1&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:54:28] "[33mGET /meals/meals?user_id=1&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:54:28] "[33mGET /meals/meals?user_id=1&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:54:28] "[33mGET /meals/meals?user_id=1&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:54:28] "[33mGET /meals/meals?user_id=1&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:54:29] "[33mGET /meals/meals?user_id=1&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [25/Nov/2024 23:56:02] "[35m[1mPOST /user/register HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.ProgrammingError: Error binding parameter 6: type 'module' is not supported
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/app.py", line 91, in register
+    db.session.commit()
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4352, in flush
+    self._flush(objects)
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4487, in _flush
+    with util.safe_reraise():
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4448, in _flush
+    flush_context.execute()
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (sqlite3.ProgrammingError) Error binding parameter 6: type 'module' is not supported
+[SQL: INSERT INTO "Users" (login, password_hash, weight, height, "calorieGoal", profile_pic) VALUES (?, ?, ?, ?, ?, ?)]
+[parameters: ('Nas.Bauer2004', '$2b$12$RstWoVUoDJ7N9ZYxXRQw.Og6aVmSUx.eg9ARpHzeecmppzuBCe/6e', None, None, 2000, <module 'base64' from '/usr/lib/python3.11/base64.py'>)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+10.8.0.14 - - [25/Nov/2024 23:56:28] "[35m[1mPOST /user/register HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.ProgrammingError: Error binding parameter 6: type 'module' is not supported
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/app.py", line 91, in register
+    db.session.commit()
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4352, in flush
+    self._flush(objects)
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4487, in _flush
+    with util.safe_reraise():
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4448, in _flush
+    flush_context.execute()
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (sqlite3.ProgrammingError) Error binding parameter 6: type 'module' is not supported
+[SQL: INSERT INTO "Users" (login, password_hash, weight, height, "calorieGoal", profile_pic) VALUES (?, ?, ?, ?, ?, ?)]
+[parameters: ('Nas.Bauer2004', '$2b$12$6a094q2/R0x/yAM8U26ppeqTSDAAkzZnEepOxpwXWwSAcaE1oX0Z2', None, None, 2000, <module 'base64' from '/usr/lib/python3.11/base64.py'>)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+10.8.0.14 - - [25/Nov/2024 23:56:49] "[35m[1mPOST /user/register HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.ProgrammingError: Error binding parameter 6: type 'module' is not supported
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/app.py", line 91, in register
+    db.session.commit()
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4352, in flush
+    self._flush(objects)
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4487, in _flush
+    with util.safe_reraise():
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4448, in _flush
+    flush_context.execute()
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (sqlite3.ProgrammingError) Error binding parameter 6: type 'module' is not supported
+[SQL: INSERT INTO "Users" (login, password_hash, weight, height, "calorieGoal", profile_pic) VALUES (?, ?, ?, ?, ?, ?)]
+[parameters: ('NasBauer2004', '$2b$12$9wCHWgQHqQNuxHgG2bVuGumx6CaO47XnYHnV9GB0W1bEYoOg8J/dq', None, None, 2000, <module 'base64' from '/usr/lib/python3.11/base64.py'>)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ * Detected change in '/home/anton/ctracker/app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 103-985-670
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://10.8.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 755-298-768
+10.8.0.3 - - [26/Nov/2024 00:00:04] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:98: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  user = User.query.get(user_id)
+10.8.0.3 - - [26/Nov/2024 00:00:04] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:313: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  food = Food.query.get(food_id)
+10.8.0.3 - - [26/Nov/2024 00:00:04] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:00:04] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:00:05] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:00:05] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:00:05] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:00:06] "[33mGET /meals/meals?user_id=1&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:00:06] "[33mGET /meals/meals?user_id=1&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:00:06] "[33mGET /meals/meals?user_id=1&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:00:06] "[33mGET /meals/meals?user_id=1&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:00:06] "[33mGET /meals/meals?user_id=1&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:00:06] "[33mGET /meals/meals?user_id=1&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:00:09] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:00:09] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:00:09] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:00:10] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:00:11] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:00:11] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:00:11] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:00:11] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:03:55] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:03:55] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:03:55] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:03:55] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:03:57] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:03:57] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:03:57] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:03:57] "[33mGET /meals/meals?user_id=1&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:03:57] "[33mGET /meals/meals?user_id=1&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:03:57] "[33mGET /meals/meals?user_id=1&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:03:57] "[33mGET /meals/meals?user_id=1&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:03:58] "[33mGET /meals/meals?user_id=1&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:03:58] "[33mGET /meals/meals?user_id=1&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:04:56] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:04:56] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:05:27] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:05:27] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:05:28] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:05:28] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:05:53] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:05:53] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:05:53] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:05:54] "[33mGET /meals/meals?user_id=1&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:05:54] "[33mGET /meals/meals?user_id=1&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:05:54] "[33mGET /meals/meals?user_id=1&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:05:54] "[33mGET /meals/meals?user_id=1&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:05:54] "[33mGET /meals/meals?user_id=1&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:05:54] "[33mGET /meals/meals?user_id=1&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:06:05] "GET /user/login?login=user1&password=Password1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:06:05] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:06:05] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:06:05] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:06:06] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.14 - - [26/Nov/2024 00:06:32] "[35m[1mPOST /user/register HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/app.py", line 89, in register
+    new_user = User(login=login, password_hash=password_hash, profile_pic=avatar_base64)
+                                                                          ^^^^^^^^^^^^^^
+NameError: name 'avatar_base64' is not defined
+10.8.0.3 - - [26/Nov/2024 00:06:41] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:06:41] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:06:42] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:06:42] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.14 - - [26/Nov/2024 00:07:06] "[35m[1mPOST /user/register HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/app.py", line 89, in register
+    new_user = User(login=login, password_hash=password_hash, profile_pic=avatar_base64)
+                                                                          ^^^^^^^^^^^^^^
+NameError: name 'avatar_base64' is not defined
+ * Detected change in '/home/anton/ctracker/app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 755-298-768
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://10.8.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 755-298-768
+10.8.0.14 - - [26/Nov/2024 00:07:16] "POST /user/register HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:98: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  user = User.query.get(user_id)
+10.8.0.14 - - [26/Nov/2024 00:07:16] "GET /user/getprofile?user_id=6 HTTP/1.1" 200 -
+10.8.0.14 - - [26/Nov/2024 00:07:16] "[33mGET /meals/meals?user_id=6&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [26/Nov/2024 00:07:18] "GET /user/getprofile?user_id=6 HTTP/1.1" 200 -
+10.8.0.14 - - [26/Nov/2024 00:07:18] "[33mGET /meals/meals?user_id=6&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [26/Nov/2024 00:07:18] "[33mGET /meals/meals?user_id=6&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [26/Nov/2024 00:07:18] "[33mGET /meals/meals?user_id=6&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [26/Nov/2024 00:07:18] "[33mGET /meals/meals?user_id=6&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [26/Nov/2024 00:07:18] "[33mGET /meals/meals?user_id=6&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [26/Nov/2024 00:07:18] "[33mGET /meals/meals?user_id=6&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [26/Nov/2024 00:07:18] "[33mGET /meals/meals?user_id=6&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [26/Nov/2024 00:07:19] "[33mGET /meals/meals?user_id=6&date=2024-11-20 HTTP/1.1[0m" 404 -
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://10.8.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 755-298-768
+/home/anton/ctracker/app.py:141: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  user = User.query.get(user_id)
+10.8.0.14 - - [26/Nov/2024 00:08:39] "PATCH /user/profile_picture HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:98: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  user = User.query.get(user_id)
+10.8.0.14 - - [26/Nov/2024 00:08:53] "GET /user/getprofile?user_id=6 HTTP/1.1" 200 -
+10.8.0.14 - - [26/Nov/2024 00:08:53] "[33mGET /meals/meals?user_id=6&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [26/Nov/2024 00:09:06] "GET /fooddb/search?food=egg HTTP/1.1" 200 -
+10.8.0.14 - - [26/Nov/2024 00:09:31] "[33mGET /meals/meals?user_id=6&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [26/Nov/2024 00:09:31] "GET /user/getprofile?user_id=6 HTTP/1.1" 200 -
+10.8.0.14 - - [26/Nov/2024 00:09:33] "GET /user/getprofile?user_id=6 HTTP/1.1" 200 -
+10.8.0.14 - - [26/Nov/2024 00:09:33] "[33mGET /meals/meals?user_id=6&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [26/Nov/2024 00:09:33] "[33mGET /meals/meals?user_id=6&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [26/Nov/2024 00:09:34] "[33mGET /meals/meals?user_id=6&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [26/Nov/2024 00:09:34] "[33mGET /meals/meals?user_id=6&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [26/Nov/2024 00:09:34] "[33mGET /meals/meals?user_id=6&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [26/Nov/2024 00:09:34] "[33mGET /meals/meals?user_id=6&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [26/Nov/2024 00:09:34] "[33mGET /meals/meals?user_id=6&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [26/Nov/2024 00:09:34] "[33mGET /meals/meals?user_id=6&date=2024-11-20 HTTP/1.1[0m" 404 -
+/home/anton/ctracker/app.py:115: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  user = User.query.get(user_id)
+10.8.0.14 - - [26/Nov/2024 00:09:47] "PATCH /user/weight HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:128: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  user = User.query.get(user_id)
+10.8.0.14 - - [26/Nov/2024 00:09:51] "PATCH /user/height HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:410: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  user = User.query.get(data['user_id'])
+10.8.0.14 - - [26/Nov/2024 00:10:00] "PATCH /user/caloriegoal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:10:15] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:10:15] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:313: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  food = Food.query.get(food_id)
+10.8.0.3 - - [26/Nov/2024 00:10:15] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:10:15] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:11:01] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:11:01] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:11:01] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:11:02] "[33mGET /meals/meals?user_id=1&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:11:02] "[33mGET /meals/meals?user_id=1&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:11:02] "[33mGET /meals/meals?user_id=1&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:11:02] "[33mGET /meals/meals?user_id=1&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:11:02] "[33mGET /meals/meals?user_id=1&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:11:02] "[33mGET /meals/meals?user_id=1&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:11:09] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:11:09] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:11:09] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:11:09] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:11:54] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:11:54] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:11:55] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:11:55] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:13:24] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:13:24] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:13:24] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:13:24] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.14 - - [26/Nov/2024 00:14:05] "GET /user/getprofile?user_id=6 HTTP/1.1" 200 -
+10.8.0.14 - - [26/Nov/2024 00:14:05] "[33mGET /meals/meals?user_id=6&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.14 - - [26/Nov/2024 00:14:40] "GET /fooddb/search?food=burger%20 HTTP/1.1" 200 -
+10.8.0.14 - - [26/Nov/2024 00:14:44] "GET /fooddb/get_item?food_id=39926 HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:330: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  user = User.query.get(user_id)
+/home/anton/ctracker/app.py:333: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  food = Food.query.get(food_id)
+10.8.0.14 - - [26/Nov/2024 00:14:50] "POST /meals/add_meal HTTP/1.1" 200 -
+10.8.0.14 - - [26/Nov/2024 00:14:50] "GET /meals/meals?user_id=6&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.14 - - [26/Nov/2024 00:14:50] "GET /user/getprofile?user_id=6 HTTP/1.1" 200 -
+10.8.0.14 - - [26/Nov/2024 00:14:50] "GET /fooddb/get_item?food_id=39926 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:25:53] "GET /user/login?login=user1&password=Password1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:25:54] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:25:54] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:25:54] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:25:54] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:36] "GET /user/login?login=user1&password=Password1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:36] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:36] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:36] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:36] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:38] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:38] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:38] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:38] "[33mGET /meals/meals?user_id=1&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:27:38] "[33mGET /meals/meals?user_id=1&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:27:38] "[33mGET /meals/meals?user_id=1&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:27:38] "[33mGET /meals/meals?user_id=1&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:27:38] "[33mGET /meals/meals?user_id=1&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:27:38] "[33mGET /meals/meals?user_id=1&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:27:39] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:39] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:39] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:39] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:46] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:46] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:46] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:46] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:47] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:47] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:47] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:47] "[33mGET /meals/meals?user_id=1&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:27:47] "[33mGET /meals/meals?user_id=1&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:27:48] "[33mGET /meals/meals?user_id=1&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:27:48] "[33mGET /meals/meals?user_id=1&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:27:48] "[33mGET /meals/meals?user_id=1&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:27:48] "[33mGET /meals/meals?user_id=1&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:27:53] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:53] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:53] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:27:53] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:28:05] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:28:05] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:28:06] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:28:06] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:29:12] "POST /user/register HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:29:12] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:29:12] "[33mGET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:29:14] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:29:14] "[33mGET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:29:14] "[33mGET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:29:14] "[33mGET /meals/meals?user_id=7&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:29:14] "[33mGET /meals/meals?user_id=7&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:29:14] "[33mGET /meals/meals?user_id=7&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:29:14] "[33mGET /meals/meals?user_id=7&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:29:14] "[33mGET /meals/meals?user_id=7&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:29:15] "[33mGET /meals/meals?user_id=7&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:29:15] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:29:15] "[33mGET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 00:29:18] "GET /fooddb/search?food=apple HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:29:20] "GET /fooddb/search?food=egg HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:29:27] "GET /fooddb/get_item?food_id=3092 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:29:31] "GET /fooddb/search?food=egg HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 00:29:32] "GET /fooddb/get_item?food_id=3092 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:35] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:35] "[33mGET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 10:23:38] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:38] "[33mGET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 10:23:38] "[33mGET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 10:23:38] "[33mGET /meals/meals?user_id=7&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 10:23:38] "[33mGET /meals/meals?user_id=7&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 10:23:38] "[33mGET /meals/meals?user_id=7&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 10:23:38] "[33mGET /meals/meals?user_id=7&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 10:23:39] "[33mGET /meals/meals?user_id=7&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 10:23:39] "[33mGET /meals/meals?user_id=7&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 10:23:39] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:39] "[33mGET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 10:23:44] "GET /fooddb/search?food=bebra HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:46] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:47] "POST /meals/add_meal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:47] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:47] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:47] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:50] "GET /fooddb/search?food=apple HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:52] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:53] "POST /meals/add_meal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:53] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:53] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:54] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:54] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:54] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:54] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:54] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:23:55] "[33mGET /meals/meals?user_id=7&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 10:23:55] "[33mGET /meals/meals?user_id=7&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 10:23:55] "[33mGET /meals/meals?user_id=7&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 10:23:55] "[33mGET /meals/meals?user_id=7&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 10:23:55] "[33mGET /meals/meals?user_id=7&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 10:23:55] "[33mGET /meals/meals?user_id=7&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 10:24:00] "PATCH /user/caloriegoal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:24:03] "PATCH /user/caloriegoal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:24:09] "PATCH /user/caloriegoal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:24:11] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:24:11] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:24:11] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:24:11] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:24:13] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:24:13] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:24:13] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 10:24:14] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:09:58] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:09:58] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:09:58] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:09:58] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:10:02] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:10:02] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:10:02] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:10:02] "[33mGET /meals/meals?user_id=7&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 12:10:02] "[33mGET /meals/meals?user_id=7&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 12:10:02] "[33mGET /meals/meals?user_id=7&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 12:10:03] "[33mGET /meals/meals?user_id=7&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 12:10:03] "[33mGET /meals/meals?user_id=7&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 12:10:03] "[33mGET /meals/meals?user_id=7&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 12:10:04] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:10:04] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:10:04] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:10:04] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:10:04] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:10:04] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:10:05] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:10:05] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:10:05] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:10:05] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:10:05] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 12:10:05] "[33mGET /meals/meals?user_id=7&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 12:10:05] "[33mGET /meals/meals?user_id=7&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 12:10:05] "[33mGET /meals/meals?user_id=7&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 12:10:05] "[33mGET /meals/meals?user_id=7&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 12:10:05] "[33mGET /meals/meals?user_id=7&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 12:10:06] "[33mGET /meals/meals?user_id=7&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 12:10:11] "PATCH /user/profile_picture HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:11:49] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:11:49] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:11:49] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:11:49] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:423: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  meal = Meal.query.get(meal_id)
+10.8.0.3 - - [26/Nov/2024 17:11:51] "GET /meals/get_meal?meal_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:11:52] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:378: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  meal = Meal.query.get(data['meal_id'])
+10.8.0.3 - - [26/Nov/2024 17:12:14] "PATCH /meals/edit_meal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:14] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:14] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:14] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:14] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:16] "GET /meals/get_meal?meal_id=9 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:16] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:19] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:19] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:19] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:20] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:21] "GET /meals/get_meal?meal_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:21] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:22] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:22] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:22] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:22] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:26] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:26] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:26] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:26] "[33mGET /meals/meals?user_id=7&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 17:12:26] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:26] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:26] "[33mGET /meals/meals?user_id=7&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 17:12:26] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:26] "[33mGET /meals/meals?user_id=7&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 17:12:27] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:27] "[33mGET /meals/meals?user_id=7&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 17:12:27] "[33mGET /meals/meals?user_id=7&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 17:12:27] "[33mGET /meals/meals?user_id=7&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 17:12:28] "GET /meals/get_meal?meal_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:28] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:30] "GET /meals/get_meal?meal_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:30] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:31] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:31] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:31] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:12:32] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:13:27] "GET /meals/get_meal?meal_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:13:27] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:13:47] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:13:47] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:13:48] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:13:48] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:15:06] "GET /meals/get_meal?meal_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:15:06] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:15:07] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:15:07] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:15:07] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:15:07] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:16:43] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:16:43] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:16:43] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:16:43] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:16:45] "GET /meals/get_meal?meal_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:16:46] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:16:48] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:16:48] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:16:48] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:16:48] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:17:09] "GET /meals/get_meal?meal_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:17:09] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:17:11] "PATCH /meals/edit_meal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:17:11] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:17:11] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:17:11] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:17:11] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:17:55] "GET /meals/get_meal?meal_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:17:55] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:17:59] "PATCH /meals/edit_meal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:17:59] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:17:59] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:17:59] "GET /fooddb/get_item?food_id=12189363 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:17:59] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:01] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:01] "GET /user/getprofile?user_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:01] "GET /meals/meals?user_id=7&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:01] "[33mGET /meals/meals?user_id=7&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 17:18:02] "[33mGET /meals/meals?user_id=7&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 17:18:02] "[33mGET /meals/meals?user_id=7&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 17:18:02] "[33mGET /meals/meals?user_id=7&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 17:18:02] "[33mGET /meals/meals?user_id=7&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 17:18:02] "[33mGET /meals/meals?user_id=7&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 17:18:10] "GET /user/login?login=user1&password=Password1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:10] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:10] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:10] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:10] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:11] "GET /meals/get_meal?meal_id=6 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:12] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:16] "PATCH /meals/edit_meal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:16] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:16] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:16] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:16] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:19] "GET /meals/get_meal?meal_id=6 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:19] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:20] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:20] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:20] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:20] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:23] "GET /meals/get_meal?meal_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:23] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:26] "PATCH /meals/edit_meal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:26] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:26] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:26] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:26] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:28] "GET /meals/get_meal?meal_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:28] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:28] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:28] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:29] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:29] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:30] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:30] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:30] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:30] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:30] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:30] "[33mGET /meals/meals?user_id=1&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 17:18:31] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:31] "[33mGET /meals/meals?user_id=1&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 17:18:31] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:31] "[33mGET /meals/meals?user_id=1&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 17:18:31] "[33mGET /meals/meals?user_id=1&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 17:18:31] "[33mGET /meals/meals?user_id=1&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 17:18:31] "[33mGET /meals/meals?user_id=1&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 17:18:32] "GET /meals/get_meal?meal_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:32] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:33] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:33] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:33] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:33] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:34] "GET /meals/get_meal?meal_id=6 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:35] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:37] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:37] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:37] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:38] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:40] "GET /meals/get_meal?meal_id=7 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:40] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:41] "GET /meals/get_meal?meal_id=6 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:42] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:44] "PATCH /meals/edit_meal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:44] "GET /meals/meals?user_id=1&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:44] "GET /user/getprofile?user_id=1 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:44] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 17:18:44] "GET /fooddb/get_item?food_id=561206 HTTP/1.1" 200 -
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://10.8.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 143-855-656
+10.8.0.3 - - [26/Nov/2024 19:28:03] "POST /user/register HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:98: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  user = User.query.get(user_id)
+10.8.0.3 - - [26/Nov/2024 19:28:04] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:28:04] "[33mGET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:28:16] "GET /user/login?login=admin&password=admin111 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:28:17] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:28:17] "[33mGET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:28:21] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:28:21] "[33mGET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:28:21] "[33mGET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:28:21] "[33mGET /meals/meals?user_id=8&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:28:21] "[33mGET /meals/meals?user_id=8&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:28:21] "[33mGET /meals/meals?user_id=8&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:28:21] "[33mGET /meals/meals?user_id=8&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:28:21] "[33mGET /meals/meals?user_id=8&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:28:21] "[33mGET /meals/meals?user_id=8&date=2024-11-20 HTTP/1.1[0m" 404 -
+/home/anton/ctracker/app.py:141: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  user = User.query.get(user_id)
+10.8.0.3 - - [26/Nov/2024 19:28:29] "PATCH /user/profile_picture HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:115: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  user = User.query.get(user_id)
+10.8.0.3 - - [26/Nov/2024 19:28:35] "PATCH /user/weight HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:128: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  user = User.query.get(user_id)
+10.8.0.3 - - [26/Nov/2024 19:28:39] "PATCH /user/height HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:410: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  user = User.query.get(data['user_id'])
+10.8.0.3 - - [26/Nov/2024 19:28:50] "PATCH /user/caloriegoal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:28:51] "[33mGET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:28:51] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:28:53] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:28:53] "[33mGET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:29:05] "GET /fooddb/search?food=a HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:313: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  food = Food.query.get(food_id)
+10.8.0.3 - - [26/Nov/2024 19:29:13] "GET /fooddb/get_item?food_id=3178 HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:330: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  user = User.query.get(user_id)
+/home/anton/ctracker/app.py:333: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  food = Food.query.get(food_id)
+10.8.0.3 - - [26/Nov/2024 19:29:20] "POST /meals/add_meal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:29:20] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:29:20] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:29:21] "GET /fooddb/get_item?food_id=3178 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:29:22] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:29:22] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:29:22] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:29:22] "[33mGET /meals/meals?user_id=8&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:29:22] "[33mGET /meals/meals?user_id=8&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:29:22] "[33mGET /meals/meals?user_id=8&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:29:22] "[33mGET /meals/meals?user_id=8&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:29:22] "[33mGET /meals/meals?user_id=8&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:29:23] "[33mGET /meals/meals?user_id=8&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:30:01] "PATCH /user/caloriegoal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:30:12] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:30:12] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:30:12] "GET /fooddb/get_item?food_id=3178 HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:423: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  meal = Meal.query.get(meal_id)
+10.8.0.3 - - [26/Nov/2024 19:30:16] "GET /meals/get_meal?meal_id=11 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:30:16] "GET /fooddb/get_item?food_id=3178 HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:389: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  meal = Meal.query.get(meal_id)
+10.8.0.3 - - [26/Nov/2024 19:30:18] "DELETE /meals/delete_meal?meal_id=11 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:30:18] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:30:18] "[33mGET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:30:23] "GET /fooddb/search?food=a HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:30:25] "GET /fooddb/get_item?food_id=3156 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:30:27] "POST /meals/add_meal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:30:27] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:30:27] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:30:27] "GET /fooddb/get_item?food_id=3156 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:30:32] "GET /fooddb/search?food=f HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:30:35] "GET /fooddb/search?food=cum HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:31:08] "GET /fooddb/get_item?food_id=21617005 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:31:10] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:31:10] "POST /meals/add_meal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:31:10] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:31:10] "GET /fooddb/get_item?food_id=3156 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:31:10] "GET /fooddb/get_item?food_id=21617005 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:31:23] "GET /fooddb/search?food=pee HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:31:28] "GET /fooddb/search?food=poop HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:31:33] "GET /fooddb/search?food=human HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:31:38] "GET /fooddb/get_item?food_id=792 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:31:50] "POST /meals/add_meal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:31:50] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:31:50] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:31:50] "GET /fooddb/get_item?food_id=3156 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:31:50] "GET /fooddb/get_item?food_id=21617005 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:31:50] "GET /fooddb/get_item?food_id=792 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:02] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:02] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:02] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:02] "[33mGET /meals/meals?user_id=8&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:32:02] "[33mGET /meals/meals?user_id=8&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:32:02] "[33mGET /meals/meals?user_id=8&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:32:02] "[33mGET /meals/meals?user_id=8&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:32:02] "[33mGET /meals/meals?user_id=8&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:32:02] "[33mGET /meals/meals?user_id=8&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:32:06] "PATCH /user/caloriegoal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:16] "PATCH /user/caloriegoal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:20] "PATCH /user/caloriegoal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:24] "PATCH /user/caloriegoal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:31] "PATCH /user/caloriegoal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:43] "PATCH /user/caloriegoal HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:49] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:49] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:50] "GET /fooddb/get_item?food_id=3156 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:50] "GET /fooddb/get_item?food_id=21617005 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:50] "GET /fooddb/get_item?food_id=792 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:51] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:51] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:51] "GET /fooddb/get_item?food_id=3156 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:52] "GET /fooddb/get_item?food_id=21617005 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:52] "GET /fooddb/get_item?food_id=792 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:52] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:52] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:53] "GET /fooddb/get_item?food_id=3156 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:53] "GET /fooddb/get_item?food_id=21617005 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:53] "GET /fooddb/get_item?food_id=792 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:53] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:53] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:53] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:32:54] "[33mGET /meals/meals?user_id=8&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:32:54] "[33mGET /meals/meals?user_id=8&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:32:54] "[33mGET /meals/meals?user_id=8&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:32:54] "[33mGET /meals/meals?user_id=8&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:32:54] "[33mGET /meals/meals?user_id=8&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:32:54] "[33mGET /meals/meals?user_id=8&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:34:28] "GET /user/login?login=admin&password=admin111 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:34:29] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:34:29] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:34:29] "GET /fooddb/get_item?food_id=3156 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:34:29] "GET /fooddb/get_item?food_id=21617005 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:34:29] "GET /fooddb/get_item?food_id=792 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:35:09] "[31m[1mPOST /user/register HTTP/1.1[0m" 409 -
+10.8.0.3 - - [26/Nov/2024 19:35:38] "GET /user/login?login=admin&password=admin111 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:35:39] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:35:39] "GET /fooddb/get_item?food_id=3156 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:35:39] "GET /fooddb/get_item?food_id=21617005 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:35:39] "GET /fooddb/get_item?food_id=792 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:35:40] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:36:14] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:36:14] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:36:14] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:36:14] "[33mGET /meals/meals?user_id=8&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:36:14] "[33mGET /meals/meals?user_id=8&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:36:14] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:36:14] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:36:14] "[33mGET /meals/meals?user_id=8&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:36:14] "GET /fooddb/get_item?food_id=3156 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:36:14] "[33mGET /meals/meals?user_id=8&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:36:14] "GET /fooddb/get_item?food_id=21617005 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:36:14] "GET /fooddb/get_item?food_id=792 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 19:36:14] "[33mGET /meals/meals?user_id=8&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 19:36:14] "[33mGET /meals/meals?user_id=8&date=2024-11-20 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 22:24:03] "[33mGET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 22:24:03] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 22:24:03] "[33mGET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 22:24:03] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [26/Nov/2024 22:24:04] "[33mGET /meals/meals?user_id=8&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 22:24:04] "[33mGET /meals/meals?user_id=8&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 22:24:04] "[33mGET /meals/meals?user_id=8&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 22:24:04] "[33mGET /meals/meals?user_id=8&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [26/Nov/2024 22:24:04] "[33mGET /meals/meals?user_id=8&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:41:36] "[33mGET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:41:36] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:41:40] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:41:40] "[33mGET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:41:40] "[33mGET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:41:40] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:41:40] "[33mGET /meals/meals?user_id=8&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:41:41] "[33mGET /meals/meals?user_id=8&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:41:41] "[33mGET /meals/meals?user_id=8&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:41:41] "[33mGET /meals/meals?user_id=8&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:41:41] "[33mGET /meals/meals?user_id=8&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:41:42] "[33mGET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:41:42] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:41:50] "GET /fooddb/search?food=appl HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:41:53] "GET /fooddb/get_item?food_id=32698754 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:41:54] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:41:54] "POST /meals/add_meal HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:41:54] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:41:54] "GET /fooddb/get_item?food_id=32698754 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:41:59] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:41:59] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:41:59] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:42:00] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:42:00] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:42:00] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:42:00] "[33mGET /meals/meals?user_id=8&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:42:00] "GET /fooddb/get_item?food_id=32698754 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:42:00] "[33mGET /meals/meals?user_id=8&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:42:01] "[33mGET /meals/meals?user_id=8&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:42:01] "[33mGET /meals/meals?user_id=8&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:42:01] "[33mGET /meals/meals?user_id=8&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:42:03] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:42:03] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:42:03] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:42:04] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:42:04] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:42:04] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:42:05] "[33mGET /meals/meals?user_id=8&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:42:05] "GET /fooddb/get_item?food_id=32698754 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:42:05] "[33mGET /meals/meals?user_id=8&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:42:05] "[33mGET /meals/meals?user_id=8&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:42:06] "[33mGET /meals/meals?user_id=8&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:42:06] "[33mGET /meals/meals?user_id=8&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:45:12] "POST /user/register HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:45:13] "[33mGET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:45:13] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:45:44] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:45:44] "[33mGET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:45:44] "[33mGET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:45:44] "[33mGET /meals/meals?user_id=9&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:45:44] "[33mGET /meals/meals?user_id=9&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:45:44] "[33mGET /meals/meals?user_id=9&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:45:44] "[33mGET /meals/meals?user_id=9&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:45:44] "[33mGET /meals/meals?user_id=9&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:45:44] "[33mGET /meals/meals?user_id=9&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:45:58] "PATCH /user/caloriegoal HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:46:05] "[33mGET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:46:05] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:46:08] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:46:08] "[33mGET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:46:08] "[33mGET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:46:08] "[33mGET /meals/meals?user_id=9&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:46:08] "[33mGET /meals/meals?user_id=9&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:46:08] "[33mGET /meals/meals?user_id=9&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:46:08] "[33mGET /meals/meals?user_id=9&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:46:08] "[33mGET /meals/meals?user_id=9&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:46:09] "[33mGET /meals/meals?user_id=9&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:51:43] "[33mGET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:51:43] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:51:46] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:51:46] "[33mGET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:52:40] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:52:40] "[33mGET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:52:40] "[33mGET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:52:41] "[33mGET /meals/meals?user_id=9&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:52:41] "[33mGET /meals/meals?user_id=9&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:52:42] "[33mGET /meals/meals?user_id=9&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:52:42] "[33mGET /meals/meals?user_id=9&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:52:42] "[33mGET /meals/meals?user_id=9&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:52:42] "[33mGET /meals/meals?user_id=9&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:53:44] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:53:44] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:53:44] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:53:44] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:53:45] "[33mGET /meals/meals?user_id=8&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:53:45] "[33mGET /meals/meals?user_id=8&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:53:45] "[33mGET /meals/meals?user_id=8&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:53:46] "[33mGET /meals/meals?user_id=8&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:53:46] "[33mGET /meals/meals?user_id=8&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:54:24] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:24] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:25] "GET /fooddb/get_item?food_id=32698754 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:25] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:25] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:25] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:25] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:26] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:26] "[33mGET /meals/meals?user_id=8&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:54:26] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:26] "GET /fooddb/get_item?food_id=32698754 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:26] "[33mGET /meals/meals?user_id=8&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:54:26] "[33mGET /meals/meals?user_id=8&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:54:26] "[33mGET /meals/meals?user_id=8&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:54:26] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:26] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:27] "[33mGET /meals/meals?user_id=8&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:54:27] "GET /fooddb/get_item?food_id=32698754 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:28] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:28] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:28] "GET /fooddb/get_item?food_id=32698754 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:30] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:30] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:30] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:30] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:30] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:30] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:30] "[33mGET /meals/meals?user_id=8&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:54:30] "GET /fooddb/get_item?food_id=32698754 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:30] "[33mGET /meals/meals?user_id=8&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:54:30] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:30] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:31] "[33mGET /meals/meals?user_id=8&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:54:31] "GET /fooddb/get_item?food_id=32698754 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:31] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:31] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:31] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:31] "GET /user/getprofile?user_id=8 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:31] "GET /meals/meals?user_id=8&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:31] "[33mGET /meals/meals?user_id=8&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:54:31] "GET /meals/meals?user_id=8&date=2024-11-26 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:31] "GET /fooddb/get_item?food_id=32698754 HTTP/1.1" 200 -
+10.8.0.3 - - [27/Nov/2024 11:54:31] "[33mGET /meals/meals?user_id=8&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:54:31] "[33mGET /meals/meals?user_id=8&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:54:32] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:54:32] "[33mGET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:54:32] "[33mGET /meals/meals?user_id=8&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:54:32] "[33mGET /meals/meals?user_id=8&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:54:32] "[33mGET /meals/meals?user_id=8&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [27/Nov/2024 11:54:32] "[33mGET /meals/meals?user_id=8&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:54:34] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:54:34] "[33mGET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:54:44] "GET /fooddb/search?food=гречка HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:54:47] "GET /fooddb/search?food=гр HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:54:57] "GET /fooddb/search?food=апельси HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:55:10] "GET /fooddb/search?food=oran HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:55:19] "GET /fooddb/get_item?food_id=935 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:56:03] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:56:03] "[33mGET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:56:10] "GET /fooddb/search?food=oran HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:56:11] "GET /fooddb/get_item?food_id=935 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:56:15] "POST /meals/add_meal HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:56:15] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:56:15] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:56:15] "GET /fooddb/get_item?food_id=935 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:56:33] "GET /fooddb/search?food=rice HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:56:38] "GET /fooddb/get_item?food_id=4501 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:56:48] "POST /meals/add_meal HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:56:48] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:56:48] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:56:48] "GET /fooddb/get_item?food_id=935 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:56:48] "GET /fooddb/get_item?food_id=4501 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:00] "GET /fooddb/search?food=chick HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:03] "GET /fooddb/get_item?food_id=1695 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:14] "POST /meals/add_meal HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:14] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:14] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:14] "GET /fooddb/get_item?food_id=935 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:14] "GET /fooddb/get_item?food_id=4501 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:14] "GET /fooddb/get_item?food_id=1695 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:22] "GET /fooddb/search?food=s HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:24] "GET /fooddb/get_item?food_id=3152 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:27] "POST /meals/add_meal HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:27] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:27] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:27] "GET /fooddb/get_item?food_id=935 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:28] "GET /fooddb/get_item?food_id=4501 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:28] "GET /fooddb/get_item?food_id=1695 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:29] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:29] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:29] "GET /fooddb/get_item?food_id=935 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:29] "GET /fooddb/get_item?food_id=3152 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:29] "GET /fooddb/get_item?food_id=4501 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:29] "GET /fooddb/get_item?food_id=1695 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:30] "GET /fooddb/get_item?food_id=3152 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:36] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:36] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:36] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:36] "[33mGET /meals/meals?user_id=9&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:57:36] "[33mGET /meals/meals?user_id=9&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:57:37] "[33mGET /meals/meals?user_id=9&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:57:37] "[33mGET /meals/meals?user_id=9&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:57:37] "[33mGET /meals/meals?user_id=9&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:57:37] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:37] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:37] "[33mGET /meals/meals?user_id=9&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:57:37] "GET /fooddb/get_item?food_id=935 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:38] "GET /fooddb/get_item?food_id=4501 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:38] "GET /fooddb/get_item?food_id=1695 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:38] "GET /fooddb/get_item?food_id=3152 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:38] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:38] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:38] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:38] "[33mGET /meals/meals?user_id=9&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:57:38] "[33mGET /meals/meals?user_id=9&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:57:39] "[33mGET /meals/meals?user_id=9&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:57:39] "[33mGET /meals/meals?user_id=9&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:57:39] "[33mGET /meals/meals?user_id=9&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:57:39] "[33mGET /meals/meals?user_id=9&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:57:54] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:54] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:55] "GET /fooddb/get_item?food_id=935 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:55] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:55] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:55] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:55] "GET /fooddb/get_item?food_id=4501 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:55] "[33mGET /meals/meals?user_id=9&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:57:55] "[33mGET /meals/meals?user_id=9&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:57:56] "[33mGET /meals/meals?user_id=9&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:57:56] "[33mGET /meals/meals?user_id=9&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:57:56] "[33mGET /meals/meals?user_id=9&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:57:56] "GET /fooddb/get_item?food_id=1695 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:57:56] "[33mGET /meals/meals?user_id=9&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:57:56] "GET /fooddb/get_item?food_id=3152 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:35] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:35] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:35] "GET /fooddb/get_item?food_id=935 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:35] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:35] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:35] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:36] "[33mGET /meals/meals?user_id=9&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:58:36] "GET /fooddb/get_item?food_id=4501 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:36] "GET /fooddb/get_item?food_id=1695 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:36] "GET /fooddb/get_item?food_id=3152 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:37] "[33mGET /meals/meals?user_id=9&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:58:37] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:37] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:37] "[33mGET /meals/meals?user_id=9&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:58:37] "GET /fooddb/get_item?food_id=935 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:37] "[33mGET /meals/meals?user_id=9&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:58:37] "GET /fooddb/get_item?food_id=4501 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:37] "[33mGET /meals/meals?user_id=9&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:58:37] "GET /fooddb/get_item?food_id=1695 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:37] "[33mGET /meals/meals?user_id=9&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:58:37] "GET /fooddb/get_item?food_id=3152 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:39] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:39] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:39] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:39] "[33mGET /meals/meals?user_id=9&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:58:39] "[33mGET /meals/meals?user_id=9&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:58:39] "[33mGET /meals/meals?user_id=9&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:58:39] "[33mGET /meals/meals?user_id=9&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:58:39] "[33mGET /meals/meals?user_id=9&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:58:41] "[33mGET /meals/meals?user_id=9&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:58:48] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:48] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:48] "GET /fooddb/get_item?food_id=935 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:48] "GET /fooddb/get_item?food_id=4501 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:49] "GET /fooddb/get_item?food_id=1695 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:49] "GET /fooddb/get_item?food_id=3152 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:49] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:49] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:49] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:58:49] "[33mGET /meals/meals?user_id=9&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:58:51] "[33mGET /meals/meals?user_id=9&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:58:51] "[33mGET /meals/meals?user_id=9&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:58:52] "[33mGET /meals/meals?user_id=9&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:58:52] "[33mGET /meals/meals?user_id=9&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:58:53] "[33mGET /meals/meals?user_id=9&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:59:28] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:59:28] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:59:28] "GET /fooddb/get_item?food_id=935 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:59:29] "GET /fooddb/get_item?food_id=4501 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:59:29] "GET /fooddb/get_item?food_id=1695 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:59:30] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:59:30] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:59:30] "GET /fooddb/get_item?food_id=935 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:59:30] "GET /user/getprofile?user_id=9 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:59:30] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:59:30] "GET /meals/meals?user_id=9&date=2024-11-27 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:59:30] "GET /fooddb/get_item?food_id=4501 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:59:30] "[33mGET /meals/meals?user_id=9&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:59:30] "GET /fooddb/get_item?food_id=3152 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:59:30] "GET /fooddb/get_item?food_id=1695 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:59:31] "[33mGET /meals/meals?user_id=9&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:59:31] "GET /fooddb/get_item?food_id=3152 HTTP/1.1" 200 -
+10.8.0.9 - - [27/Nov/2024 11:59:31] "[33mGET /meals/meals?user_id=9&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:59:31] "[33mGET /meals/meals?user_id=9&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:59:31] "[33mGET /meals/meals?user_id=9&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.9 - - [27/Nov/2024 11:59:31] "[33mGET /meals/meals?user_id=9&date=2024-11-21 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:35:00] "POST /user/register HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:35:01] "[33mGET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:35:01] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:35:04] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:35:04] "[33mGET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:35:04] "[33mGET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:35:04] "[33mGET /meals/meals?user_id=10&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:35:05] "[33mGET /meals/meals?user_id=10&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:35:05] "[33mGET /meals/meals?user_id=10&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:35:05] "[33mGET /meals/meals?user_id=10&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:35:05] "[33mGET /meals/meals?user_id=10&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:35:06] "[33mGET /meals/meals?user_id=10&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:35:08] "[33mGET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:35:08] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:35:15] "GET /fooddb/search?food=яблоко HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:35:25] "GET /fooddb/search?food=apple HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:35:27] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:35:28] "POST /meals/add_meal HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:35:28] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:35:28] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:35:28] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:35:29] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:35:29] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:35:29] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:35:30] "[33mGET /meals/meals?user_id=10&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:35:30] "[33mGET /meals/meals?user_id=10&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:35:30] "[33mGET /meals/meals?user_id=10&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:35:31] "[33mGET /meals/meals?user_id=10&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:35:31] "[33mGET /meals/meals?user_id=10&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:35:31] "[33mGET /meals/meals?user_id=10&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:35:34] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:35:34] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:35:35] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:35:50] "[35m[1mGET /fooddb/search?food=duplingz HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/.venv/lib/python3.11/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anton/ctracker/app.py", line 227, in food_list
+    food_id = food["food_id"]
+              ^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+10.8.0.3 - - [28/Nov/2024 07:35:55] "GET /fooddb/search?food=duplings HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:35:59] "GET /fooddb/get_item?food_id=18771743 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:04] "POST /meals/add_meal HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:04] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:04] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:05] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:05] "GET /fooddb/get_item?food_id=18771743 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:06] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:06] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:06] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:06] "[33mGET /meals/meals?user_id=10&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:36:06] "[33mGET /meals/meals?user_id=10&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:36:07] "[33mGET /meals/meals?user_id=10&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:36:07] "[33mGET /meals/meals?user_id=10&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:36:07] "[33mGET /meals/meals?user_id=10&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:36:07] "[33mGET /meals/meals?user_id=10&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:36:14] "PATCH /user/caloriegoal HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:21] "PATCH /user/weight HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:36] "PATCH /user/height HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:48] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:48] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:48] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:48] "GET /fooddb/get_item?food_id=18771743 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:52] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:52] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:52] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:52] "[33mGET /meals/meals?user_id=10&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:36:53] "[33mGET /meals/meals?user_id=10&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:36:53] "[33mGET /meals/meals?user_id=10&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:36:53] "[33mGET /meals/meals?user_id=10&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:36:53] "[33mGET /meals/meals?user_id=10&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:36:53] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:53] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:54] "[33mGET /meals/meals?user_id=10&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:36:54] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:36:54] "GET /fooddb/get_item?food_id=18771743 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:59:47] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:59:47] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:59:47] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:59:47] "GET /fooddb/get_item?food_id=18771743 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:59:51] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:59:51] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:59:51] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 07:59:52] "[33mGET /meals/meals?user_id=10&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:59:52] "[33mGET /meals/meals?user_id=10&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:59:52] "[33mGET /meals/meals?user_id=10&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:59:52] "[33mGET /meals/meals?user_id=10&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:59:53] "[33mGET /meals/meals?user_id=10&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 07:59:53] "[33mGET /meals/meals?user_id=10&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:06:51] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:06:51] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:06:51] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:06:52] "GET /fooddb/get_item?food_id=18771743 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:06:55] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:06:55] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:06:55] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:06:56] "[33mGET /meals/meals?user_id=10&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:06:56] "[33mGET /meals/meals?user_id=10&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:06:56] "[33mGET /meals/meals?user_id=10&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:06:56] "[33mGET /meals/meals?user_id=10&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:06:56] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:06:57] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:06:57] "[33mGET /meals/meals?user_id=10&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:06:57] "[33mGET /meals/meals?user_id=10&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:06:57] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:06:57] "GET /fooddb/get_item?food_id=18771743 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:02] "GET /meals/get_meal?meal_id=19 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:03] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+/home/anton/ctracker/app.py:378: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  meal = Meal.query.get(data['meal_id'])
+10.8.0.3 - - [28/Nov/2024 08:07:05] "PATCH /meals/edit_meal HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:05] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:05] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:05] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:06] "GET /fooddb/get_item?food_id=18771743 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:08] "GET /meals/get_meal?meal_id=19 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:08] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:10] "PATCH /meals/edit_meal HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:10] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:10] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:11] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:11] "GET /fooddb/get_item?food_id=18771743 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:13] "GET /meals/get_meal?meal_id=19 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:13] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:17] "PATCH /meals/edit_meal HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:17] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:17] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:18] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:07:18] "GET /fooddb/get_item?food_id=18771743 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:05] "GET /meals/get_meal?meal_id=20 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:05] "GET /fooddb/get_item?food_id=18771743 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:06] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:06] "DELETE /meals/delete_meal?meal_id=20 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:06] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:06] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:06] "GET /fooddb/get_item?food_id=18771743 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:10] "GET /meals/get_meal?meal_id=19 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:10] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:11] "DELETE /meals/delete_meal?meal_id=19 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:11] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:11] "[33mGET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:20] "GET /fooddb/search?food=apple HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:21] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:24] "POST /meals/add_meal HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:24] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:24] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:25] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:28] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:28] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:28] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:28] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:28] "GET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:29] "[33mGET /meals/meals?user_id=10&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:29] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:29] "[33mGET /meals/meals?user_id=10&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:30] "[33mGET /meals/meals?user_id=10&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:30] "[33mGET /meals/meals?user_id=10&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:30] "[33mGET /meals/meals?user_id=10&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:30] "GET /meals/get_meal?meal_id=19 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:30] "[33mGET /meals/meals?user_id=10&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:31] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:31] "DELETE /meals/delete_meal?meal_id=19 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:31] "[33mGET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:31] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:34] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:34] "[33mGET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:34] "[33mGET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:35] "[33mGET /meals/meals?user_id=10&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:35] "[33mGET /meals/meals?user_id=10&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:35] "[33mGET /meals/meals?user_id=10&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:36] "[33mGET /meals/meals?user_id=10&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:36] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:36] "[33mGET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:36] "[33mGET /meals/meals?user_id=10&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:36] "[33mGET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:36] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:37] "[33mGET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:37] "[33mGET /meals/meals?user_id=10&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:37] "[33mGET /meals/meals?user_id=10&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:37] "[33mGET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:37] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:10:37] "[33mGET /meals/meals?user_id=10&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:38] "[33mGET /meals/meals?user_id=10&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:38] "[33mGET /meals/meals?user_id=10&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:38] "[33mGET /meals/meals?user_id=10&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:10:38] "[33mGET /meals/meals?user_id=10&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:06] "[33mGET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:06] "[33mGET /meals/meals?user_id=10&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:06] "GET /user/getprofile?user_id=10 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:17:06] "[33mGET /meals/meals?user_id=10&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:06] "[33mGET /meals/meals?user_id=10&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:07] "[33mGET /meals/meals?user_id=10&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:07] "[33mGET /meals/meals?user_id=10&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:07] "[33mGET /meals/meals?user_id=10&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:07] "[33mGET /meals/meals?user_id=10&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:17] "POST /user/register HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:17:17] "GET /user/getprofile?user_id=11 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:17:17] "[33mGET /meals/meals?user_id=11&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:18] "[33mGET /meals/meals?user_id=11&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:18] "GET /user/getprofile?user_id=11 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:17:18] "[33mGET /meals/meals?user_id=11&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:19] "[33mGET /meals/meals?user_id=11&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:19] "[33mGET /meals/meals?user_id=11&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:19] "[33mGET /meals/meals?user_id=11&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:20] "[33mGET /meals/meals?user_id=11&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:20] "[33mGET /meals/meals?user_id=11&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:21] "[33mGET /meals/meals?user_id=11&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:22] "PATCH /user/weight HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:17:25] "PATCH /user/height HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:17:26] "GET /user/getprofile?user_id=11 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:17:26] "[33mGET /meals/meals?user_id=11&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:27] "[33mGET /meals/meals?user_id=11&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:27] "GET /user/getprofile?user_id=11 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:17:27] "[33mGET /meals/meals?user_id=11&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:27] "[33mGET /meals/meals?user_id=11&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:27] "[33mGET /meals/meals?user_id=11&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:28] "[33mGET /meals/meals?user_id=11&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:28] "[33mGET /meals/meals?user_id=11&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:28] "[33mGET /meals/meals?user_id=11&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:28] "[33mGET /meals/meals?user_id=11&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 08:17:33] "PATCH /user/caloriegoal HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:17:34] "GET /user/getprofile?user_id=11 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 08:17:34] "[33mGET /meals/meals?user_id=11&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 13:08:41] "GET /user/getprofile?user_id=11 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 13:08:41] "[33mGET /meals/meals?user_id=11&date=2024-11-28 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 13:08:45] "GET /fooddb/search?food=apple HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 13:08:47] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 13:08:49] "[33mGET /meals/meals?user_id=11&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 13:08:49] "[33mGET /meals/meals?user_id=11&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 13:08:49] "[33mGET /meals/meals?user_id=11&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 13:08:49] "[33mGET /meals/meals?user_id=11&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 13:08:49] "[33mGET /meals/meals?user_id=11&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 13:08:49] "[33mGET /meals/meals?user_id=11&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 13:08:50] "[33mGET /meals/meals?user_id=11&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 13:08:50] "[33mGET /meals/meals?user_id=11&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 13:08:52] "POST /meals/add_meal HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 13:08:52] "GET /meals/meals?user_id=11&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 13:08:52] "GET /user/getprofile?user_id=11 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 13:08:52] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 13:08:53] "GET /user/getprofile?user_id=11 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 13:08:53] "GET /meals/meals?user_id=11&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 13:08:53] "GET /meals/meals?user_id=11&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 13:08:53] "GET /user/getprofile?user_id=11 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 13:08:53] "GET /meals/meals?user_id=11&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 13:08:54] "[33mGET /meals/meals?user_id=11&date=2024-11-27 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 13:08:54] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 13:08:54] "[33mGET /meals/meals?user_id=11&date=2024-11-26 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 13:08:54] "[33mGET /meals/meals?user_id=11&date=2024-11-25 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 13:08:54] "[33mGET /meals/meals?user_id=11&date=2024-11-24 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 13:08:54] "[33mGET /meals/meals?user_id=11&date=2024-11-23 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 13:08:55] "[33mGET /meals/meals?user_id=11&date=2024-11-22 HTTP/1.1[0m" 404 -
+10.8.0.3 - - [28/Nov/2024 13:08:57] "GET /user/getprofile?user_id=11 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 13:08:57] "GET /meals/meals?user_id=11&date=2024-11-28 HTTP/1.1" 200 -
+10.8.0.3 - - [28/Nov/2024 13:08:57] "GET /fooddb/get_item?food_id=35718 HTTP/1.1" 200 -
+ * Detected change in '/home/anton/ctracker/app.py', reloading
+ * Restarting with stat
+  File "/home/anton/ctracker/app.py", line 199
+    while total_results is None or (len(results) < 10 and page * 10 < total_results):
+IndentationError: unexpected indent

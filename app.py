@@ -190,121 +190,126 @@ def food_list():
     food_name = request.args.get('food')
     if not food_name:
         return jsonify({"error": "Parameter 'food' is required"}), 400
-
+    
+    page = 0
+    total_results = None
+    results = []
+    unique_names = set()
     # Параметры запроса
     search_url = "https://platform.fatsecret.com/rest/server.api"
-    params = {
-        "method": "foods.search",
-        "format": "json",
-        "max_results" : 11,
-        "search_expression": food_name,
-        "oauth_consumer_key": FATSECRET_CONSUMER_KEY,
-        "oauth_nonce": os.urandom(8).hex(),
-        "oauth_signature_method": "HMAC-SHA1",
-        "oauth_timestamp": str(int(time.time())),
-        "oauth_version": "1.0"
-    }
+    while total_results is None or (len(results) < 10 and page * 10 < total_results):
+        page += 1
+        params = {
+            "method": "foods.search",
+            "format": "json",
+            "max_results" : 11,
+            "page_number": page,
+            "search_expression": food_name,
+            "oauth_consumer_key": FATSECRET_CONSUMER_KEY,
+            "oauth_nonce": os.urandom(8).hex(),
+            "oauth_signature_method": "HMAC-SHA1",
+            "oauth_timestamp": str(int(time.time())),
+            "oauth_version": "1.0"
+        }
+        # Генерация подписи для запроса
+        base_string = "&".join(f"{key}={requests.utils.quote(str(value), safe='')}" for key, value in sorted(params.items()))
+        signature_base_string = f"GET&{requests.utils.quote(search_url, safe='')}&{requests.utils.quote(base_string, safe='')}"
+        signing_key = f"{FATSECRET_CONSUMER_SECRET}&"
+        signature = base64.b64encode(hmac.new(signing_key.encode(), signature_base_string.encode(), hashlib.sha1).digest()).decode()
+        params["oauth_signature"] = signature
 
-    # Генерация подписи для запроса
-    base_string = "&".join(f"{key}={requests.utils.quote(str(value), safe='')}" for key, value in sorted(params.items()))
-    signature_base_string = f"GET&{requests.utils.quote(search_url, safe='')}&{requests.utils.quote(base_string, safe='')}"
-    signing_key = f"{FATSECRET_CONSUMER_SECRET}&"
-    signature = base64.b64encode(hmac.new(signing_key.encode(), signature_base_string.encode(), hashlib.sha1).digest()).decode()
-    params["oauth_signature"] = signature
+        # Выполнение GET-запроса к FatSecret API
+        response = requests.get(search_url, params=params)
 
-    # Выполнение GET-запроса к FatSecret API
-    response = requests.get(search_url, params=params)
+        if response.status_code != 200:
+            return jsonify({"error": "Failed to fetch data from FatSecret API"}), response.status_code
 
-    if response.status_code != 200:
-        return jsonify({"error": "Failed to fetch data from FatSecret API"}), response.status_code
+        fatsecret_data = response.json()
+        foods = fatsecret_data.get("foods", {}).get("food", [])
+        total_results = int(fatsecret_data.get("foods", {}).get("total_results", 0))
+        # Формирование результата
 
-    fatsecret_data = response.json()
-    foods = fatsecret_data.get("foods", {}).get("food", [])
+        for food in foods:
+            food_id = food["food_id"]
+            food_name = food["food_name"]
+            food_description = food["food_description"]
+            # Проверяем, существует ли продукт в базе
+            existing_food = Food.query.filter_by(food_id=food_id).first()
+            
+            if "Per 1 serving" in food_description:
+                continue
+            if not existing_food:
+                # Если продукта нет в базе, добавляем его
+                details_url = "https://platform.fatsecret.com/rest/server.api"
+                details_params = {
+                    "method": "food.get",
+                    "format": "json",
+                    "food_id": food_id,
+                    "oauth_consumer_key": FATSECRET_CONSUMER_KEY,
+                    "oauth_nonce": os.urandom(8).hex(),
+                    "oauth_signature_method": "HMAC-SHA1",
+                    "oauth_timestamp": str(int(time.time())),
+                    "oauth_version": "1.0"
+                }
+                # Генерация подписи
+                details_base_string = "&".join(f"{key}={requests.utils.quote(str(value), safe='')}" for key, value in sorted(details_params.items()))
+                details_signature_base_string = f"GET&{requests.utils.quote(details_url, safe='')}&{requests.utils.quote(details_base_string, safe='')}"
+                details_signature = base64.b64encode(hmac.new(signing_key.encode(), details_signature_base_string.encode(), hashlib.sha1).digest()).decode()
+                details_params["oauth_signature"] = details_signature
 
-    # Формирование результата
-    result = []
-    for food in foods:
-        food_id = food["food_id"]
-        food_name = food["food_name"]
-        food_description = food["food_description"]
+                details_response = requests.get(details_url, params=details_params)
+                if details_response.status_code == 200:
+                    food_details = details_response.json()["food"]
+                    servings = food_details["servings"]["serving"]
+                    if isinstance(servings, list):
+                        primary_serving = servings[0]
+                    else:
+                        primary_serving = servings
+                        
+                    # Получаем значение единицы измерения
+                    metric_serving_amount = float(primary_serving.get("metric_serving_amount", 100))  # Если отсутствует, устанавливаем 100
+                    metric_serving_unit = primary_serving.get("metric_serving_unit", "g")
 
-        # Проверяем, существует ли продукт в базе
-        existing_food = Food.query.filter_by(food_id=food_id).first()
-        
-        if "Per 1 serving" in food_description:
-            continue
-        if not existing_food:
-            # Если продукта нет в базе, добавляем его
-            details_url = "https://platform.fatsecret.com/rest/server.api"
-            details_params = {
-                "method": "food.get",
-                "format": "json",
-                "food_id": food_id,
-                "oauth_consumer_key": FATSECRET_CONSUMER_KEY,
-                "oauth_nonce": os.urandom(8).hex(),
-                "oauth_signature_method": "HMAC-SHA1",
-                "oauth_timestamp": str(int(time.time())),
-                "oauth_version": "1.0"
-            }
-            # Генерация подписи
-            details_base_string = "&".join(f"{key}={requests.utils.quote(str(value), safe='')}" for key, value in sorted(details_params.items()))
-            details_signature_base_string = f"GET&{requests.utils.quote(details_url, safe='')}&{requests.utils.quote(details_base_string, safe='')}"
-            details_signature = base64.b64encode(hmac.new(signing_key.encode(), details_signature_base_string.encode(), hashlib.sha1).digest()).decode()
-            details_params["oauth_signature"] = details_signature
+                    # Конвертация в граммы, если необходимо
+                    if metric_serving_unit == "oz":
+                        metric_serving_amount *= 28.3495  # 1 унция = 28.3495 грамм
+                    elif metric_serving_unit == "ml":
+                        # Для ml предполагаем, что 1 мл = 1 г (для воды и подобных жидкостей)
+                        metric_serving_amount = metric_serving_amount
+                    elif metric_serving_unit != "g":
+                        # Если единица не поддерживается, пропускаем
+                        continue
 
-            details_response = requests.get(details_url, params=details_params)
-            if details_response.status_code == 200:
-                food_details = details_response.json()["food"]
-                servings = food_details["servings"]["serving"]
-                if isinstance(servings, list):
-                    primary_serving = servings[0]
-                else:
-                    primary_serving = servings
-                    
-                # Получаем значение единицы измерения
-                metric_serving_amount = float(primary_serving.get("metric_serving_amount", 100))  # Если отсутствует, устанавливаем 100
-                metric_serving_unit = primary_serving.get("metric_serving_unit", "g")
+                    # Пересчёт КБЖУ на 100 граммов
+                    calories = float(primary_serving["calories"]) * (100 / metric_serving_amount)
+                    protein = float(primary_serving["protein"]) * (100 / metric_serving_amount)
+                    fats = float(primary_serving["fat"]) * (100 / metric_serving_amount)
+                    carbs = float(primary_serving["carbohydrate"]) * (100 / metric_serving_amount)
 
-                # Конвертация в граммы, если необходимо
-                if metric_serving_unit == "oz":
-                    metric_serving_amount *= 28.3495  # 1 унция = 28.3495 грамм
-                elif metric_serving_unit == "ml":
-                    # Для ml предполагаем, что 1 мл = 1 г (для воды и подобных жидкостей)
-                    metric_serving_amount = metric_serving_amount
-                elif metric_serving_unit != "g":
-                    # Если единица не поддерживается, пропускаем
-                    continue
+                    # Добавляем продукт в базу
+                    new_food = Food(
+                        food_id=food_id,
+                        name=food_name,
+                        calories=round(calories, 2),
+                        protein=round(protein, 2),
+                        fats=round(fats, 2),
+                        carbs=round(carbs, 2),
+                        description=food_description
+                    )
+                    db.session.add(new_food)
+                    db.session.commit()
 
-                # Пересчёт КБЖУ на 100 граммов
-                calories = float(primary_serving["calories"]) * (100 / metric_serving_amount)
-                protein = float(primary_serving["protein"]) * (100 / metric_serving_amount)
-                fats = float(primary_serving["fat"]) * (100 / metric_serving_amount)
-                carbs = float(primary_serving["carbohydrate"]) * (100 / metric_serving_amount)
-
-                # Добавляем продукт в базу
-                new_food = Food(
-                    food_id=food_id,
-                    name=food_name,
-                    calories=round(calories, 2),
-                    protein=round(protein, 2),
-                    fats=round(fats, 2),
-                    carbs=round(carbs, 2),
-                    description=food_description
-                )
-                db.session.add(new_food)
-                db.session.commit()
-
-        # Формируем результат
-        result.append({
-            'name': food_name,
-            'food_id': food_id,
-            'calorie': existing_food.calories if existing_food else round(calories, 2),
-            'carbs': existing_food.carbs if existing_food else round(carbs, 2),
-            'fats': existing_food.fats if existing_food else round(fats, 2),
-            'protein': existing_food.protein if existing_food else round(protein, 2)
-        })
-
-    return jsonify(result), 200
+            if food_name not in unique_names:
+                unique_names.add(food_name)
+                results.append({
+                    'name': food_name,
+                    'food_id': food_id,
+                    'calorie': existing_food.calories if existing_food else round(calories, 2),
+                    'carbs': existing_food.carbs if existing_food else round(carbs, 2),
+                    'fats': existing_food.fats if existing_food else round(fats, 2),
+                    'protein': existing_food.protein if existing_food else round(protein, 2)
+                })
+    return jsonify(results), 200
 
 # Get Food Item by ID
 @app.route('/fooddb/get_item', methods=['GET'])
