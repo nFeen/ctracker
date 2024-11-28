@@ -46,7 +46,7 @@ interface MealApiService {
     fun editMeal(@Body body: EditMealRequest): Call<Map<String, String>>
 
     @DELETE("/meals/delete_meal")
-    fun deleteMeal(@Body body: DeleteMealRequest): Call<Map<String, String>>
+    fun deleteMeal(@Query("meal_id") mealId : Int): Call<Map<String, String>>
 
     @GET("/meals/get_meal")
     fun getMeal(

@@ -3,7 +3,7 @@ import android.content.SharedPreferences
 
 object SharedPreferencesManager {
 
-    private const val PREF_NAME = "MySharedPrefs"
+    private const val PREF_NAME = "MySharedPref"
     private lateinit var sharedPreferences: SharedPreferences
 
     fun init(context: Context) {

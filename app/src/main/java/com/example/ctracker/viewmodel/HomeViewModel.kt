@@ -15,7 +15,7 @@ import java.util.Locale
 class HomeViewModel() : ViewModel() {
 
     // ID пользователя из SharedPreferences
-    private val userId: Int = SharedPreferencesManager.getString("UserID", "-1")?.toInt() ?: -1
+    private val userId: Int = SharedPreferencesManager.getString("UserID", "-1").toInt()
 
     // Максимальные калории
     val maxCalories = mutableIntStateOf(SharedPreferencesManager.getInt("maxCalorie", 2500))
@@ -27,6 +27,8 @@ class HomeViewModel() : ViewModel() {
 
     // Флаг загрузки данных
     val isLoading: MutableState<Boolean> = mutableStateOf(true)
+
+    val recommendations = mutableStateOf("")
 
     init {
         // Изначально создаем пустые MealModel
@@ -137,6 +139,22 @@ class HomeViewModel() : ViewModel() {
     private fun getCurrentDate(): String {
         val formatter = java.text.SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return formatter.format(Date())
+    }
+
+    fun getReccomendations() {
+        viewModelScope.launch {
+            try {
+                // Получаем рекомендации с помощью UserRepository
+                val recommendationText = UserRepository.getRecommendationPrompt(userId, getCurrentDate())
+
+                // Обновляем переменную recommendations текстом из ответа
+                recommendations.value = recommendationText
+            } catch (e: Exception) {
+                // В случае ошибки, можем вывести сообщение об ошибке
+                recommendations.value = "Не удалось получить рекомендации. Попробуйте позже."
+                println("Ошибка bebra $e")
+            }
+        }
     }
 }
 

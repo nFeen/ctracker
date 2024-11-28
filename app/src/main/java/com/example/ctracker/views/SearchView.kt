@@ -38,7 +38,6 @@ fun SearchView(viewModel: SearchViewModel, navController: NavController) {
         onQueryChange = viewModel::onQuerySearch,
         onSearch = viewModel::search,
         onItemClick = { index ->
-            print("here")
             val mealType: Int = viewModel.mealType // mealType берется из ViewModel
             navController.navigate("additem/${mealType}/$index")
         },
@@ -67,7 +66,7 @@ fun SearchContent(
                 ),
                 title = {
                     Text(
-                        "CTracker",
+                        "Поиск",
                         fontFamily = FontFamily.Serif,
                         color = MaterialTheme.colorScheme.onPrimary
                     )
@@ -201,7 +200,7 @@ fun SearchContentPreview() {
             SearchContent(
                 query = "",
                 results = listOf(
-                    Food(1, "Яблоко ASdoi asiodj adjioasdj ioasdjo idjoia jdoiajs disi osjadoi jasiodja", 52F, 0.2f, 14f, 0.3f),
+                    Food(1, "Яблоко сочное садовое", 52F, 0.2f, 14f, 0.3f),
                     Food(2, "Банан", 89F, 0.3f, 23f, 1.1f),
                     Food(3, "Куриное филе", 165F, 3.6f, 0f, 31f),
                     Food(4, "Овсянка", 68F, 1.4f, 12f, 2.4f),

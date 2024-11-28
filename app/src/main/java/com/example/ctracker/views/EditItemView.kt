@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -36,6 +38,10 @@ fun EditItemView(viewModel: EditMealViewModel, navController: NavController) {
                 viewModel.updateMeal()
                 navController.popBackStack("home", false)
             }
+        },
+        onDelete = {
+            viewModel.deleteMeal()
+            navController.popBackStack("home", false)
         }
     )
 }
@@ -52,6 +58,7 @@ fun EditItemContent(
     isError: Boolean,
     onWeightChange: (String) -> Unit,
     onSaveClick: () -> Unit,
+    onDelete: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -70,7 +77,8 @@ fun EditItemContent(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(16.dp),
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Top
         ) {
             // Название продукта
@@ -117,34 +125,6 @@ fun EditItemContent(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Поле ввода веса
-            OutlinedTextField(
-                value = weight,
-                onValueChange = onWeightChange,
-                label = { Text("Вес (г)") },
-                isError = isError,
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(),
-                keyboardOptions = KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Done // Устанавливаем действие "Готово"
-                ),
-                keyboardActions = KeyboardActions(
-                    onDone = {
-                        if (!isError) onSaveClick() // Вызываем функцию, если нет ошибки
-                    }
-                )
-            )
-            if (isError) {
-                Text(
-                    text = "Введите корректное значение больше 0",
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(top = 4.dp)
-                )
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
 
             // "На $weight грамм"
             val weightValue = weight.toFloatOrNull() ?: 0f
@@ -168,34 +148,90 @@ fun EditItemContent(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        InfoBlock("Калории", "${(calories * weightValue / 100).toInt()} ккал", Modifier.weight(1f))
+                        InfoBlock(
+                            "Калории",
+                            "${(calories * weightValue / 100).toInt()} ккал",
+                            Modifier.weight(1f)
+                        )
                         Spacer(modifier = Modifier.width(16.dp))
-                        InfoBlock("Белки", "${(protein * weightValue / 100).format(1)} г", Modifier.weight(1f))
+                        InfoBlock(
+                            "Белки",
+                            "${(protein * weightValue / 100).format(1)} г",
+                            Modifier.weight(1f)
+                        )
                     }
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        InfoBlock("Жиры", "${(fats * weightValue / 100).format(1)} г", Modifier.weight(1f))
+                        InfoBlock(
+                            "Жиры",
+                            "${(fats * weightValue / 100).format(1)} г",
+                            Modifier.weight(1f)
+                        )
                         Spacer(modifier = Modifier.width(16.dp))
-                        InfoBlock("Углеводы", "${(carbs * weightValue / 100).format(1)} г", Modifier.weight(1f))
+                        InfoBlock(
+                            "Углеводы",
+                            "${(carbs * weightValue / 100).format(1)} г",
+                            Modifier.weight(1f)
+                        )
                     }
+                }
+
+                Spacer(modifier = Modifier.height(24.dp))
+                // Поле ввода веса
+                OutlinedTextField(
+                    value = weight,
+                    onValueChange = onWeightChange,
+                    label = { Text("Вес (г)") },
+                    isError = isError,
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        keyboardType = KeyboardType.Number,
+                        imeAction = ImeAction.Done // Устанавливаем действие "Готово"
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onDone = {
+                            if (!isError) onSaveClick() // Вызываем функцию, если нет ошибки
+                        }
+                    )
+                )
+                if (isError) {
+                    Text(
+                        text = "Введите корректное значение больше 0",
+                        color = MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(top = 4.dp)
+                    )
                 }
             }
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Кнопка "Сохранить"
-            Button(
-                onClick = {
-                    if (!isError) onSaveClick()
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
-                enabled = !isError
-            ) {
-                Text(text = "Сохранить")
+            Row() {
+                Button(
+                    onClick = {
+                        onDelete()
+                    },
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(56.dp),
+                ) {
+                    Text(text = "Удалить")
+                }
+                Spacer(modifier = Modifier.width(16.dp))
+                Button(
+                    onClick = {
+                        if (!isError) onSaveClick()
+                    },
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(56.dp),
+                    enabled = !isError
+                ) {
+                    Text(text = "Сохранить")
+                }
             }
         }
     }
@@ -223,7 +259,8 @@ fun PreviewEditItemContent() {
                 weight = "200",
                 isError = false,
                 onWeightChange = {},
-                onSaveClick = {}
+                onSaveClick = {},
+                onDelete = {}
             )
         }
     }

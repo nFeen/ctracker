@@ -28,7 +28,6 @@ class SearchViewModel(val mealType: Int) : ViewModel() {
         viewModelScope.launch {
             try {
                 val foods = FoodRepository.searchFoods(query.value)
-                println("bebra $foods")
                 results.value = foods.map {
                     Food(
                         id = it.food_id,
@@ -39,7 +38,6 @@ class SearchViewModel(val mealType: Int) : ViewModel() {
                         carb = it.carbs
                     )
                 }
-                println("fodds results $results.value")
             } catch (e: Exception) {
                 errorMessage.value = "Ошибка загрузки данных: ${e.message}"
             } finally {

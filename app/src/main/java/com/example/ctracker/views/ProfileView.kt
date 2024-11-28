@@ -308,10 +308,20 @@ fun ProfileContent(
                             contentColor = MaterialTheme.colorScheme.onSurface
                         )
                     ) {
+                        var multiplier by remember { mutableStateOf(1f) }
                         Text(
                             text = "Изменить цель",
                             textAlign = TextAlign.Center,
-                            fontSize = 14.sp
+                            maxLines = 1,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            style = LocalTextStyle.current.copy(
+                                fontSize = LocalTextStyle.current.fontSize * multiplier
+                            ),
+                            onTextLayout = {
+                                if (it.hasVisualOverflow) {
+                                    multiplier *= 0.99f // you can tune this constant
+                                }
+                            }
                         )
                     }
                 }
@@ -470,7 +480,7 @@ fun ProfileContent(
                     confirmButton = {
                         Button(onClick = {
                             val weight = newWeight.value.toIntOrNull()
-                            if (weight != null&& height in 1..300) {
+                            if (weight != null && weight in 1..300) {
                                 onUpdateWeight(weight)
                                 isWeightDialogOpen.value = false
                             }
@@ -581,7 +591,7 @@ fun ProfileContent(
                 confirmButton = {
                     Button(onClick = {
                         val calorieGoal = newCalorieGoal.value.toIntOrNull()
-                        if (calorieGoal != null && height in 1..10000) {
+                        if (calorieGoal != null && calorieGoal in 1..10000) {
                             onUpdateCalorieGoal(calorieGoal)
                             isCalorieGoalDialogOpen.value = false
                         }
@@ -601,8 +611,8 @@ fun ProfileContent(
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @RequiresApi(Build.VERSION_CODES.O)
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Preview(showBackground = true)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES, heightDp = 950)
+@Preview(showBackground = true, heightDp = 950)
 @Composable
 fun ProfileContentPreview() {
     CTrackerTheme {

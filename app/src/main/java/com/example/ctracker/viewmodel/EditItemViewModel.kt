@@ -76,6 +76,23 @@ class EditMealViewModel(private val mealId: Int) : ViewModel() {
         }
     }
 
+    fun deleteMeal() {
+        println("Try to delete")
+        viewModelScope.launch {
+            try {
+                val success = MealRepository.deleteMeal(mealId)
+                if (success) {
+                    println("deleted succesfull")
+                } else {
+                    println("delete not succes")
+                    errorMessage.value = "Не удалось удалить прием пищи"
+                }
+            } catch (e: Exception) {
+                errorMessage.value = "delete error: ${e.message}"
+            }
+        }
+    }
+
     fun updateWeight(input: String) {
         val sanitizedInput = input.toIntOrNull()
         val validatedWeight = when {

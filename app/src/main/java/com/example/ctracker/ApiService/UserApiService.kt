@@ -39,4 +39,11 @@ interface UserApiService {
 
     @PATCH("/user/caloriegoal")
     fun updateCalorieGoal(@Body body: UpdateCalorieGoalRequest): Call<RegisterResponse>
+
+    @GET("/user/recommendation_prompt")
+    fun getRecommendationPrompt(
+        @Query("user_id") userId: Int,
+        @Query("date") date: String
+    ): Call<Map<String, String>>
+
 }

@@ -22,7 +22,9 @@ class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val userId = SharedPreferencesManager.getString("UserID", "-1")?.toInt()
+        val userId = SharedPreferencesManager.getString("UserID", "-1").toInt()
+
+        println("bebra $userId")
 
         if (userId != -1) {
             val i = Intent(this@LoginActivity, MainActivity::class.java)
@@ -35,6 +37,7 @@ class LoginActivity : ComponentActivity() {
                 CTrackerTheme {
                     val loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
                     val registerViewModel = ViewModelProvider(this)[RegistrationViewModel::class.java]
+                    println("bebra2 $userId")
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,

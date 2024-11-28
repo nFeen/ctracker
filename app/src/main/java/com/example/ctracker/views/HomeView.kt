@@ -43,7 +43,9 @@ fun HomeView(viewModel: HomeViewModel, navController: NavController) {
         maxCalories = viewModel.maxCalories.value,
         mealList = viewModel.mealList,
         onNavigateToSearch = { index -> navController.navigate("search/$index") },
-        onNavigateToEditMeal = { mealId -> navController.navigate("editmeal/$mealId") }
+        onNavigateToEditMeal = { mealId -> navController.navigate("editmeal/$mealId") },
+        getReccomendations = { viewModel.getReccomendations() },
+        recommendations = viewModel.recommendations.value
     )
 }
 
@@ -54,7 +56,9 @@ fun HomeContent(
     maxCalories: Int,
     mealList: List<MealModel>,
     onNavigateToSearch: (Int) -> Unit,
-    onNavigateToEditMeal: (Int) -> Unit // Добавляем обработчик для перехода на экран редактирования
+    onNavigateToEditMeal: (Int) -> Unit,
+    getReccomendations: () -> Unit,
+    recommendations : String// Добавляем обработчик для перехода на экран редактирования
 ) {
     Scaffold(
         topBar = {
@@ -103,6 +107,30 @@ fun HomeContent(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
             }
+            Button(
+                onClick = {
+                    getReccomendations()
+                },
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 48.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+            ) {
+                Text(text = "Создать рекомендации", color = MaterialTheme.colorScheme.onPrimary)
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = recommendations,
+                fontSize = 16.sp,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        shape = RoundedCornerShape(8.dp)
+                    )
+                    .padding(16.dp),
+                textAlign = TextAlign.Start
+            )
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
@@ -263,9 +291,9 @@ fun PreviewHomeContent() {
 
     val mealList = listOf(
         MealModel("Завтрак", breakfastProducts, mutableStateOf(true)) { },
-        MealModel("Обед", lunchProducts, mutableStateOf(false)) { },
-        MealModel("Ужин", dinnerProducts, mutableStateOf(false)) { },
-        MealModel("Другое", additionalProducts, mutableStateOf(false)) { }
+        //MealModel("Обед", lunchProducts, mutableStateOf(false)) { },
+        //MealModel("Ужин", dinnerProducts, mutableStateOf(false)) { },
+        //MealModel("Другое", additionalProducts, mutableStateOf(false)) { }
     )
     CTrackerTheme {
         Scaffold(
@@ -277,7 +305,9 @@ fun PreviewHomeContent() {
                 maxCalories = 2000,
                 mealList = mealList,
                 onNavigateToSearch = {},
-                onNavigateToEditMeal = {}
+                onNavigateToEditMeal = {},
+                getReccomendations = {},
+                recommendations = "bebra please eat more\n bebra\nasdfpasdokfopasdkfopasdkfopfopkasdksdapfok asdf oaskdf "
             )
         }
     }

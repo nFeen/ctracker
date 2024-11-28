@@ -18,7 +18,7 @@ import java.util.Date
 import java.util.Locale
 
 class AddItemViewModel(private val index: Int, private val mealType: Int) : ViewModel() {
-    private val userId: Int = SharedPreferencesManager.getString("UserID", "-1")!!.toInt()
+    private val userId: Int = SharedPreferencesManager.getString("UserID", "-1").toInt()
     val food = mutableStateOf<Food?>(null)
     val weightState = mutableStateOf("50")
     val isError = mutableStateOf(false)

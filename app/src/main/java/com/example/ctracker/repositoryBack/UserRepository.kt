@@ -110,5 +110,21 @@ object UserRepository {
         }
     }
 
+    suspend fun getRecommendationPrompt(userId: Int, date: String): String {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = api.getRecommendationPrompt(userId, date).execute()
+                if (response.isSuccessful) {
+                    response.body()?.get("response")
+                        ?: throw Exception("Не удалось получить текст рекомендации")
+                } else {
+                    throw HttpException(response)
+                }
+            } catch (e: Exception) {
+                throw Exception("Ошибка при получении текста рекомендации: ${e.message}")
+            }
+        }
+    }
+
 }
 

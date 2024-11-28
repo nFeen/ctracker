@@ -70,6 +70,7 @@ fun MainView(navController: NavHostController, viewModel: MainViewModel) {
         }
     }
 }
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable

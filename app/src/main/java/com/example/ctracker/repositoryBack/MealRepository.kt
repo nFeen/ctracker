@@ -66,7 +66,7 @@ object MealRepository {
     suspend fun deleteMeal(mealId: Int): Boolean {
         return withContext(Dispatchers.IO) {
             try {
-                val response = api.deleteMeal(DeleteMealRequest(mealId)).execute()
+                val response = api.deleteMeal(mealId = mealId).execute()
                 response.isSuccessful
             } catch (e: Exception) {
                 throw Exception("Ошибка при удалении приёма пищи: ${e.message}")
