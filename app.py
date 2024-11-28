@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 import os
 import requests
-from requests_oauthlib import OAuth1
 from dotenv import load_dotenv
 import time
 import uuid
@@ -11,8 +10,7 @@ import hmac
 import hashlib
 import base64
 import urllib
-from urllib.parse import urlencode, quote
-from requests_oauthlib import OAuth1Session
+from openai import OpenAI
 
 # Добавьте ваши ключи аутентификации для FatSecret API
 
@@ -32,6 +30,15 @@ load_dotenv()
 # Получаем ключи из .env
 FATSECRET_CONSUMER_KEY = os.getenv("FATSECRET_CONSUMER_KEY")
 FATSECRET_CONSUMER_SECRET = os.getenv("FATSECRET_CONSUMER_SECRET")
+
+CHAT_API_KEY = os.getenv("CHAT_API_KEY")
+
+
+
+client = OpenAI(
+  api_key=CHAT_API_KEY,
+  base_url='https://bothub.chat/api/v2/openai/v1'
+)
     
 class User(db.Model):
     __tablename__ = 'Users'
@@ -144,6 +151,56 @@ def update_profile_picture():
         db.session.commit()
         return jsonify({"status": "profile picture updated"}), 200
     abort(404)
+    
+@app.route('/user/recommendation_prompt', methods=['GET'])
+def generate_recommendation_prompt():
+    user_id = request.args.get('user_id')
+    date = request.args.get('date')
+    
+    if not user_id or not date:
+        return jsonify({"error": "user_id and date parameters are required"}), 400
+    
+    # Получаем все приёмы пищи за указанную дату
+    meals = Meal.query.filter_by(user_id=user_id, date=date).all()
+    
+    if not meals:
+        return jsonify({"response": "Добавьте приемы пищи, чтобы их можно было проанализировать"}), 200
+
+    # Генерация списка съеденных продуктов
+    food_list = []
+    for meal in meals:
+        food = Food.query.get(meal.food_id)
+        if food:
+            food_list.append(
+                f"{meal.quantity} г {food.name} (Калории: {meal.calories:.2f}, "
+                f"Белки: {meal.protein:.2f}, Жиры: {meal.fats:.2f}, Углеводы: {meal.carbs:.2f})"
+            )
+
+    # Формирование текста промпта
+    prompt = (
+        f"Составьте рекомендации для пользователя с ID {user_id} на основании его рациона за {date}. Рекомендация не должна превышать 200 символов.\n"
+        f"Пользователь съел следующие продукты:\n" +
+        "\n".join(food_list)
+    )
+    
+    chat_completion = client.chat.completions.create(
+    messages=[
+        {
+            'role': 'user',
+            'content': str(prompt),
+        }
+    ],
+    model='gpt-3.5-turbo',
+    max_tokens=300
+    )
+    response_message = chat_completion.choices[0].message.content
+
+    # Проверяем, если ответ существует, отправляем его пользователю
+    if response_message:
+        return jsonify({"response": response_message}), 200
+    else:
+        return jsonify({"error": "No response from ChatGPT"}), 500
+
 
 def generate_oauth_headers(params, consumer_key, consumer_secret, url, method="GET"):
     # Добавляем параметры OAuth
@@ -298,7 +355,6 @@ def food_list():
                     )
                     db.session.add(new_food)
                     db.session.commit()
-
             if food_name not in unique_names:
                 unique_names.add(food_name)
                 results.append({
