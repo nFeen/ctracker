@@ -166,6 +166,7 @@ def generate_recommendation_prompt():
     weight = user.weight
     height = user.height
     calorieGoal = user.calorieGoal
+    login = user.login
     
     if not meals:
         return jsonify({"response": "Добавьте приемы пищи, чтобы их можно было проанализировать"}), 200
@@ -182,7 +183,7 @@ def generate_recommendation_prompt():
 
     # Формирование текста промпта
     prompt = (
-        f"Составьте рекомендации для пользователя с ID {user_id} на основании его рациона за {date}. Его рост {height}, его вес {weight}, его цель по калориям за этот день {calorieGoal}. Рекомендация не должна превышать 500 символов. Попытайся сделать рекомендации максимально индивидуальные.\n"
+        f"Ограничься 70 словами. Составьте рекомендации для пользователь {login} на основании его рациона за {date}. Его рост {height}, его вес {weight}, его цель по калориям за этот день {calorieGoal}. Попытайся сделать рекомендации максимально индивидуальные для пользователя, основываясь на его приемах пищи. Оформи рекомендации в виде списка. Добавляй везде эмодзи, эмодзи должны быть в каждом пункте списка\n"
         f"Пользователь съел следующие продукты:\n" +
         "\n".join(food_list)
     )
@@ -195,7 +196,7 @@ def generate_recommendation_prompt():
         }
     ],
     model='gpt-3.5-turbo',
-    max_tokens=300
+    max_tokens=400
     )
     response_message = chat_completion.choices[0].message.content
 
@@ -443,7 +444,21 @@ def edit_meal():
     data = request.json
     meal = Meal.query.get(data['meal_id'])
     if meal:
+        # Обновляем количество
         meal.quantity = data['quantity']
+
+        # Извлекаем данные о продукте
+        food = Food.query.get(meal.food_id)
+        if not food:
+            abort(404, description="Food not found")
+        
+        # Перерасчет КБЖУ
+        meal.calories = food.calories * meal.quantity / 100
+        meal.protein = food.protein * meal.quantity / 100
+        meal.carbs = food.carbs * meal.quantity / 100
+        meal.fats = food.fats * meal.quantity / 100
+
+        # Сохраняем изменения
         db.session.commit()
         return jsonify({"status": "Meal updated successfully"}), 200
     abort(404)
