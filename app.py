@@ -162,6 +162,10 @@ def generate_recommendation_prompt():
     
     # Получаем все приёмы пищи за указанную дату
     meals = Meal.query.filter_by(user_id=user_id, date=date).all()
+    user = User.query.get(user_id)
+    weight = user.weight
+    height = user.height
+    calorieGoal = user.calorieGoal
     
     if not meals:
         return jsonify({"response": "Добавьте приемы пищи, чтобы их можно было проанализировать"}), 200
@@ -178,7 +182,7 @@ def generate_recommendation_prompt():
 
     # Формирование текста промпта
     prompt = (
-        f"Составьте рекомендации для пользователя с ID {user_id} на основании его рациона за {date}. Рекомендация не должна превышать 200 символов.\n"
+        f"Составьте рекомендации для пользователя с ID {user_id} на основании его рациона за {date}. Его рост {height}, его вес {weight}, его цель по калориям за этот день {calorieGoal}. Рекомендация не должна превышать 500 символов. Попытайся сделать рекомендации максимально индивидуальные.\n"
         f"Пользователь съел следующие продукты:\n" +
         "\n".join(food_list)
     )
