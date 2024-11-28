@@ -179,7 +179,7 @@ fun ProductItem(
             Spacer(modifier = Modifier.height(4.dp))
 
             Text(
-                text = "Б: ${product.protein} г | Ж: ${product.fat} г | У: ${product.carb} г",
+                text = "Б: ${product.protein} г | Ж: ${product.fats} г | У: ${product.carbs} г",
                 fontSize = 12.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

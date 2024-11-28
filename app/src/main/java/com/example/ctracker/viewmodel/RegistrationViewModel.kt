@@ -14,7 +14,7 @@ class RegistrationViewModel : ViewModel() {
     var loginSuccess = MutableLiveData(false)
 
     private val loginRegex = Regex("^[A-Za-z][A-Za-z\\d.-]{0,19}$")
-    private val passwordRegex = Regex("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
+    private val passwordRegex = Regex("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{4,}$")
 
     fun onLoginChanged(newLogin: String) {
         login.value = newLogin
@@ -55,9 +55,9 @@ class RegistrationViewModel : ViewModel() {
 
         // Проверка пароля
         when {
-            password.value.length < 8 -> {
+            password.value.length < 4 -> {
                 isPasswordError.value = true
-                errorMessage.value = "Пароль должен быть длиной не менее 8 символов"
+                errorMessage.value = "Пароль должен быть длиной не менее 4 символов"
                 return
             }
             !passwordRegex.matches(password.value) -> {

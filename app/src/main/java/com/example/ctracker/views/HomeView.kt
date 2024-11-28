@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,14 +39,18 @@ import java.util.Date
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeView(viewModel: HomeViewModel, navController: NavController) {
+    val calorieState = viewModel.calorie
+    val maxCalorieState = viewModel.maxCalories
+    val mealListState = viewModel.mealList
     HomeContent(
-        calorie = viewModel.calorie.value,
-        maxCalories = viewModel.maxCalories.value,
-        mealList = viewModel.mealList,
+        calorie = calorieState.value,
+        maxCalories = maxCalorieState.value,
+        mealList = mealListState,
         onNavigateToSearch = { index -> navController.navigate("search/$index") },
         onNavigateToEditMeal = { mealId -> navController.navigate("editmeal/$mealId") },
         getReccomendations = { viewModel.getReccomendations() },
-        recommendations = viewModel.recommendations.value
+        recommendations = viewModel.recommendations.value,
+        isLoadingRecommendations = viewModel.isLoading.value
     )
 }
 
@@ -58,7 +63,8 @@ fun HomeContent(
     onNavigateToSearch: (Int) -> Unit,
     onNavigateToEditMeal: (Int) -> Unit,
     getReccomendations: () -> Unit,
-    recommendations : String// Добавляем обработчик для перехода на экран редактирования
+    recommendations: String,// Добавляем обработчик для перехода на экран редактирования
+    isLoadingRecommendations: Boolean
 ) {
     Scaffold(
         topBar = {
@@ -68,7 +74,11 @@ fun HomeContent(
                     titleContentColor = MaterialTheme.colorScheme.onSurface,
                 ),
                 title = {
-                    Text("CTracker", fontFamily = FontFamily.Serif, color = MaterialTheme.colorScheme.onPrimary)
+                    Text(
+                        "CTracker",
+                        fontFamily = FontFamily.Serif,
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
                 }
             )
         }
@@ -111,25 +121,38 @@ fun HomeContent(
                 onClick = {
                     getReccomendations()
                 },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 48.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 48.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+                enabled = !isLoadingRecommendations
             ) {
                 Text(text = "Создать рекомендации", color = MaterialTheme.colorScheme.onPrimary)
             }
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = recommendations,
-                fontSize = 16.sp,
-                color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(
-                        color = MaterialTheme.colorScheme.surfaceVariant,
-                        shape = RoundedCornerShape(8.dp)
+            if (!isLoadingRecommendations) {
+                if (recommendations != "") {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = recommendations,
+                        fontSize = 16.sp,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(
+                                color = MaterialTheme.colorScheme.surfaceVariant,
+                                shape = RoundedCornerShape(8.dp)
+                            )
+                            .padding(16.dp),
+                        textAlign = TextAlign.Start
                     )
-                    .padding(16.dp),
-                textAlign = TextAlign.Start
-            )
+                }
+            } else {
+                Spacer(modifier = Modifier.height(16.dp))
+                CircularProgressIndicator(
+                    modifier = Modifier.size(100.dp),
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
             Spacer(modifier = Modifier.height(16.dp))
         }
     }
@@ -249,7 +272,11 @@ fun ProductItem(product: Meal, onEditProductClick: (Int) -> Unit) {
 
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "Вес: ${product.quantity} г | Б: ${product.protein.format(1)} г | Ж: ${product.fats.format(1)} г | У: ${product.carbs.format(1)} г",
+                text = "Вес: ${product.quantity} г | Б: ${product.protein.format(1)} г | Ж: ${
+                    product.fats.format(
+                        1
+                    )
+                } г | У: ${product.carbs.format(1)} г",
                 fontSize = 12.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -307,7 +334,8 @@ fun PreviewHomeContent() {
                 onNavigateToSearch = {},
                 onNavigateToEditMeal = {},
                 getReccomendations = {},
-                recommendations = "bebra please eat more\n bebra\nasdfpasdokfopasdkfopasdkfopfopkasdksdapfok asdf oaskdf "
+                recommendations = "bebra please eat more\n bebra\nasdfpasdokfopasdkfopasdkfopfopkasdksdapfok asdf oaskdf ",
+                isLoadingRecommendations = true
             )
         }
     }

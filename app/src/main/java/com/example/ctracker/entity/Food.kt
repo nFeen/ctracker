@@ -4,7 +4,7 @@ data class Food(
     val id: Int,
     val name: String,
     val calories: Float,
-    val fat: Float,
-    val carb: Float,
+    val fats: Float,
+    val carbs: Float,
     val protein: Float
 )

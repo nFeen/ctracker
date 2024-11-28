@@ -34,8 +34,8 @@ class SearchViewModel(val mealType: Int) : ViewModel() {
                         name = it.name,
                         calories = it.calorie.toFloat(),
                         protein = it.protein,
-                        fat = it.fats,
-                        carb = it.carbs
+                        fats = it.fats,
+                        carbs = it.carbs
                     )
                 }
             } catch (e: Exception) {

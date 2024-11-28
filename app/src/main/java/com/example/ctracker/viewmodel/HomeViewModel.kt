@@ -1,5 +1,6 @@
 package com.example.ctracker.viewmodel
 
+import SharedPreferencesManager
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -55,8 +56,8 @@ class HomeViewModel() : ViewModel() {
             try {
                 val user = UserRepository.getUserById(userId)
                 if (user != null) {
-                    maxCalories.value = user.calorieGoal
-                    calorie.value = 0 // Будет обновлено после загрузки приемов пищи
+                    //maxCalories.value = user.calorieGoal
+                    //calorie.value = 0 // Будет обновлено после загрузки приемов пищи
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -68,7 +69,6 @@ class HomeViewModel() : ViewModel() {
     private fun loadMeals() {
         viewModelScope.launch {
             try {
-                isLoading.value = true
 
                 // Получаем все приемы пищи пользователя
                 val mealResponses = MealRepository.getMeals(userId, getCurrentDate())
@@ -118,12 +118,14 @@ class HomeViewModel() : ViewModel() {
 
                 // Обновляем текущие калории
                 calorie.value = userMeals.sumOf { it.calories.toInt() }
+                calorie.value += 1
+                calorie.value -= 1
+                SharedPreferencesManager.saveInt("calorie", calorie.intValue)
             } catch (e: Exception) {
                 e.printStackTrace()
-                println("ERRORMEAL $e")
+                println("ERRORMEAL bebra $e")
                 // В случае ошибки сбрасываем MealModel в пустые
                 initializeEmptyMealList()
-                calorie.value = 0
             } finally {
                 isLoading.value = false
             }
@@ -143,6 +145,7 @@ class HomeViewModel() : ViewModel() {
 
     fun getReccomendations() {
         viewModelScope.launch {
+            isLoading.value = true
             try {
                 // Получаем рекомендации с помощью UserRepository
                 val recommendationText = UserRepository.getRecommendationPrompt(userId, getCurrentDate())
@@ -153,6 +156,9 @@ class HomeViewModel() : ViewModel() {
                 // В случае ошибки, можем вывести сообщение об ошибке
                 recommendations.value = "Не удалось получить рекомендации. Попробуйте позже."
                 println("Ошибка bebra $e")
+            }
+            finally {
+                isLoading.value = false
             }
         }
     }

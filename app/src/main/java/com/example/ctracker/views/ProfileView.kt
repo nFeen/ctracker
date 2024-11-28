@@ -308,20 +308,11 @@ fun ProfileContent(
                             contentColor = MaterialTheme.colorScheme.onSurface
                         )
                     ) {
-                        var multiplier by remember { mutableStateOf(1f) }
                         Text(
                             text = "Изменить цель",
                             textAlign = TextAlign.Center,
                             maxLines = 1,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            style = LocalTextStyle.current.copy(
-                                fontSize = LocalTextStyle.current.fontSize * multiplier
-                            ),
-                            onTextLayout = {
-                                if (it.hasVisualOverflow) {
-                                    multiplier *= 0.99f // you can tune this constant
-                                }
-                            }
+                            fontSize = TextUnit(35f, TextUnitType.Unspecified)
                         )
                     }
                 }
@@ -345,16 +336,9 @@ fun ProfileContent(
                         Text(
                             modifier = Modifier.align(Alignment.Center),
                             text = "Белки: $protein",
+                            textAlign = TextAlign.Center,
                             maxLines = 1,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            style = LocalTextStyle.current.copy(
-                                fontSize = LocalTextStyle.current.fontSize * multiplier
-                            ),
-                            onTextLayout = {
-                                if (it.hasVisualOverflow) {
-                                    multiplier *= 0.99f // you can tune this constant
-                                }
-                            }
+                            fontSize = TextUnit(50f, TextUnitType.Unspecified)
                         )
                     }
                     Spacer(modifier = Modifier.height(36.dp))
@@ -366,20 +350,12 @@ fun ProfileContent(
                             .padding(16.dp)
                             .weight(1f),
                     ) {
-                        var multiplier by remember { mutableStateOf(1f) }
                         Text(
                             modifier = Modifier.align(Alignment.Center),
                             text = "Жиры: $fats",
+                            textAlign = TextAlign.Center,
                             maxLines = 1,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            style = LocalTextStyle.current.copy(
-                                fontSize = LocalTextStyle.current.fontSize * multiplier
-                            ),
-                            onTextLayout = {
-                                if (it.hasVisualOverflow) {
-                                    multiplier *= 0.99f // you can tune this constant
-                                }
-                            }
+                            fontSize = TextUnit(50f, TextUnitType.Unspecified)
                         )
                     }
                     Spacer(modifier = Modifier.height(36.dp))
@@ -390,20 +366,12 @@ fun ProfileContent(
                             .padding(16.dp)
                             .weight(1f)
                     ) {
-                        var multiplier by remember { mutableStateOf(1f) }
                         Text(
                             modifier = Modifier.align(Alignment.Center),
                             text = "Углеводы: $carbs",
+                            textAlign = TextAlign.Center,
                             maxLines = 1,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            style = LocalTextStyle.current.copy(
-                                fontSize = LocalTextStyle.current.fontSize * multiplier
-                            ),
-                            onTextLayout = {
-                                if (it.hasVisualOverflow) {
-                                    multiplier *= 0.99f // you can tune this constant
-                                }
-                            }
+                            fontSize = TextUnit(50f, TextUnitType.Unspecified)
                         )
                     }
                 }

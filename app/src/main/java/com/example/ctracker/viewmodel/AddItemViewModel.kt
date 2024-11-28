@@ -42,8 +42,8 @@ class AddItemViewModel(private val index: Int, private val mealType: Int) : View
                         name = foodResponse.name,
                         calories = foodResponse.calorie.toFloat(),
                         protein = foodResponse.protein,
-                        fat = foodResponse.fats,
-                        carb = foodResponse.carbs
+                        fats = foodResponse.fats,
+                        carbs = foodResponse.carbs
                     )
                 } else {
                     errorMessage.value = "Продукт не найден"

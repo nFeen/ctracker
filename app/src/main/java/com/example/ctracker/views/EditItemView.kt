@@ -22,28 +22,43 @@ import androidx.navigation.compose.rememberNavController
 import com.example.ctracker.ui.theme.CTrackerTheme
 import com.example.ctracker.viewmodel.EditMealViewModel
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun EditItemView(viewModel: EditMealViewModel, navController: NavController) {
-    EditItemContent(
-        mealName = viewModel.food?.value?.name ?: "Продукт",
-        calories = viewModel.food?.value?.calories?.toInt() ?: 0,
-        protein = viewModel.food?.value?.protein ?: 0f,
-        fats = viewModel.food?.value?.fat ?: 0f,
-        carbs = viewModel.food?.value?.carb ?: 0f,
-        weight = viewModel.weightState.value,
-        isError = viewModel.isError.value,
-        onWeightChange = { input -> viewModel.updateWeight(input) },
-        onSaveClick = {
-            if (!viewModel.isError.value) {
-                viewModel.updateMeal()
+    val food = viewModel.food.value
+    if (food == null) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Spacer(modifier = Modifier.height(16.dp))
+            CircularProgressIndicator(
+                modifier = Modifier.size(100.dp),
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
+    } else {
+        EditItemContent(
+            mealName = food.name,
+            calories = food.calories.toInt(),
+            protein = food.protein,
+            fats = food.protein,
+            carbs = food.carbs,
+            weight = viewModel.weightState.value,
+            isError = viewModel.isError.value,
+            onWeightChange = { input -> viewModel.updateWeight(input) },
+            onSaveClick = {
+                if (!viewModel.isError.value) {
+                    viewModel.updateMeal()
+                    navController.popBackStack("home", false)
+                }
+            },
+            onDelete = {
+                viewModel.deleteMeal()
                 navController.popBackStack("home", false)
             }
-        },
-        onDelete = {
-            viewModel.deleteMeal()
-            navController.popBackStack("home", false)
-        }
-    )
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -177,35 +192,35 @@ fun EditItemContent(
                         )
                     }
                 }
-
-                Spacer(modifier = Modifier.height(24.dp))
-                // Поле ввода веса
-                OutlinedTextField(
-                    value = weight,
-                    onValueChange = onWeightChange,
-                    label = { Text("Вес (г)") },
-                    isError = isError,
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth(),
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number,
-                        imeAction = ImeAction.Done // Устанавливаем действие "Готово"
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onDone = {
-                            if (!isError) onSaveClick() // Вызываем функцию, если нет ошибки
-                        }
-                    )
-                )
-                if (isError) {
-                    Text(
-                        text = "Введите корректное значение больше 0",
-                        color = MaterialTheme.colorScheme.error,
-                        style = MaterialTheme.typography.bodySmall,
-                        modifier = Modifier.padding(top = 4.dp)
-                    )
-                }
             }
+            Spacer(modifier = Modifier.height(24.dp))
+            // Поле ввода веса
+            OutlinedTextField(
+                value = weight,
+                onValueChange = onWeightChange,
+                label = { Text("Вес (г)") },
+                isError = isError,
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Done // Устанавливаем действие "Готово"
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        if (!isError) onSaveClick() // Вызываем функцию, если нет ошибки
+                    }
+                )
+            )
+            if (isError) {
+                Text(
+                    text = "Введите корректное значение больше 0",
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
+            }
+
 
             Spacer(modifier = Modifier.height(32.dp))
 

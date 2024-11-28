@@ -10,6 +10,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -40,16 +41,24 @@ fun AddItemView(viewModel: AddItemViewModel, navController: NavController) {
     val food = viewModel.food.value
 
     if (food == null) {
-        // Показываем сообщение о загрузке или ошибке
-        Text("Загрузка информации о продукте...")
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Spacer(modifier = Modifier.height(16.dp))
+            CircularProgressIndicator(
+                modifier = Modifier.size(100.dp),
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
     } else {
         // Если продукт загружен, отображаем его данные
         AddItemContent(
             productName = food.name,
             calories = food.calories,
             protein = food.protein,
-            fats = food.fat,
-            carbs = food.carb,
+            fats = food.fats,
+            carbs = food.carbs,
             weight = viewModel.weightState.value,
             isError = viewModel.isError.value, // Используем флаг из ViewModel
             onWeightChange = { input -> viewModel.updateWeight(input) },

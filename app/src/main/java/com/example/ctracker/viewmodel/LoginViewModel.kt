@@ -12,7 +12,7 @@ class LoginViewModel : ViewModel() {
     var errorMessage = mutableStateOf("")
 
     private val loginRegex = Regex("^(?=.*[A-Za-z0-9]$)[A-Za-z][A-Za-z\\d.-]{0,19}$")
-    private val passwordRegex = Regex("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
+    private val passwordRegex = Regex("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{4,}$")
 
     fun onLoginChanged(newLogin: String) {
         login.value = newLogin

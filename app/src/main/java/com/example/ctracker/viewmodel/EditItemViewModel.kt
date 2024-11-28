@@ -37,8 +37,8 @@ class EditMealViewModel(private val mealId: Int) : ViewModel() {
                             id = foodResponse.food_id,
                             name = foodResponse.name,
                             calories = foodResponse.calorie.toFloat(),
-                            fat = foodResponse.fats,
-                            carb = foodResponse.carbs,
+                            fats = foodResponse.fats,
+                            carbs = foodResponse.carbs,
                             protein = foodResponse.protein
                         )
                     } else {
