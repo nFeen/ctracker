@@ -12,8 +12,6 @@ import base64
 import urllib
 from openai import OpenAI
 
-# Добавьте ваши ключи аутентификации для FatSecret API
-
 app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] =\
@@ -24,15 +22,16 @@ bcrypt = Bcrypt(app)
 with open('avatar_standart.txt') as file:
     avatar_base64 = file.read()
     
-# Загружаем переменные окружения из .env
 load_dotenv()
 
-# Получаем ключи из .env
 FATSECRET_CONSUMER_KEY = os.getenv("FATSECRET_CONSUMER_KEY")
 FATSECRET_CONSUMER_SECRET = os.getenv("FATSECRET_CONSUMER_SECRET")
+if not FATSECRET_CONSUMER_KEY or not FATSECRET_CONSUMER_SECRET:
+    raise RuntimeError("FatSecret API keys not found in environment variables")
 
 CHAT_API_KEY = os.getenv("CHAT_API_KEY")
-
+if not CHAT_API_KEY:
+    raise RuntimeError("Chat API key not found in environment variables")
 
 
 client = OpenAI(
@@ -73,7 +72,7 @@ class Food(db.Model):
     carbs = db.Column(db.Float, nullable=False)
     description = db.Column(db.String(128))
 
-# User Login
+# Логин пользователя
 @app.route('/user/login', methods=['GET'])
 def login():
     login = request.args.get('login')
@@ -84,7 +83,7 @@ def login():
     else:
         abort(401)
 
-# User Registration
+# Регистрация пользователя
 @app.route('/user/register', methods=['POST'])
 def register():
     data = request.json
@@ -98,7 +97,7 @@ def register():
     db.session.commit()
     return jsonify({'user_id': new_user.user_id})
 
-# Get User Profile
+# Получить профиль пользователя
 @app.route('/user/getprofile', methods=['GET'])
 def get_profile():
     user_id = request.args.get('user_id')
@@ -113,7 +112,7 @@ def get_profile():
         })
     abort(404)
 
-# Update User Weight
+# Обновить вес пользователя
 @app.route('/user/weight', methods=['PATCH'])
 def update_weight():
     data = request.json
@@ -126,7 +125,7 @@ def update_weight():
         return jsonify({"status": "Weight updated"}), 200
     abort(404)
     
-# Update User Height
+# Обновить рост пользователя
 @app.route('/user/height', methods=['PATCH'])
 def update_height():
     data = request.json
@@ -139,7 +138,7 @@ def update_height():
         return jsonify({"status": "height updated"}), 200
     abort(404)
 
-# Update User Profile Picture
+# Обновить аватарку пользователя
 @app.route('/user/profile_picture', methods=['PATCH'])
 def update_profile_picture():
     data = request.json
@@ -151,7 +150,8 @@ def update_profile_picture():
         db.session.commit()
         return jsonify({"status": "profile picture updated"}), 200
     abort(404)
-    
+
+# Генерация рекомендаций для пользователя
 @app.route('/user/recommendation_prompt', methods=['GET'])
 def generate_recommendation_prompt():
     user_id = request.args.get('user_id')
@@ -205,48 +205,15 @@ def generate_recommendation_prompt():
         return jsonify({"response": response_message}), 200
     else:
         return jsonify({"error": "No response from ChatGPT"}), 500
-
-
-def generate_oauth_headers(params, consumer_key, consumer_secret, url, method="GET"):
-    # Добавляем параметры OAuth
-    oauth_params = {
-        "oauth_consumer_key": consumer_key,
-        "oauth_signature_method": "HMAC-SHA1",
-        "oauth_timestamp": str(int(time.time())),
-        "oauth_nonce": str(uuid.uuid4().hex),
-        "oauth_version": "1.0",
-    }
-    # Объединяем все параметры (включая параметры запроса)
-    all_params = {**params, **oauth_params}
-    # Сортируем параметры по ключу в лексикографическом порядке
-    sorted_params = sorted(all_params.items())
-    # Создаем строку для подписи
-    param_string = "&".join(
-        f"{urllib.parse.quote(k, safe='')}={urllib.parse.quote(str(v), safe='')}"
-        for k, v in sorted_params
-    )
-    # Формируем базовую строку (Base String) для подписи
-    base_string = "&".join(
-        [
-            method.upper(),
-            urllib.parse.quote(url, safe=""),
-            urllib.parse.quote(param_string, safe=""),
-        ]
-    )
-    # Генерируем ключ для подписи
-    signing_key = f"{consumer_secret}&"
-    # Вычисляем подпись
-    signature = base64.b64encode(
-        hmac.new(signing_key.encode(), base_string.encode(), hashlib.sha1).digest()
-    ).decode()
-    # Добавляем подпись к OAuth параметрам
-    oauth_params["oauth_signature"] = signature
-    # Формируем заголовок Authorization
-    oauth_header = "OAuth " + ", ".join(
-        f'{k}="{urllib.parse.quote(v)}"' for k, v in sorted(oauth_params.items())
-    )
-    return {"Authorization": oauth_header}
     
+def generate_oauth_signature(url, params, consumer_secret):
+    base_string = "&".join(f"{key}={requests.utils.quote(str(value), safe='')}" for key, value in sorted(params.items()))
+    signature_base_string = f"GET&{requests.utils.quote(url, safe='')}&{requests.utils.quote(base_string, safe='')}"
+    signing_key = f"{consumer_secret}&"
+    signature = base64.b64encode(hmac.new(signing_key.encode(), signature_base_string.encode(), hashlib.sha1).digest()).decode()
+    return signature
+
+# Поиск еды в БД FatSecret
 @app.route('/fooddb/search', methods=['GET'])
 def food_list():
     food_name = request.args.get('food')
@@ -273,12 +240,8 @@ def food_list():
             "oauth_version": "1.0"
         }
         page += 1
-        # Генерация подписи для запроса
-        base_string = "&".join(f"{key}={requests.utils.quote(str(value), safe='')}" for key, value in sorted(params.items()))
-        signature_base_string = f"GET&{requests.utils.quote(search_url, safe='')}&{requests.utils.quote(base_string, safe='')}"
-        signing_key = f"{FATSECRET_CONSUMER_SECRET}&"
-        signature = base64.b64encode(hmac.new(signing_key.encode(), signature_base_string.encode(), hashlib.sha1).digest()).decode()
-        params["oauth_signature"] = signature
+        
+        params["oauth_signature"] = generate_oauth_signature(search_url, params, FATSECRET_CONSUMER_SECRET)
 
         # Выполнение GET-запроса к FatSecret API
         response = requests.get(search_url, params=params)
@@ -313,11 +276,8 @@ def food_list():
                     "oauth_timestamp": str(int(time.time())),
                     "oauth_version": "1.0"
                 }
-                # Генерация подписи
-                details_base_string = "&".join(f"{key}={requests.utils.quote(str(value), safe='')}" for key, value in sorted(details_params.items()))
-                details_signature_base_string = f"GET&{requests.utils.quote(details_url, safe='')}&{requests.utils.quote(details_base_string, safe='')}"
-                details_signature = base64.b64encode(hmac.new(signing_key.encode(), details_signature_base_string.encode(), hashlib.sha1).digest()).decode()
-                details_params["oauth_signature"] = details_signature
+
+                details_params["oauth_signature"] = generate_oauth_signature(search_url, details_params, FATSECRET_CONSUMER_SECRET)
 
                 details_response = requests.get(details_url, params=details_params)
                 if details_response.status_code == 200:
@@ -373,7 +333,7 @@ def food_list():
     print(page, unique_names)
     return jsonify(results), 200
 
-# Get Food Item by ID
+# Получение информации о еде при помощи id с FatSecret
 @app.route('/fooddb/get_item', methods=['GET'])
 def get_food_item():
     food_id = request.args.get('food_id')
@@ -389,7 +349,7 @@ def get_food_item():
         })
     abort(404)
     
-# Add Meal
+# Добавить приём пищи
 @app.route('/meals/add_meal', methods=['POST'])
 def add_meal():
     data = request.json
@@ -416,7 +376,7 @@ def add_meal():
     else:
         abort(404)
 
-# Get Meals by User, Date, and Part of Day
+# Получить приемы пищи пользователя за дату
 @app.route('/meals/meals', methods=['GET'])
 def get_meals():
     user_id = request.args.get('user_id')
@@ -438,7 +398,7 @@ def get_meals():
         return jsonify(result)
     abort(404)
 
-# Edit Meal Quantity
+# Изменить кол-во еды в приёме
 @app.route('/meals/edit_meal', methods=['PATCH'])
 def edit_meal():
     data = request.json
@@ -463,7 +423,7 @@ def edit_meal():
         return jsonify({"status": "Meal updated successfully"}), 200
     abort(404)
 
-# Get Meals by User, Date, and Part of Day
+# Удалить приём пищи
 @app.route('/meals/delete_meal', methods=['DELETE'])
 def delete_meal():
     meal_id = request.args.get('meal_id')
@@ -473,18 +433,8 @@ def delete_meal():
         db.session.commit()
         return jsonify({"status": "Meal deleted successfully"}), 200
     abort(404)
-
-# Change profile picture in base64
-@app.route('/user/change_image', methods=['PATCH'])
-def edit_image():
-    data = request.json
-    user = User.query.get(data['user_id'])
-    if user:
-        user.profile_pic = data['profile_pic']
-        db.session.commit()
-        return jsonify({"status": "Profile picture updated successfully"}), 200
-    abort(404)
     
+# Изменить цель по калориям у пользователя 
 @app.route('/user/caloriegoal', methods=['PATCH'])
 def edit_calorieGoal():
     data = request.json
@@ -495,6 +445,7 @@ def edit_calorieGoal():
         return jsonify({"status": "calorieGoal updated successfully"}), 200
     abort(404)
     
+# Получить информацию о приёме пищи по id
 @app.route('/meals/get_meal', methods=['GET'])
 def get_meal():
     meal_id = request.args.get('meal_id')
