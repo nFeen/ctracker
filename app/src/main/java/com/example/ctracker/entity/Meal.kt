@@ -9,5 +9,5 @@ data class Meal(
     var fats: Float,
     var carbs: Float,
     var quantity: Int,
-    val date: String // Дата, когда был употреблен прием пищи
+    val date: String
 )

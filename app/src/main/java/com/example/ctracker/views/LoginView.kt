@@ -1,3 +1,5 @@
+package com.example.ctracker.views
+
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
@@ -12,13 +14,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
 import com.example.ctracker.ui.theme.CTrackerTheme
-import com.example.ctracker.views.NavigationBottomBar
+import com.example.ctracker.viewmodel.LoginViewModel
 
 @Composable
 fun LoginView(
@@ -36,7 +37,6 @@ fun LoginView(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginContent(
     login: String,

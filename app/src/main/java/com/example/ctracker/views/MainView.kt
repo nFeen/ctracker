@@ -1,33 +1,23 @@
+package com.example.ctracker.views
+
 import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.navigation.NavController
 import androidx.navigation.compose.*
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import com.example.ctracker.ui.theme.CTrackerTheme
 import com.example.ctracker.viewmodel.AddItemViewModel
 import com.example.ctracker.viewmodel.EditMealViewModel
 import com.example.ctracker.viewmodel.HomeViewModel
-import com.example.ctracker.views.ProfileView
+import com.example.ctracker.viewmodel.MainViewModel
 import com.example.ctracker.viewmodel.ProfileViewModel
 import com.example.ctracker.viewmodel.SearchViewModel
-import com.example.ctracker.views.AddItemView
-import com.example.ctracker.views.EditItemView
-import com.example.ctracker.views.NavigationBottomBar
-import com.example.ctracker.views.SearchView
 
 @RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "RememberReturnType")

@@ -1,3 +1,10 @@
+import com.example.ctracker.RetrofitClient
+import com.example.ctracker.apiservice.RegisterResponse
+import com.example.ctracker.apiservice.UpdateCalorieGoalRequest
+import com.example.ctracker.apiservice.UpdateHeightRequest
+import com.example.ctracker.apiservice.UpdatePictureRequest
+import com.example.ctracker.apiservice.UpdateWeightRequest
+import com.example.ctracker.apiservice.UserProfile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -32,7 +39,6 @@ object UserRepository {
                 val body = mapOf("login" to login, "password" to password)
                 val response = api.register(body).execute()
                 if (response.isSuccessful) {
-                    // Десериализуем тело ответа как RegisterResponse
                     response.body() ?: throw Exception("Пустой ответ от сервера")
                 } else {
                     when (response.code()) {
@@ -75,11 +81,12 @@ object UserRepository {
             }
         }
     }
+
     // Обновление роста пользователя
     suspend fun updateHeight(userId: Int, height: Int): Boolean {
         return withContext(Dispatchers.IO) {
             try {
-                val body = UpdateHeightRequest(user_id = userId, height = height) // Переиспользуем UpdateWeightRequest
+                val body = UpdateHeightRequest(user_id = userId, height = height)
                 val response = api.updateHeight(body).execute()
                 response.isSuccessful
             } catch (e: Exception) {
@@ -87,10 +94,12 @@ object UserRepository {
             }
         }
     }
+
+    // Обновление роста пользователя
     suspend fun updateProfilePicture(userId: Int, profilePicture: String): Boolean {
         return withContext(Dispatchers.IO) {
             try {
-                val body = UpdatePictureRequest(user_id= userId, profile_picture = profilePicture)
+                val body = UpdatePictureRequest(user_id = userId, profile_picture = profilePicture)
                 val response = api.updateProfilePicture(body).execute()
                 response.isSuccessful
             } catch (e: Exception) {
@@ -98,6 +107,8 @@ object UserRepository {
             }
         }
     }
+
+    // Обновление целя калорий
     suspend fun updateCalorieGoal(userId: Int, calorieGoal: Int): Boolean {
         return withContext(Dispatchers.IO) {
             try {
@@ -110,6 +121,7 @@ object UserRepository {
         }
     }
 
+    // Обновление рекомендаций
     suspend fun getRecommendationPrompt(userId: Int, date: String): String {
         return withContext(Dispatchers.IO) {
             try {

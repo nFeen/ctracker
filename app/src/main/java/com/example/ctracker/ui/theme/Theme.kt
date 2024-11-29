@@ -1,6 +1,5 @@
 package com.example.ctracker.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -13,44 +12,42 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Color(0xFF66BB6A), // Основной зелёный
+    primary = Color(0xFF66BB6A),
     onPrimary = Color.White,
-    primaryContainer = Color(0xFF4E4E4E), // Нейтральный серый для контейнера
-    onPrimaryContainer = Color.White, // Текст или элементы на primaryContainer
-    secondary = Color(0xFF6D6D6D), // Нейтральный тёмно-серый для secondary
-    tertiary = Color(0xFF888888), // Приглушённый коралловый
-    tertiaryContainer = Color(0xFF6C6C6C), // Тёмно-коричневатый для контейнера
-    background = Color(0xFF1A1A1A), // Более светлый чёрный (угольный)
-    surface = Color(0xFF2A2A2A), // Чуть более светлая поверхность
+    primaryContainer = Color(0xFF4E4E4E),
+    onPrimaryContainer = Color.White,
+    secondary = Color(0xFF6D6D6D),
+    tertiary = Color(0xFF888888),
+    tertiaryContainer = Color(0xFF6C6C6C),
+    background = Color(0xFF1A1A1A),
+    surface = Color(0xFF2A2A2A),
     onSecondary = Color.White,
     onTertiary = Color.Black,
-    onTertiaryContainer = Color.White, // Светлый текст на тёмном контейнере
+    onTertiaryContainer = Color.White,
     onBackground = Color.White,
     onSurface = Color.White,
-    inversePrimary = Color(0xFFFFCC80) // Без изменений
+    inversePrimary = Color(0xFFFFCC80)
 )
 
 
-
 private val LightColorScheme = lightColorScheme(
-    primary = Color(0xFF66BB6A), // Основной зелёный
+    primary = Color(0xFF66BB6A),
     onPrimary = Color.White,
-    primaryContainer = Color(0xFFD0D0D0), // Нейтральный светло-серый
-    onPrimaryContainer = Color.Black, // Текст или элементы на primaryContainer
+    primaryContainer = Color(0xFFD0D0D0),
+    onPrimaryContainer = Color.Black,
     secondary = Color(0xFFB0BEC5),
     secondaryContainer = Color(0xFFB0BEC5),
-    tertiary = Color(0xFFBDBDBD), // Приглушённый светло-серый для tertiary
-    tertiaryContainer = Color(0xFFE0E0E0), // Светлый нейтральный серый для контейнера
-    background = Color(0xFFE2E2E2), // Светлый фон
-    surface = Color(0xFFFFFFFF), // Белая поверхность
+    tertiary = Color(0xFFBDBDBD),
+    tertiaryContainer = Color(0xFFE0E0E0),
+    background = Color(0xFFE2E2E2),
+    surface = Color(0xFFFFFFFF),
     onSecondary = Color.Black,
     onTertiary = Color.Black,
-    onTertiaryContainer = Color.Black, // Чёрный текст на светлом контейнере
+    onTertiaryContainer = Color.Black,
     onBackground = Color.Black,
     onSurface = Color.Black,
     inversePrimary = Color(0xFFFFCC80),
 )
-
 
 
 @Composable
@@ -65,6 +62,7 @@ fun CTrackerTheme(
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
+
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }

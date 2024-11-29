@@ -1,6 +1,5 @@
 package com.example.ctracker.viewmodel
 
-import SharedPreferencesManager
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -8,38 +7,27 @@ import androidx.lifecycle.ViewModel
 import com.example.ctracker.entity.Meal
 
 import androidx.lifecycle.viewModelScope
-import com.example.ctracker.repositoryBack.*
+import com.example.ctracker.SharedPreferencesManager
 import kotlinx.coroutines.launch
 import java.util.Date
 import java.util.Locale
 
-class HomeViewModel() : ViewModel() {
+class HomeViewModel : ViewModel() {
 
-    // ID пользователя из SharedPreferences
-    private val userId: Int = SharedPreferencesManager.getString("UserID", "-1").toInt()
-
-    // Максимальные калории
+    private val userId: Int = SharedPreferencesManager.getString("userID", "-1").toInt()
     val maxCalories = mutableIntStateOf(SharedPreferencesManager.getInt("maxCalorie", 2500))
-
     val calorie = mutableIntStateOf(SharedPreferencesManager.getInt("calorie", 0))
+    val recommendations = mutableStateOf(SharedPreferencesManager.getString("recommendation", ""))
 
-    // Список моделей для каждого приема пищи
     val mealList = mutableListOf<MealModel>()
-
-    // Флаг загрузки данных
     val isLoading: MutableState<Boolean> = mutableStateOf(true)
 
-    val recommendations = mutableStateOf("")
 
     init {
-        // Изначально создаем пустые MealModel
         initializeEmptyMealList()
-        // Загружаем данные
-        loadUserData()
         loadMeals()
     }
 
-    // Инициализация пустых MealModel
     private fun initializeEmptyMealList() {
         mealList.apply {
             clear()
@@ -50,40 +38,22 @@ class HomeViewModel() : ViewModel() {
         }
     }
 
-    // Метод для загрузки данных о пользователе
-    private fun loadUserData() {
-        viewModelScope.launch {
-            try {
-                val user = UserRepository.getUserById(userId)
-                if (user != null) {
-                    //maxCalories.value = user.calorieGoal
-                    //calorie.value = 0 // Будет обновлено после загрузки приемов пищи
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
-
-    // Метод для загрузки данных из MealRepository
     private fun loadMeals() {
         viewModelScope.launch {
             try {
 
-                // Получаем все приемы пищи пользователя
                 val mealResponses = MealRepository.getMeals(userId, getCurrentDate())
 
-                // Если данных нет, оставляем MealModel пустыми
                 if (mealResponses.isEmpty()) {
-                    calorie.value = 0
+                    calorie.intValue = 0
                     return@launch
                 }
 
-                // Преобразуем MealResponse в Meal с запросом названия еды из FoodRepository
                 val userMeals = mealResponses.map { response ->
                     val foodName = try {
                         val food = FoodRepository.getFoodById(response.food_id)
-                        food?.name ?: "Неизвестный продукт" // Если продукт не найден, подставляем заглушку
+                        food?.name
+                            ?: "Неизвестный продукт" // Если продукт не найден, подставляем заглушку
                     } catch (e: Exception) {
                         "Неизвестный продукт"
                     }
@@ -110,20 +80,36 @@ class HomeViewModel() : ViewModel() {
                 // Наполняем MealModel полученными данными
                 mealList.apply {
                     clear()
-                    add(MealModel("Завтрак", breakfastProducts, mutableStateOf(false)) { toggleVisibility(0) })
-                    add(MealModel("Обед", lunchProducts, mutableStateOf(false)) { toggleVisibility(1) })
-                    add(MealModel("Ужин", dinnerProducts, mutableStateOf(false)) { toggleVisibility(2) })
-                    add(MealModel("Другое", additionalProducts, mutableStateOf(false)) { toggleVisibility(3) })
+                    add(
+                        MealModel(
+                            "Завтрак",
+                            breakfastProducts,
+                            mutableStateOf(false)
+                        ) { toggleVisibility(0) })
+                    add(
+                        MealModel(
+                            "Обед",
+                            lunchProducts,
+                            mutableStateOf(false)
+                        ) { toggleVisibility(1) })
+                    add(MealModel("Ужин", dinnerProducts, mutableStateOf(false)) {
+                        toggleVisibility(
+                            2
+                        )
+                    })
+                    add(
+                        MealModel(
+                            "Другое",
+                            additionalProducts,
+                            mutableStateOf(false)
+                        ) { toggleVisibility(3) })
                 }
 
                 // Обновляем текущие калории
-                calorie.value = userMeals.sumOf { it.calories.toInt() }
-                calorie.value += 1
-                calorie.value -= 1
+                calorie.intValue = userMeals.sumOf { it.calories.toInt() }
                 SharedPreferencesManager.saveInt("calorie", calorie.intValue)
             } catch (e: Exception) {
                 e.printStackTrace()
-                println("ERRORMEAL bebra $e")
                 // В случае ошибки сбрасываем MealModel в пустые
                 initializeEmptyMealList()
             } finally {
@@ -143,21 +129,17 @@ class HomeViewModel() : ViewModel() {
         return formatter.format(Date())
     }
 
-    fun getReccomendations() {
+    fun getRecommendations() {
         viewModelScope.launch {
             isLoading.value = true
             try {
-                // Получаем рекомендации с помощью UserRepository
-                val recommendationText = UserRepository.getRecommendationPrompt(userId, getCurrentDate())
-
-                // Обновляем переменную recommendations текстом из ответа
+                val recommendationText =
+                    UserRepository.getRecommendationPrompt(userId, getCurrentDate())
                 recommendations.value = recommendationText
+                SharedPreferencesManager.saveString("recommendation", recommendationText)
             } catch (e: Exception) {
-                // В случае ошибки, можем вывести сообщение об ошибке
                 recommendations.value = "Не удалось получить рекомендации. Попробуйте позже."
-                println("Ошибка bebra $e")
-            }
-            finally {
+            } finally {
                 isLoading.value = false
             }
         }

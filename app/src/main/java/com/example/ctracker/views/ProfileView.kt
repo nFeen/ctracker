@@ -2,11 +2,11 @@ package com.example.ctracker.views
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
+//noinspection ExifInterface
 import android.media.ExifInterface
 import android.net.Uri
 import android.os.Build
@@ -18,15 +18,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,8 +34,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
@@ -50,17 +45,18 @@ import com.example.ctracker.viewmodel.ProfileViewModel
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.output.ByteArrayOutputStream
 import java.util.Base64
 
+@SuppressLint("AutoboxingStateValueProperty")
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ProfileView(viewModel: ProfileViewModel) {
     ProfileContent(
         userName = viewModel.userName.value,
         userWeight = viewModel.userWeight.value,
-        calorie = viewModel.calorie.value,
-        maxCalorie = viewModel.maxCalorie.value,
-        protein = viewModel.protein.value,
-        fats = viewModel.fats.value,
-        carbs = viewModel.carbs.value,
+        calorie = viewModel.calorie.intValue,
+        maxCalorie = viewModel.maxCalorie.intValue,
+        protein = viewModel.protein.intValue,
+        fats = viewModel.fats.intValue,
+        carbs = viewModel.carbs.intValue,
         chartData = viewModel.chartData.value,
         height = viewModel.userHeight.value,
         onUpdateWeight = viewModel::updateUserWeight,
@@ -84,8 +80,8 @@ fun ProfileContent(
     carbs: Int,
     chartData: List<Pair<Int, String>>,
     height: Int,
-    onUpdateWeight: (Int) -> Unit, // Добавляем callback для обновления веса
-    onUpdateHeight: (Int) -> Unit, // Добавляем callback для обновления веса
+    onUpdateWeight: (Int) -> Unit,
+    onUpdateHeight: (Int) -> Unit,
     onUpdateProfilePicture: (String) -> Unit,
     onUpdateCalorieGoal: (Int) -> Unit,
     profilePic: String
@@ -141,7 +137,6 @@ fun ProfileContent(
         ) {
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Блок с аватаркой и информацией о пользователе
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -155,7 +150,7 @@ fun ProfileContent(
                         .clickable { isPictureDialogOpen.value = true },
                     contentAlignment = Alignment.Center
                 ) {
-                    if (profilePic != null && profilePic != "") {
+                    if (profilePic != "") {
                         val imageBitmap = decodeBase64ToImage(profilePic)
                         if (imageBitmap != null) {
                             androidx.compose.foundation.Image(
@@ -163,6 +158,7 @@ fun ProfileContent(
                                 contentDescription = "User Avatar",
                                 modifier = Modifier
                                     .background(MaterialTheme.colorScheme.primaryContainer)
+                                    .fillMaxSize()
                             )
                         } else {
                             Text(
@@ -196,7 +192,7 @@ fun ProfileContent(
                     ) {
                         Text(
                             text = userName,
-                            fontSize = 24.sp,
+                            fontSize = 20.sp,
                             color = MaterialTheme.colorScheme.onSurface,
                             modifier = Modifier.padding(horizontal = 8.dp),
                             textAlign = TextAlign.Center
@@ -215,7 +211,7 @@ fun ProfileContent(
                     ) {
                         Text(
                             text = userWeight,
-                            fontSize = 18.sp,
+                            fontSize = 16.sp,
                             color = MaterialTheme.colorScheme.onSecondaryContainer,
                             modifier = Modifier.padding(horizontal = 8.dp)
                         )
@@ -231,7 +227,7 @@ fun ProfileContent(
                     ) {
                         Text(
                             text = "$height см",
-                            fontSize = 18.sp,
+                            fontSize = 16.sp,
                             color = MaterialTheme.colorScheme.onSecondaryContainer,
                             modifier = Modifier.padding(horizontal = 8.dp)
                         )
@@ -266,7 +262,6 @@ fun ProfileContent(
                             .aspectRatio(1f)
                     ) {
                         Canvas(modifier = Modifier.fillMaxSize()) {
-                            // Рисуем серую окружность
                             val strokeWidth = 12.dp.toPx()
                             drawArc(
                                 color = Color.Gray,
@@ -280,10 +275,9 @@ fun ProfileContent(
                             if (calorie > maxCalorie) MaterialTheme.colorScheme.inversePrimary else MaterialTheme.colorScheme.primary
                         Canvas(modifier = Modifier.fillMaxSize()) {
                             val strokeWidth = 12.dp.toPx()
-                            val color = circleColor
                             val sweepAngle = 360 * (calorie.toFloat() / maxCalorie)
                             drawArc(
-                                color = color,
+                                color = circleColor,
                                 startAngle = -90f,
                                 sweepAngle = sweepAngle,
                                 useCenter = false,
@@ -312,7 +306,7 @@ fun ProfileContent(
                             text = "Изменить цель",
                             textAlign = TextAlign.Center,
                             maxLines = 1,
-                            fontSize = TextUnit(35f, TextUnitType.Unspecified)
+                            fontSize = 12.sp
                         )
                     }
                 }
@@ -332,13 +326,12 @@ fun ProfileContent(
                             .padding(16.dp)
                             .weight(1f)
                     ) {
-                        var multiplier by remember { mutableStateOf(1f) }
                         Text(
                             modifier = Modifier.align(Alignment.Center),
                             text = "Белки: $protein",
                             textAlign = TextAlign.Center,
-                            maxLines = 1,
-                            fontSize = TextUnit(50f, TextUnitType.Unspecified)
+                            maxLines = 2,
+                            fontSize = 16.sp
                         )
                     }
                     Spacer(modifier = Modifier.height(36.dp))
@@ -354,8 +347,8 @@ fun ProfileContent(
                             modifier = Modifier.align(Alignment.Center),
                             text = "Жиры: $fats",
                             textAlign = TextAlign.Center,
-                            maxLines = 1,
-                            fontSize = TextUnit(50f, TextUnitType.Unspecified)
+                            maxLines = 2,
+                            fontSize = 16.sp
                         )
                     }
                     Spacer(modifier = Modifier.height(36.dp))
@@ -371,7 +364,7 @@ fun ProfileContent(
                             text = "Углеводы: $carbs",
                             textAlign = TextAlign.Center,
                             maxLines = 1,
-                            fontSize = TextUnit(50f, TextUnitType.Unspecified)
+                            fontSize = 14.sp
                         )
                     }
                 }
@@ -430,7 +423,7 @@ fun ProfileContent(
                     }
                 }
             }
-            // Диалог для выбора веса
+
             if (isWeightDialogOpen.value) {
                 AlertDialog(
                     onDismissRequest = { isWeightDialogOpen.value = false },
@@ -448,7 +441,7 @@ fun ProfileContent(
                     confirmButton = {
                         Button(onClick = {
                             val weight = newWeight.value.toIntOrNull()
-                            if (weight != null && weight in 1..300) {
+                            if (weight != null && weight in 30..300) {
                                 onUpdateWeight(weight)
                                 isWeightDialogOpen.value = false
                             }
@@ -463,6 +456,7 @@ fun ProfileContent(
                     }
                 )
             }
+
             if (isHeightDialogOpen.value) {
                 AlertDialog(
                     onDismissRequest = { isHeightDialogOpen.value = false },
@@ -479,9 +473,9 @@ fun ProfileContent(
                     },
                     confirmButton = {
                         Button(onClick = {
-                            val height = newHeight.value.toIntOrNull()
-                            if (height != null && height in 1..300) {
-                                onUpdateHeight(height)
+                            val heightFromDialog = newHeight.value.toIntOrNull()
+                            if (heightFromDialog != null && heightFromDialog in 75..300) {
+                                onUpdateHeight(heightFromDialog)
                                 isHeightDialogOpen.value = false
                             }
                         }) {
@@ -541,7 +535,7 @@ fun ProfileContent(
                 )
             }
         }
-        // Диалог для изменения цели по калориям
+
         if (isCalorieGoalDialogOpen.value) {
             AlertDialog(
                 onDismissRequest = { isCalorieGoalDialogOpen.value = false },
@@ -634,7 +628,6 @@ private fun encodeImageToBase64(context: Context, uri: Uri): String? {
         val inputStream = context.contentResolver.openInputStream(uri)
         val bitmap = BitmapFactory.decodeStream(inputStream)
 
-        // Проверка ориентации и исправление
         val correctedBitmap = fixImageOrientation(context, uri, bitmap)
 
         val byteArrayOutputStream = ByteArrayOutputStream()

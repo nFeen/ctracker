@@ -1,3 +1,5 @@
+package com.example.ctracker.views
+
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
@@ -12,11 +14,8 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableIntState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,23 +31,22 @@ import com.example.ctracker.entity.Meal
 import com.example.ctracker.ui.theme.CTrackerTheme
 import com.example.ctracker.viewmodel.HomeViewModel
 import com.example.ctracker.viewmodel.MealModel
-import com.example.ctracker.views.NavigationBottomBar
 import java.util.Calendar
 import java.util.Date
 
-@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("AutoboxingStateValueProperty")
 @Composable
 fun HomeView(viewModel: HomeViewModel, navController: NavController) {
     val calorieState = viewModel.calorie
     val maxCalorieState = viewModel.maxCalories
     val mealListState = viewModel.mealList
     HomeContent(
-        calorie = calorieState.value,
-        maxCalories = maxCalorieState.value,
-        mealList = mealListState,
+        calorie = calorieState.intValue,
+        maxCalories = maxCalorieState.intValue,
+        mealList = remember { mealListState },
         onNavigateToSearch = { index -> navController.navigate("search/$index") },
         onNavigateToEditMeal = { mealId -> navController.navigate("editmeal/$mealId") },
-        getReccomendations = { viewModel.getReccomendations() },
+        getReccomendations = { viewModel.getRecommendations() },
         recommendations = viewModel.recommendations.value,
         isLoadingRecommendations = viewModel.isLoading.value
     )
@@ -63,7 +61,7 @@ fun HomeContent(
     onNavigateToSearch: (Int) -> Unit,
     onNavigateToEditMeal: (Int) -> Unit,
     getReccomendations: () -> Unit,
-    recommendations: String,// Добавляем обработчик для перехода на экран редактирования
+    recommendations: String,
     isLoadingRecommendations: Boolean
 ) {
     Scaffold(
@@ -99,7 +97,7 @@ fun HomeContent(
             val progressColor = if (calorie > maxCalories) Color(0xFFFFD1A4) else Color(0xFF4CAF50)
             val progress = calorie.toFloat() / maxCalories.toFloat()
             LinearProgressIndicator(
-                progress = progress.coerceIn(0f, 1f),
+                progress = { progress.coerceIn(0f, 1f) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(8.dp),
@@ -113,7 +111,7 @@ fun HomeContent(
                 MealOfDay(
                     mealModel = mealModel,
                     onAddProductClick = { onNavigateToSearch(index) },
-                    onEditProductClick = onNavigateToEditMeal // Передаём обработчик для редактирования
+                    onEditProductClick = onNavigateToEditMeal
                 )
                 Spacer(modifier = Modifier.height(16.dp))
             }
@@ -162,7 +160,7 @@ fun HomeContent(
 fun MealOfDay(
     mealModel: MealModel,
     onAddProductClick: () -> Unit,
-    onEditProductClick: (Int) -> Unit // Добавляем обработчик для редактирования
+    onEditProductClick: (Int) -> Unit
 ) {
     val icon: ImageVector = if (mealModel.isProductListVisible.value) {
         Icons.Filled.KeyboardArrowUp
@@ -194,7 +192,7 @@ fun MealOfDay(
             )
             Spacer(modifier = Modifier.size(8.dp))
             Text(
-                text = "${mealModel.name} (${mealModel.totalCalories} ккал)", // Отображение имени и калорий
+                text = "${mealModel.name} (${mealModel.totalCalories} ккал)",
                 fontSize = 20.sp,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
                 textAlign = TextAlign.Start,
@@ -216,12 +214,31 @@ fun MealOfDay(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(max = 200.dp)
-                .verticalScroll(rememberScrollState())
         ) {
-            mealModel.productList.forEach { product ->
-                ProductItem(product = product, onEditProductClick = onEditProductClick)
-                Spacer(modifier = Modifier.height(8.dp))
+            if (mealModel.productList.isNotEmpty()) {
+                mealModel.productList.forEach { product ->
+                    ProductItem(product = product, onEditProductClick = onEditProductClick)
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+            } else {
+                Button(
+                    onClick = { }, // Передаём ID продукта
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(80.dp),
+                    shape = RoundedCornerShape(8.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                    ) {
+                        Text(
+                            "Ничего не добавлено", fontSize = 16.sp, textAlign = TextAlign.Center
+                        )
+                    }
+                }
             }
         }
     }
@@ -231,7 +248,7 @@ fun MealOfDay(
 @Composable
 fun ProductItem(product: Meal, onEditProductClick: (Int) -> Unit) {
     Button(
-        onClick = { onEditProductClick(product.id) }, // Передаём ID продукта
+        onClick = { onEditProductClick(product.id) },
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp),
@@ -246,17 +263,11 @@ fun ProductItem(product: Meal, onEditProductClick: (Int) -> Unit) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                var multiplier by remember { mutableStateOf(1f) }
                 Text(
                     text = product.name,
                     fontSize = 16.sp,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.weight(1f),
-                    onTextLayout = {
-                        if (it.hasVisualOverflow) {
-                            multiplier *= 0.99f // you can tune this constant
-                        }
-                    },
                     maxLines = 2,
                 )
 
@@ -284,7 +295,7 @@ fun ProductItem(product: Meal, onEditProductClick: (Int) -> Unit) {
     }
 }
 
-// Extension function for formatting floats
+// Форматирование чисел с плавающей точки
 private fun Float.format(digits: Int) = "%.${digits}f".format(this)
 
 @SuppressLint("UnrememberedMutableState", "UnusedMaterial3ScaffoldPaddingParameter")
@@ -318,9 +329,9 @@ fun PreviewHomeContent() {
 
     val mealList = listOf(
         MealModel("Завтрак", breakfastProducts, mutableStateOf(true)) { },
-        //MealModel("Обед", lunchProducts, mutableStateOf(false)) { },
-        //MealModel("Ужин", dinnerProducts, mutableStateOf(false)) { },
-        //MealModel("Другое", additionalProducts, mutableStateOf(false)) { }
+        MealModel("Обед", lunchProducts, mutableStateOf(false)) { },
+        MealModel("Ужин", dinnerProducts, mutableStateOf(false)) { },
+        MealModel("Другое", additionalProducts, mutableStateOf(false)) { }
     )
     CTrackerTheme {
         Scaffold(

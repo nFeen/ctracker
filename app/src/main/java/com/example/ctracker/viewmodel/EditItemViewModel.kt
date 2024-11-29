@@ -4,9 +4,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ctracker.entity.Food
-import com.example.ctracker.entity.Meal
-import com.example.ctracker.repositoryBack.FoodRepository
-import com.example.ctracker.repositoryBack.MealRepository
 import kotlinx.coroutines.launch
 
 
@@ -14,8 +11,8 @@ class EditMealViewModel(private val mealId: Int) : ViewModel() {
     val weightState = mutableStateOf("")
     val food = mutableStateOf<Food?>(null)
     val isError = mutableStateOf(false)
-    val isLoading = mutableStateOf(false)
-    val errorMessage = mutableStateOf<String?>(null)
+    private val isLoading = mutableStateOf(false)
+    private val errorMessage = mutableStateOf<String?>(null)
 
     init {
         loadMealDetails()
@@ -25,18 +22,16 @@ class EditMealViewModel(private val mealId: Int) : ViewModel() {
         isLoading.value = true
         viewModelScope.launch {
             try {
-                // Получаем данные о приеме пищи
                 val mealResponse = MealRepository.getMealById(mealId)
                 if (mealResponse != null) {
                     weightState.value = mealResponse.quantity.toString()
 
-                    // Загружаем данные о продукте по food_id
                     val foodResponse = FoodRepository.getFoodById(mealResponse.food_id)
                     if (foodResponse != null) {
                         food.value = Food(
-                            id = foodResponse.food_id,
+                            id = foodResponse.foodId,
                             name = foodResponse.name,
-                            calories = foodResponse.calorie.toFloat(),
+                            calories = foodResponse.calorie,
                             fats = foodResponse.fats,
                             carbs = foodResponse.carbs,
                             protein = foodResponse.protein
@@ -77,7 +72,6 @@ class EditMealViewModel(private val mealId: Int) : ViewModel() {
     }
 
     fun deleteMeal() {
-        println("Try to delete")
         viewModelScope.launch {
             try {
                 val success = MealRepository.deleteMeal(mealId)
@@ -102,6 +96,7 @@ class EditMealViewModel(private val mealId: Int) : ViewModel() {
             else -> sanitizedInput.toString()
         }
         weightState.value = validatedWeight
-        isError.value = validatedWeight.isEmpty() || validatedWeight.toIntOrNull()?.let { it <= 0 } ?: true
+        isError.value =
+            validatedWeight.isEmpty() || validatedWeight.toIntOrNull()?.let { it <= 0 } ?: true
     }
 }

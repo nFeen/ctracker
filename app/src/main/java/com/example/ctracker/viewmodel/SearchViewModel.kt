@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ctracker.entity.Food
-import com.example.ctracker.repositoryBack.FoodRepository
 import kotlinx.coroutines.launch
 
 class SearchViewModel(val mealType: Int) : ViewModel() {
@@ -13,7 +12,7 @@ class SearchViewModel(val mealType: Int) : ViewModel() {
     val results: MutableState<List<Food>> = mutableStateOf(emptyList())
     val hasSearched: MutableState<Boolean> = mutableStateOf(false)
     val isLoading: MutableState<Boolean> = mutableStateOf(false)
-    val errorMessage: MutableState<String?> = mutableStateOf(null)
+    private val errorMessage: MutableState<String?> = mutableStateOf(null)
 
     fun search() {
         if (query.value.isBlank()) {
@@ -30,9 +29,9 @@ class SearchViewModel(val mealType: Int) : ViewModel() {
                 val foods = FoodRepository.searchFoods(query.value)
                 results.value = foods.map {
                     Food(
-                        id = it.food_id,
+                        id = it.foodId,
                         name = it.name,
-                        calories = it.calorie.toFloat(),
+                        calories = it.calorie,
                         protein = it.protein,
                         fats = it.fats,
                         carbs = it.carbs
@@ -46,7 +45,7 @@ class SearchViewModel(val mealType: Int) : ViewModel() {
         }
     }
 
-    fun resetSearchState() {
+    private fun resetSearchState() {
         hasSearched.value = false
         results.value = emptyList()
         errorMessage.value = null

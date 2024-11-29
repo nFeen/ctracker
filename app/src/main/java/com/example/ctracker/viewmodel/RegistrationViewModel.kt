@@ -1,7 +1,10 @@
+package com.example.ctracker.viewmodel
+
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ctracker.SharedPreferencesManager
 import kotlinx.coroutines.launch
 
 class RegistrationViewModel : ViewModel() {
@@ -33,7 +36,6 @@ class RegistrationViewModel : ViewModel() {
     }
 
     fun onRegisterClick(onSuccess: () -> Unit) {
-        // Проверка логина
         when {
             login.value.length > 20 -> {
                 isLoginError.value = true
@@ -53,7 +55,6 @@ class RegistrationViewModel : ViewModel() {
             }
         }
 
-        // Проверка пароля
         when {
             password.value.length < 4 -> {
                 isPasswordError.value = true
@@ -68,13 +69,12 @@ class RegistrationViewModel : ViewModel() {
             }
         }
 
-        // Асинхронная регистрация пользователя
         viewModelScope.launch {
             try {
                 val response = UserRepository.addUser(login.value, password.value)
                 if (response != null) {
                     loginSuccess.value = true
-                    SharedPreferencesManager.saveString("UserID", response.user_id.toString())
+                    SharedPreferencesManager.saveString("userID", response.user_id.toString())
                     onSuccess()
                 } else {
                     isLoginError.value = true

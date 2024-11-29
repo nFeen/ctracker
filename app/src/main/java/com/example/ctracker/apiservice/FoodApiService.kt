@@ -1,11 +1,11 @@
-package com.example.ctracker.ApiService
+package com.example.ctracker.apiservice
 
 import retrofit2.Call
 import retrofit2.http.*
 
 data class FoodResponse(
     val name: String,
-    val food_id: Int,
+    val foodId: Int,
     val calorie: Float,
     val carbs: Float,
     val fats: Float,

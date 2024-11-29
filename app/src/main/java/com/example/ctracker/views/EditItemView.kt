@@ -2,10 +2,8 @@ package com.example.ctracker.views
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -96,7 +94,6 @@ fun EditItemContent(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Top
         ) {
-            // Название продукта
             Text(
                 text = mealName,
                 style = MaterialTheme.typography.headlineMedium,
@@ -104,7 +101,6 @@ fun EditItemContent(
             )
             Spacer(modifier = Modifier.height(8.dp))
 
-            // "На 100 грамм"
             Text(
                 text = "На 100 грамм",
                 style = MaterialTheme.typography.bodyLarge,
@@ -113,7 +109,6 @@ fun EditItemContent(
             )
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Блоки на 100 грамм (два ряда)
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -140,8 +135,6 @@ fun EditItemContent(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-
-            // "На $weight грамм"
             val weightValue = weight.toFloatOrNull() ?: 0f
             if (!isError) {
                 Text(
@@ -152,7 +145,6 @@ fun EditItemContent(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Блоки на введённый вес
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -194,7 +186,7 @@ fun EditItemContent(
                 }
             }
             Spacer(modifier = Modifier.height(24.dp))
-            // Поле ввода веса
+
             OutlinedTextField(
                 value = weight,
                 onValueChange = onWeightChange,
@@ -204,11 +196,11 @@ fun EditItemContent(
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Done // Устанавливаем действие "Готово"
+                    imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = {
-                        if (!isError) onSaveClick() // Вызываем функцию, если нет ошибки
+                        if (!isError) onSaveClick()
                     }
                 )
             )
@@ -224,7 +216,7 @@ fun EditItemContent(
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            Row() {
+            Row {
                 Button(
                     onClick = {
                         onDelete()
@@ -252,7 +244,7 @@ fun EditItemContent(
     }
 }
 
-// Extension function for formatting floats
+// Форматирование чисел с плавающей точки
 private fun Float.format(digits: Int) = "%.${digits}f".format(this)
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

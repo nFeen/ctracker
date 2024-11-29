@@ -1,3 +1,6 @@
+package com.example.ctracker.views
+
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -11,12 +14,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.example.ctracker.ui.theme.CTrackerTheme
-import com.example.ctracker.views.NavigationBottomBar
+import com.example.ctracker.viewmodel.MainViewModel
 
 @Composable
 fun SettingsView(viewModel: MainViewModel) {
     SettingsContent(
-        onLogoutClick = viewModel::onLogoutClick // Передача функции из ViewModel
+        onLogoutClick = viewModel::onLogoutClick
     )
 }
 
@@ -33,9 +36,11 @@ fun SettingsContent(
                     titleContentColor = MaterialTheme.colorScheme.onSurface,
                 ),
                 title = {
-                    Text("Настройки",
+                    Text(
+                        "Настройки",
                         fontFamily = FontFamily.Serif,
-                        color = MaterialTheme.colorScheme.onPrimary)
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
                 }
             )
         }
@@ -48,7 +53,6 @@ fun SettingsContent(
         ) {
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Кнопка Logout
             OutlinedButton(
                 onClick = onLogoutClick, // Использование переданной функции
                 colors = ButtonDefaults.outlinedButtonColors(
@@ -57,13 +61,16 @@ fun SettingsContent(
                 ),
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
-                Text(text = "Logout",
-                    color = MaterialTheme.colorScheme.onPrimary)
+                Text(
+                    text = "Logout",
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
             }
         }
     }
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true)
 @Composable

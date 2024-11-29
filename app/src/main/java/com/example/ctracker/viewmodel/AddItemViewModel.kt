@@ -1,32 +1,25 @@
 package com.example.ctracker.viewmodel
 
-import android.widget.Toast
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ctracker.ApiService.AddMealRequest
+import com.example.ctracker.SharedPreferencesManager
+import com.example.ctracker.apiservice.AddMealRequest
 import com.example.ctracker.entity.Food
-import com.example.ctracker.entity.Meal
-import com.example.ctracker.repositoryBack.FoodRepository
-import com.example.ctracker.repositoryBack.MealRepository
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class AddItemViewModel(private val index: Int, private val mealType: Int) : ViewModel() {
-    private val userId: Int = SharedPreferencesManager.getString("UserID", "-1").toInt()
+class AddItemViewModel(val index: Int, val mealType: Int) : ViewModel() {
+    private val userId: Int = SharedPreferencesManager.getString("userID", "-1").toInt()
     val food = mutableStateOf<Food?>(null)
     val weightState = mutableStateOf("50")
     val isError = mutableStateOf(false)
-    val isLoading = mutableStateOf(false)
-    val errorMessage = mutableStateOf<String?>(null)
+    private val isLoading = mutableStateOf(false)
+    private val errorMessage = mutableStateOf<String?>(null)
 
     init {
-        println("bebra")
         loadFoodDetails(index)
     }
 
@@ -38,9 +31,9 @@ class AddItemViewModel(private val index: Int, private val mealType: Int) : View
                 val foodResponse = FoodRepository.getFoodById(foodId)
                 if (foodResponse != null) {
                     food.value = Food(
-                        id = foodResponse.food_id,
+                        id = foodResponse.foodId,
                         name = foodResponse.name,
-                        calories = foodResponse.calorie.toFloat(),
+                        calories = foodResponse.calorie,
                         protein = foodResponse.protein,
                         fats = foodResponse.fats,
                         carbs = foodResponse.carbs
@@ -58,32 +51,25 @@ class AddItemViewModel(private val index: Int, private val mealType: Int) : View
 
     fun addMealToUser() {
         val currentFood = food.value
-        if (currentFood == null || isError.value) return // Прерываем, если есть ошибка или продукт не загружен
+        if (currentFood == null || isError.value) return
 
         val weight = weightState.value.toFloatOrNull() ?: 0f
-        val quantity = weight.toInt() // Преобразуем вес в целое число для запроса
+        val quantity = weight.toInt()
 
-        // Получаем текущую дату в формате yyyy-MM-dd
         val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val currentDate = dateFormatter.format(Date())
 
-        // Создаем запрос для добавления приема пищи
         val addMealRequest = AddMealRequest(
             user_id = userId,
             food_id = currentFood.id,
             quantity = quantity,
             date = currentDate,
-            part_of_the_day = mealType // Используем mealType как part_of_the_day
+            part_of_the_day = mealType
         )
 
         viewModelScope.launch {
             try {
-                val success = MealRepository.addMeal(addMealRequest)
-                if (success) {
-                    println("Прием пищи успешно добавлен")
-                } else {
-                    println("Не удалось добавить прием пищи")
-                }
+                MealRepository.addMeal(addMealRequest)
             } catch (e: Exception) {
                 println("Ошибка при добавлении приема пищи: ${e.message}")
             }
@@ -91,7 +77,7 @@ class AddItemViewModel(private val index: Int, private val mealType: Int) : View
     }
 
     fun updateWeight(input: String) {
-        val sanitizedInput = input.toIntOrNull() // Пробуем преобразовать в число
+        val sanitizedInput = input.toIntOrNull()
         val validatedWeight = when {
             sanitizedInput == null -> ""
             sanitizedInput < 0 -> "0"
@@ -101,6 +87,7 @@ class AddItemViewModel(private val index: Int, private val mealType: Int) : View
         weightState.value = validatedWeight
 
         // Проверка на ошибку
-        isError.value = validatedWeight.isEmpty() || validatedWeight.toFloatOrNull()?.let { it <= 0f } ?: true
+        isError.value =
+            validatedWeight.isEmpty() || validatedWeight.toFloatOrNull()?.let { it <= 0f } ?: true
     }
 }

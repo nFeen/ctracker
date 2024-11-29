@@ -16,13 +16,7 @@ import com.example.ctracker.viewmodel.SearchViewModel
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -38,7 +32,7 @@ fun SearchView(viewModel: SearchViewModel, navController: NavController) {
         onQueryChange = viewModel::onQuerySearch,
         onSearch = viewModel::search,
         onItemClick = { index ->
-            val mealType: Int = viewModel.mealType // mealType берется из ViewModel
+            val mealType: Int = viewModel.mealType
             navController.navigate("additem/${mealType}/$index")
         },
         isLoading = viewModel.isLoading.value
@@ -120,7 +114,7 @@ fun SearchContent(
                         modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.Top,
 
-                    ) {
+                        ) {
                         results.take(10).forEach { product ->
                             ProductItem(product) { onItemClick(product.id) }
                             Spacer(modifier = Modifier.height(8.dp))
@@ -153,18 +147,12 @@ fun ProductItem(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                var multiplier by remember { mutableStateOf(1f) }
                 Text(
                     text = product.name,
                     fontSize = 16.sp,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.weight(1f),
-                    onTextLayout = {
-                        if (it.hasVisualOverflow) {
-                            multiplier *= 0.99f // you can tune this constant
-                        }
-                    },
-                    maxLines = 2,
+                    maxLines = 2
                 )
                 Text(
                     text = "${product.calories} ккал",

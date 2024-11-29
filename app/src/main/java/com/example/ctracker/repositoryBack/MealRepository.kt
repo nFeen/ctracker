@@ -1,6 +1,7 @@
-package com.example.ctracker.repositoryBack
-
-import com.example.ctracker.ApiService.*
+import com.example.ctracker.RetrofitClient
+import com.example.ctracker.apiservice.AddMealRequest
+import com.example.ctracker.apiservice.EditMealRequest
+import com.example.ctracker.apiservice.MealResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -23,6 +24,7 @@ object MealRepository {
             }
         }
     }
+
     // Получение информации о конкретном приеме пищи
     suspend fun getMealById(mealId: Int): MealResponse? {
         return withContext(Dispatchers.IO) {
@@ -38,6 +40,7 @@ object MealRepository {
             }
         }
     }
+
     // Добавление нового приема пищи
     suspend fun addMeal(request: AddMealRequest): Boolean {
         return withContext(Dispatchers.IO) {
@@ -54,7 +57,8 @@ object MealRepository {
     suspend fun editMeal(mealId: Int, quantity: Int): Boolean {
         return withContext(Dispatchers.IO) {
             try {
-                val response = api.editMeal(EditMealRequest(meal_id = mealId, quantity = quantity)).execute()
+                val response =
+                    api.editMeal(EditMealRequest(meal_id = mealId, quantity = quantity)).execute()
                 response.isSuccessful
             } catch (e: Exception) {
                 throw Exception("Ошибка при редактировании приёма пищи: ${e.message}")

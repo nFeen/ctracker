@@ -62,7 +62,7 @@ fun NavigationBottomBar(navController: NavController) {
 }
 
 sealed class BottomNavItem(val route: String, val icon: ImageVector, val title: String) {
-    object Profile : BottomNavItem("profile", Icons.Default.Person, "Profile")
-    object Home : BottomNavItem("home", Icons.Default.Home, "Home")
-    object Settings : BottomNavItem("settings", Icons.Default.Settings, "Settings")
+    data object Profile : BottomNavItem("profile", Icons.Default.Person, "Profile")
+    data object Home : BottomNavItem("home", Icons.Default.Home, "Home")
+    data object Settings : BottomNavItem("settings", Icons.Default.Settings, "Settings")
 }

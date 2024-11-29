@@ -1,38 +1,31 @@
 package com.example.ctracker.viewmodel
 
-
-import SharedPreferencesManager
-import UserProfile
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ctracker.SharedPreferencesManager
+import com.example.ctracker.apiservice.UserProfile
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
-import com.example.ctracker.repositoryBack.*
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+
 
 class ProfileViewModel : ViewModel() {
 
-    private val userId: Int = SharedPreferencesManager.getString("UserID", "-1").toInt()
+    private val userId: Int = SharedPreferencesManager.getString("userID", "-1").toInt()
 
-    // Макросы и калории
     val fats = mutableIntStateOf(SharedPreferencesManager.getInt("fats", 0))
     val carbs = mutableIntStateOf(SharedPreferencesManager.getInt("carbs", 0))
     val protein = mutableIntStateOf(SharedPreferencesManager.getInt("protein", 0))
     val maxCalorie = mutableIntStateOf(SharedPreferencesManager.getInt("maxCalorie", 2500))
     val calorie = mutableIntStateOf(SharedPreferencesManager.getInt("calorie", 0))
 
-    // Логин пользователя
     val userName = mutableStateOf(SharedPreferencesManager.getString("userName", "Unknown User"))
-    val userHeight = mutableStateOf(SharedPreferencesManager.getInt("userHeight", 0))
+    val userHeight = mutableIntStateOf(SharedPreferencesManager.getInt("userHeight", 0))
     val userWeight = mutableStateOf("${SharedPreferencesManager.getInt("userWeight", 0)} kg")
     val profilePic = mutableStateOf(SharedPreferencesManager.getString("profilePic", ""))
-    val chartData = mutableStateOf<List<Pair<Int, String>>>(loadChartDataFromSharedPreferences())
-
-    private val gson = Gson() // Для сериализации/десериализации данных
+    val chartData = mutableStateOf(loadChartDataFromSharedPreferences())
 
     init {
         loadUserData()
@@ -65,28 +58,31 @@ class ProfileViewModel : ViewModel() {
                     val totalFats = meals.sumOf { it.fats.toInt() }
                     val totalCarbs = meals.sumOf { it.carbs.toInt() }
 
-                    calorie.value = totalCalories
-                    protein.value = totalProtein
-                    fats.value = totalFats
-                    carbs.value = totalCarbs
+                    calorie.intValue = totalCalories
+                    protein.intValue = totalProtein
+                    fats.intValue = totalFats
+                    carbs.intValue = totalCarbs
 
-                    saveMacrosToSharedPreferences(totalCalories, totalProtein, totalFats, totalCarbs)
+                    saveMacrosToSharedPreferences(
+                        totalCalories,
+                        totalProtein,
+                        totalFats,
+                        totalCarbs
+                    )
                 } else {
-                    // Если данных за текущий день нет, устанавливаем макросы в 0
-                    calorie.value = 0
-                    protein.value = 0
-                    fats.value = 0
-                    carbs.value = 0
+                    calorie.intValue = 0
+                    protein.intValue = 0
+                    fats.intValue = 0
+                    carbs.intValue = 0
 
                     saveMacrosToSharedPreferences(0, 0, 0, 0)
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
-                // В случае ошибки также устанавливаем макросы в 0
-                calorie.value = 0
-                protein.value = 0
-                fats.value = 0
-                carbs.value = 0
+                println("Ошибка при загрузке данных профиля: ${e.message}")
+                calorie.intValue = 0
+                protein.intValue = 0
+                fats.intValue = 0
+                carbs.intValue = 0
 
                 saveMacrosToSharedPreferences(0, 0, 0, 0)
             }
@@ -94,6 +90,8 @@ class ProfileViewModel : ViewModel() {
     }
 
     private fun loadChartData() {
+        val savedChartData = loadChartDataFromSharedPreferences()
+
         val inputDateFormatter =
             SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()) // Формат для репозитория
         val outputDateFormatter =
@@ -104,10 +102,7 @@ class ProfileViewModel : ViewModel() {
             val calendar = Calendar.getInstance().apply { add(Calendar.DATE, -offset) }
             inputDateFormatter.format(calendar.time)
         }
-        // Загрузка данных из SharedPreferences
-        val savedChartData = loadChartDataFromSharedPreferences()
 
-        // Если данных в SharedPreferences нет, заполняем нулями с датами
         if (savedChartData.isEmpty()) {
             chartData.value = dates.map { date ->
                 0 to outputDateFormatter.format(inputDateFormatter.parse(date)!!)
@@ -139,10 +134,9 @@ class ProfileViewModel : ViewModel() {
 
                 // Убедимся, что на графике ровно 7 столбиков
                 chartData.value = chartValues.take(7).reversed()
-                saveChartDataToSharedPreferences(chartData.value) // Сохраняем данные в SharedPreferences
+                saveChartDataToSharedPreferences(chartData.value)
             } catch (e: Exception) {
                 println("Ошибка загрузки данных для графика: ${e.message}")
-                // Если не удалось загрузить данные, загружаем из SharedPreferences
                 chartData.value = loadChartDataFromSharedPreferences()
             }
         }
@@ -172,9 +166,9 @@ class ProfileViewModel : ViewModel() {
     private fun updateStateWithProfile(userProfile: UserProfile) {
         userName.value = userProfile.login
         userWeight.value = "${userProfile.weight} kg"
-        userHeight.value = userProfile.height
+        userHeight.intValue = userProfile.height
         profilePic.value = userProfile.profile_picture
-        maxCalorie.value = userProfile.calorieGoal
+        maxCalorie.intValue = userProfile.calorieGoal
     }
 
     private fun getCurrentDate(): String {
@@ -191,8 +185,7 @@ class ProfileViewModel : ViewModel() {
                     SharedPreferencesManager.saveInt("userWeight", newWeight)
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
-                // Можно добавить обработку ошибок, например, вывод в UI
+                println("Ошибка при обновлении веса: ${e.message}")
             }
         }
     }
@@ -202,12 +195,11 @@ class ProfileViewModel : ViewModel() {
             try {
                 val success = UserRepository.updateHeight(userId, newHeight)
                 if (success) {
-                    userHeight.value = newHeight
+                    userHeight.intValue = newHeight
                     SharedPreferencesManager.saveInt("userHeight", newHeight)
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
-                // Можно добавить обработку ошибок
+                println("Ошибка при обновлении веса: ${e.message}")
             }
         }
     }
@@ -221,25 +213,25 @@ class ProfileViewModel : ViewModel() {
                     SharedPreferencesManager.saveString("profilePic", newProfilePicture)
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
+                println("Ошибка при обновлении аватарки: ${e.message}")
             }
         }
     }
+
     fun updateUserCalorieGoal(newCalorieGoal: Int) {
         viewModelScope.launch {
             try {
                 val success = UserRepository.updateCalorieGoal(userId, newCalorieGoal)
                 if (success) {
-                    maxCalorie.value = newCalorieGoal
+                    maxCalorie.intValue = newCalorieGoal
                     SharedPreferencesManager.saveInt("maxCalorie", newCalorieGoal)
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
-                // Можно добавить обработку ошибок
+                println("Ошибка при обновлении цели као=лорий: ${e.message}")
             }
         }
     }
-    // Сохранение chartData в SharedPreferences
+
     private fun saveChartDataToSharedPreferences(chartData: List<Pair<Int, String>>) {
         val serialized = chartData.joinToString(";") { "${it.first},${it.second}" }
         SharedPreferencesManager.saveString("chartData", serialized)
@@ -247,7 +239,7 @@ class ProfileViewModel : ViewModel() {
 
     private fun loadChartDataFromSharedPreferences(): List<Pair<Int, String>> {
         val serialized = SharedPreferencesManager.getString("chartData", null.toString())
-        return if (serialized.isNullOrEmpty()) {
+        return if (serialized.isEmpty()) {
             emptyList()
         } else {
             serialized.split(";").mapNotNull { entry ->

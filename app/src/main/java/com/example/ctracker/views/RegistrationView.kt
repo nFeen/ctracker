@@ -1,3 +1,5 @@
+package com.example.ctracker.views
+
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -11,13 +13,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
 import com.example.ctracker.ui.theme.CTrackerTheme
-import com.example.ctracker.views.NavigationBottomBar
+import com.example.ctracker.viewmodel.RegistrationViewModel
 
 @Composable
 fun RegisterView(viewModel: RegistrationViewModel, navController: NavController) {
@@ -114,7 +115,6 @@ fun RegisterContent(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Поле ввода пароля
                 OutlinedTextField(
                     value = password,
                     onValueChange = onPasswordChanged,

@@ -1,4 +1,4 @@
-package com.example.ctracker.ApiService
+package com.example.ctracker.apiservice
 
 import retrofit2.Call
 import retrofit2.http.*
@@ -28,10 +28,6 @@ data class EditMealRequest(
     val quantity: Int
 )
 
-data class DeleteMealRequest(
-    val meal_id: Int
-)
-
 interface MealApiService {
     @GET("/meals/meals")
     fun getMeals(
@@ -46,7 +42,7 @@ interface MealApiService {
     fun editMeal(@Body body: EditMealRequest): Call<Map<String, String>>
 
     @DELETE("/meals/delete_meal")
-    fun deleteMeal(@Query("meal_id") mealId : Int): Call<Map<String, String>>
+    fun deleteMeal(@Query("meal_id") mealId: Int): Call<Map<String, String>>
 
     @GET("/meals/get_meal")
     fun getMeal(

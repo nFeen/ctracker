@@ -19,18 +19,13 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.text.input.ImeAction
 import androidx.navigation.compose.rememberNavController
 import com.example.ctracker.ui.theme.CTrackerTheme
@@ -52,7 +47,6 @@ fun AddItemView(viewModel: AddItemViewModel, navController: NavController) {
             )
         }
     } else {
-        // Если продукт загружен, отображаем его данные
         AddItemContent(
             productName = food.name,
             calories = food.calories,
@@ -60,7 +54,7 @@ fun AddItemView(viewModel: AddItemViewModel, navController: NavController) {
             fats = food.fats,
             carbs = food.carbs,
             weight = viewModel.weightState.value,
-            isError = viewModel.isError.value, // Используем флаг из ViewModel
+            isError = viewModel.isError.value,
             onWeightChange = { input -> viewModel.updateWeight(input) },
             onAddClick = {
                 viewModel.addMealToUser()
@@ -80,7 +74,7 @@ fun AddItemContent(
     fats: Float,
     carbs: Float,
     weight: String,
-    isError: Boolean, // Принимаем флаг ошибки
+    isError: Boolean,
     onWeightChange: (String) -> Unit,
     onAddClick: () -> Unit,
 ) {
@@ -109,7 +103,6 @@ fun AddItemContent(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Top
         ) {
-            // Название продукта
             Text(
                 text = productName,
                 style = MaterialTheme.typography.headlineMedium,
@@ -118,7 +111,6 @@ fun AddItemContent(
             )
             Spacer(modifier = Modifier.height(8.dp))
 
-            // "На 100 грамм"
             Text(
                 text = "На 100 грамм",
                 style = MaterialTheme.typography.bodyLarge,
@@ -127,7 +119,6 @@ fun AddItemContent(
             )
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Блоки на 100 грамм (два ряда)
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -154,7 +145,6 @@ fun AddItemContent(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // "На $weight грамм"
             val weightValue = weight.toFloatOrNull() ?: 0f
             if (!isError) {
                 Text(
@@ -165,7 +155,6 @@ fun AddItemContent(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Блоки на вес (два ряда)
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -193,7 +182,6 @@ fun AddItemContent(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Поле ввода для количества еды
             OutlinedTextField(
                 value = weight,
                 onValueChange = onWeightChange,
@@ -203,11 +191,11 @@ fun AddItemContent(
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Done // Устанавливаем действие "Готово"
+                    imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = {
-                        if (!isError) onAddClick() // Вызываем функцию, если нет ошибки
+                        if (!isError) onAddClick()
                     }
                 )
             )
@@ -222,7 +210,6 @@ fun AddItemContent(
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Кнопка "Добавить"
             Button(
                 onClick = {
                     if (!isError) onAddClick()
@@ -257,7 +244,7 @@ fun InfoBlock(title: String, value: String, modifier: Modifier = Modifier) {
                 maxLines = 1,
                 softWrap = false, // Отключает перенос
                 modifier = Modifier.fillMaxWidth(),
-                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis // Уменьшение текста
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
@@ -273,7 +260,7 @@ fun InfoBlock(title: String, value: String, modifier: Modifier = Modifier) {
     }
 }
 
-// Extension function for formatting floats
+// Форматирование чисел с плавающей точки
 private fun Float.format(digits: Int) = "%.${digits}f".format(this)
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

@@ -1,7 +1,10 @@
+package com.example.ctracker.viewmodel
+
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ctracker.SharedPreferencesManager
 import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
@@ -29,16 +32,16 @@ class LoginViewModel : ViewModel() {
             return
         }
 
-        // Выполнение сетевой операции в корутине
         viewModelScope.launch {
             try {
                 val userId = UserRepository.authenticateUser(login.value, password.value)
                 loginSuccess.value = true
                 errorMessage.value = ""
-                SharedPreferencesManager.saveString("UserID", userId.toString())
+                SharedPreferencesManager.saveString("userID", userId.toString())
             } catch (e: Exception) {
                 loginSuccess.value = false
-                errorMessage.value = e.message ?: "Неизвестная ошибка"
+                errorMessage.value = "Ошибка на стороне сервера"
+                println("Ошибка при входе: ${e.message}")
             }
         }
     }
