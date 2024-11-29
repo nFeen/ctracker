@@ -30,7 +30,7 @@ class SearchViewModel(val mealType: Int) : ViewModel() {
                 val foods = FoodRepository.searchFoods(query.value)
                 results.value = foods.map {
                     Food(
-                        id = it.foodId,
+                        id = it.food_id,
                         name = it.name,
                         calories = it.calorie,
                         protein = it.protein,

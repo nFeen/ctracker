@@ -33,7 +33,7 @@ class AddItemViewModel(val index: Int, val mealType: Int) : ViewModel() {
                 val foodResponse = FoodRepository.getFoodById(foodId)
                 if (foodResponse != null) {
                     food.value = Food(
-                        id = foodResponse.foodId,
+                        id = foodResponse.food_id,
                         name = foodResponse.name,
                         calories = foodResponse.calorie,
                         protein = foodResponse.protein,

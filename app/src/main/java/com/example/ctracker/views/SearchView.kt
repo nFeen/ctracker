@@ -33,7 +33,7 @@ fun SearchView(viewModel: SearchViewModel, navController: NavController) {
         onSearch = viewModel::search,
         onItemClick = { index ->
             val mealType: Int = viewModel.mealType
-            navController.navigate("additem/${mealType}/$index")
+            navController.navigate("additem/${mealType}/${index}")
         },
         isLoading = viewModel.isLoading.value
     )

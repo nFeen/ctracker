@@ -5,7 +5,7 @@ import retrofit2.http.*
 
 data class FoodResponse(
     val name: String,
-    val foodId: Int,
+    val food_id: Int,
     val calorie: Float,
     val carbs: Float,
     val fats: Float,

@@ -31,7 +31,7 @@ class EditMealViewModel(private val mealId: Int) : ViewModel() {
                     val foodResponse = FoodRepository.getFoodById(mealResponse.food_id)
                     if (foodResponse != null) {
                         food.value = Food(
-                            id = foodResponse.foodId,
+                            id = foodResponse.food_id,
                             name = foodResponse.name,
                             calories = foodResponse.calorie,
                             fats = foodResponse.fats,
