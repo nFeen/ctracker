@@ -471,4 +471,6 @@ def get_meal():
 
 
 if __name__ == '__main__':
+    with app.app_context():  # Создание контекста приложения
+        db.create_all()      # Создание таблиц, если они не существуют
     app.run(host='10.8.0.1',port=5000,debug="true")
