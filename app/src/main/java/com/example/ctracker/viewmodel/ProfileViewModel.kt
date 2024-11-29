@@ -1,11 +1,13 @@
 package com.example.ctracker.viewmodel
 
+import UserProfile
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ctracker.SharedPreferencesManager
-import com.example.ctracker.apiservice.UserProfile
+import com.example.ctracker.repositoryBack.MealRepository
+import com.example.ctracker.repositoryBack.UserRepository
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*

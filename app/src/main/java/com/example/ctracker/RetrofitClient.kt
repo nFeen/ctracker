@@ -1,8 +1,8 @@
 package com.example.ctracker
 
-import com.example.ctracker.apiservice.FoodApiService
-import com.example.ctracker.apiservice.MealApiService
-import com.example.ctracker.apiservice.UserApiService
+import FoodApiService
+import MealApiService
+import UserApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

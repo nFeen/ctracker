@@ -1,15 +1,17 @@
 package com.example.ctracker.viewmodel
 
+import AddMealRequest
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ctracker.SharedPreferencesManager
-import com.example.ctracker.apiservice.AddMealRequest
 import com.example.ctracker.entity.Food
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import com.example.ctracker.repositoryBack.FoodRepository
+import com.example.ctracker.repositoryBack.MealRepository
 
 class AddItemViewModel(val index: Int, val mealType: Int) : ViewModel() {
     private val userId: Int = SharedPreferencesManager.getString("userID", "-1").toInt()

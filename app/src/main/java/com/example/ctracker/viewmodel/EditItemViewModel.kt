@@ -4,6 +4,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ctracker.entity.Food
+import com.example.ctracker.repositoryBack.FoodRepository
+import com.example.ctracker.repositoryBack.MealRepository
 import kotlinx.coroutines.launch
 
 

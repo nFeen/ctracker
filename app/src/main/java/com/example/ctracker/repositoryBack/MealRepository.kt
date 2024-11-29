@@ -1,7 +1,9 @@
+package com.example.ctracker.repositoryBack
+
+import AddMealRequest
+import EditMealRequest
+import MealResponse
 import com.example.ctracker.RetrofitClient
-import com.example.ctracker.apiservice.AddMealRequest
-import com.example.ctracker.apiservice.EditMealRequest
-import com.example.ctracker.apiservice.MealResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException

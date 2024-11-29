@@ -1,10 +1,12 @@
+package com.example.ctracker.repositoryBack
+
+import RegisterResponse
+import UpdateCalorieGoalRequest
+import UpdateHeightRequest
+import UpdatePictureRequest
+import UpdateWeightRequest
+import UserProfile
 import com.example.ctracker.RetrofitClient
-import com.example.ctracker.apiservice.RegisterResponse
-import com.example.ctracker.apiservice.UpdateCalorieGoalRequest
-import com.example.ctracker.apiservice.UpdateHeightRequest
-import com.example.ctracker.apiservice.UpdatePictureRequest
-import com.example.ctracker.apiservice.UpdateWeightRequest
-import com.example.ctracker.apiservice.UserProfile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException

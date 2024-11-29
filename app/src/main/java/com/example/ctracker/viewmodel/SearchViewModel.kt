@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ctracker.entity.Food
+import com.example.ctracker.repositoryBack.FoodRepository
 import kotlinx.coroutines.launch
 
 class SearchViewModel(val mealType: Int) : ViewModel() {

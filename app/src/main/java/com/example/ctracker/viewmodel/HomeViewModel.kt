@@ -5,9 +5,11 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.ctracker.entity.Meal
-
 import androidx.lifecycle.viewModelScope
 import com.example.ctracker.SharedPreferencesManager
+import com.example.ctracker.repositoryBack.FoodRepository
+import com.example.ctracker.repositoryBack.MealRepository
+import com.example.ctracker.repositoryBack.UserRepository
 import kotlinx.coroutines.launch
 import java.util.Date
 import java.util.Locale
