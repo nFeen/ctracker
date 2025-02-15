@@ -195,8 +195,7 @@ def generate_recommendation_prompt():
             'content': str(prompt),
         }
     ],
-    model='gpt-3.5-turbo',
-    max_tokens=400
+    model='gpt-4o'
     )
     response_message = chat_completion.choices[0].message.content
 
