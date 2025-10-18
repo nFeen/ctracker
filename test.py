@@ -1,0 +1,9 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+FATSECRET_CONSUMER_KEY = os.getenv("FATSECRET_CONSUMER_KEY")
+FATSECRET_CONSUMER_SECRET = os.getenv("FATSECRET_CONSUMER_SECRET")
+print(FATSECRET_CONSUMER_KEY)
+print(FATSECRET_CONSUMER_SECRET)
